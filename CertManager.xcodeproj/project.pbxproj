@@ -210,6 +210,7 @@
 				TargetAttributes = {
 					946E2E7D1A1AD24C00FE227C = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 43CC4S8JL3;
 					};
 					946E2E961A1AD24C00FE227C = {
 						CreatedOnToolsVersion = 6.1;
@@ -382,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Ryan/Developer,
@@ -408,6 +410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Ryan/Developer,
@@ -483,6 +486,7 @@
 				946E2EA31A1AD24C00FE227C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		946E2EA41A1AD24C00FE227C /* Build configuration list for PBXNativeTarget "CertManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +495,7 @@
 				946E2EA61A1AD24C00FE227C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
