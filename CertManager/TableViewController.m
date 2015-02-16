@@ -93,15 +93,62 @@
     NSInteger row      = [indexPath row];
     NSString *certName = [_certStore nameForCertificateWithTitle:title andOffset:row];
     
-    UITableViewRowAction *untrustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Untrust"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+    //Cancel event handler.
+    UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * action) {}];
+    
+    //Untrust event handler.
+    UIAlertAction *untrustAlertAction = [UIAlertAction actionWithTitle:@"Untrust" style:UIAlertActionStyleDestructive
+                                                          handler:^(UIAlertAction * action) {
+                                                              
+                                                              NSLog(@"Untrusting: %@", certName);
+                                                              
+                                                          }];
+    
+    //Trust event handler.
+    UIAlertAction *trustAlertAction = [UIAlertAction actionWithTitle:@"Trust" style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action) {
+                                                            
+                                                            NSLog(@"Trusting: %@", certName);
+                                                            
+                                                        }];
+    
+    
+    //String for Alert
+    NSString* (^alertMessage)(BOOL trust) = ^NSString *(BOOL trust) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Untrust Certificate" message:[NSString stringWithFormat:@"You are about to untrust the \"%@\" root certificate. This will stop all secure communications with servers identifying with this certificate. Are you sure you want to do this?", certName] delegate:nil cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
-        [alert show];
+        NSString *trusts = @"trust";
+        NSString *action = @"start";
+        if(!trust) trusts = @"untrust";
+        if(!trust) action = @"stop";
+        
+        return [NSString stringWithFormat:@"You are about to %@ the \"%@\" root certificate. This will %@ all secure communications with servers identifying with this certificate. Are you sure you want to do this?", trusts, certName, action];
+        
+
+    };
+    
+
+    UITableViewRowAction *untrustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Untrust" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Untrust Certificate" message:alertMessage(false) preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:untrustAlertAction];
+        [alert addAction:cancelAlertAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }];
 
     UITableViewRowAction *trustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Trust"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Trust Certificate" message:[NSString stringWithFormat:@"You are about to trust the \"%@\" root certificate. This will allow secure communications with servers identifying with this certificate. Are you sure you want to do this?", certName] delegate:nil cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
-        [alert show];
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Trust Certificate"
+                                                                       message:alertMessage(true)
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        
+        [alert addAction:cancelAlertAction];
+        [alert addAction:trustAlertAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        
     }];
 
     trustAction.backgroundColor = [UIColor colorWithRed:0.35 green:0.71 blue:0.2 alpha:1];
