@@ -51,7 +51,6 @@
 		946E2EAA1A1AD2A500FE227C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OTATrustUtilities.c; sourceTree = "<group>"; };
 		946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SecTrustServer.c; sourceTree = "<group>"; };
-		946E2EAF1A1AD2A500FE227C /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
 		946E2EB01A1AD2A500FE227C /* X509Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = X509Wrapper.m; sourceTree = "<group>"; };
 		946E2EBB1A1AD2D800FE227C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		946E2EBC1A1AD2D800FE227C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		9492AE531A92243500582A99 /* trusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@3x.png"; sourceTree = "<group>"; };
 		9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = University_of_Surrey_coat_of_arms.png; sourceTree = "<group>"; };
 		9492AE5E1A923A0D00582A99 /* icon-jb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-jb.png"; sourceTree = "<group>"; };
+		9492AE601A92475C00582A99 /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +195,7 @@
 			children = (
 				946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */,
 				946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */,
-				946E2EAF1A1AD2A500FE227C /* X509Wrapper.h */,
+				9492AE601A92475C00582A99 /* X509Wrapper.h */,
 				946E2EB01A1AD2A500FE227C /* X509Wrapper.m */,
 			);
 			name = Security;

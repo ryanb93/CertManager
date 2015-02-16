@@ -43,21 +43,14 @@
 #include <stdlib.h>
 #include <Securityd/SecCFRelease.h>
 #include <Securityd/CFRuntime.h>
-//#include "SecCFError.h"
 #include <Securityd/SecCFWrappers.h>
 #include <Securityd/SecBasePriv.h>
 #include <dispatch/dispatch.h>
 #include <CommonCrypto/CommonDigest.h>
 
 
-//#define NEW_LOCATION 1
 
-#if NEW_LOCATION
-static const char*  kBaseAssertDirectory = "/var/OTAPKI/Assets";
-#else
 static const char*	kBaseAssertDirectory = "/var/Keychains/Assets";
-#endif
-
 static const char*	kVersionDirectoryNamePrefix = "Version_";
 static const char*	kNumberString = "%d";
 
@@ -633,24 +626,6 @@ static bool InitializeAnchorTable(const char* path_ptr, CFDictionaryRef* pLookup
 	// size of the data is around 250K.
 	// ------------------------------------------------------------------------
 	dir_path = path_ptr;
-	
-//	if (NULL != dir_path)
-//	{
-//		// There is a set of OTA asset files
-//		memset(file_path_buffer, 0, PATH_MAX);
-//		snprintf(file_path_buffer, PATH_MAX, "%s/certsIndex.data", dir_path);
-//        cert_index_file_data = SecOTACopyFileContents(file_path_buffer);
-//        
-//		if (NULL != cert_index_file_data)
-//		{
-//			memset(file_path_buffer, 0, PATH_MAX);
-//			snprintf(file_path_buffer, PATH_MAX, "%s/certsTable.data", dir_path);
-//            local_anchorTable  = (char *)MapFile(file_path_buffer, &local_anchorTable_fd, &local_anchorTableSize);
-//        }
-//
-////		free((void *)dir_path);
-//        dir_path = NULL;
-//	}
 	
 	// Check to see if kAnchorTable was indeed set
 	if (NULL == local_anchorTable)
