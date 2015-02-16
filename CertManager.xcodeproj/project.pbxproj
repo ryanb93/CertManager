@@ -27,6 +27,7 @@
 		9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE521A92243500582A99 /* trusted@2x.png */; };
 		9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE531A92243500582A99 /* trusted@3x.png */; };
 		9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */; };
+		9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE5E1A923A0D00582A99 /* icon-jb.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		9492AE521A92243500582A99 /* trusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@2x.png"; sourceTree = "<group>"; };
 		9492AE531A92243500582A99 /* trusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@3x.png"; sourceTree = "<group>"; };
 		9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = University_of_Surrey_coat_of_arms.png; sourceTree = "<group>"; };
+		9492AE5E1A923A0D00582A99 /* icon-jb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-jb.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,10 +121,7 @@
 				946E2EAA1A1AD2A500FE227C /* AppDelegate.m */,
 				9492AE461A9222C500582A99 /* TableViewController.h */,
 				9492AE471A9222C500582A99 /* TableViewController.m */,
-				946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */,
-				946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */,
-				946E2EAF1A1AD2A500FE227C /* X509Wrapper.h */,
-				946E2EB01A1AD2A500FE227C /* X509Wrapper.m */,
+				9492AE5D1A9238A100582A99 /* Security */,
 				9492AE4C1A92243500582A99 /* Resources */,
 				946E2E811A1AD24C00FE227C /* Supporting Files */,
 			);
@@ -179,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				9492AE4D1A92243500582A99 /* icon.png */,
+				9492AE5E1A923A0D00582A99 /* icon-jb.png */,
 				9492AE4E1A92243500582A99 /* Info.plist */,
 				9492AE4F1A92243500582A99 /* LaunchScreen.nib */,
 				9492AE501A92243500582A99 /* LaunchScreen.xib */,
@@ -188,6 +188,17 @@
 				9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9492AE5D1A9238A100582A99 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */,
+				946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */,
+				946E2EAF1A1AD2A500FE227C /* X509Wrapper.h */,
+				946E2EB01A1AD2A500FE227C /* X509Wrapper.m */,
+			);
+			name = Security;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */,
 				9492AE571A92243500582A99 /* LaunchScreen.nib in Resources */,
 				9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */,
 				9492AE561A92243500582A99 /* Info.plist in Resources */,
