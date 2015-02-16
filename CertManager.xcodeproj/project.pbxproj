@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 94153E731A924C5B0068BC4B /* CertDataStore.m */; };
 		946E2E841A1AD24C00FE227C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E831A1AD24C00FE227C /* main.m */; };
 		946E2E9E1A1AD24C00FE227C /* CertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */; };
 		946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAA1A1AD2A500FE227C /* AppDelegate.m */; };
@@ -21,13 +22,13 @@
 		9492AE481A9222C500582A99 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TableViewController.m */; };
 		9492AE551A92243500582A99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4D1A92243500582A99 /* icon.png */; };
 		9492AE561A92243500582A99 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4E1A92243500582A99 /* Info.plist */; };
-		9492AE571A92243500582A99 /* LaunchScreen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4F1A92243500582A99 /* LaunchScreen.nib */; };
 		9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE501A92243500582A99 /* LaunchScreen.xib */; };
 		9492AE591A92243500582A99 /* trusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE511A92243500582A99 /* trusted.png */; };
 		9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE521A92243500582A99 /* trusted@2x.png */; };
 		9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE531A92243500582A99 /* trusted@3x.png */; };
 		9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */; };
 		9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE5E1A923A0D00582A99 /* icon-jb.png */; };
+		9492AE641A92495A00582A99 /* blacklist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE631A92495A00582A99 /* blacklist.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		94153E6F1A924C200068BC4B /* CertDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertDataStore.h; sourceTree = "<group>"; };
+		94153E731A924C5B0068BC4B /* CertDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertDataStore.m; sourceTree = "<group>"; };
 		946E2E7E1A1AD24C00FE227C /* CertManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E821A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E831A1AD24C00FE227C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,7 +65,6 @@
 		9492AE471A9222C500582A99 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		9492AE4D1A92243500582A99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9492AE4E1A92243500582A99 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9492AE4F1A92243500582A99 /* LaunchScreen.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LaunchScreen.nib; sourceTree = "<group>"; };
 		9492AE501A92243500582A99 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9492AE511A92243500582A99 /* trusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trusted.png; sourceTree = "<group>"; };
 		9492AE521A92243500582A99 /* trusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@2x.png"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = University_of_Surrey_coat_of_arms.png; sourceTree = "<group>"; };
 		9492AE5E1A923A0D00582A99 /* icon-jb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-jb.png"; sourceTree = "<group>"; };
 		9492AE601A92475C00582A99 /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
+		9492AE631A92495A00582A99 /* blacklist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blacklist.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 				946E2EAA1A1AD2A500FE227C /* AppDelegate.m */,
 				9492AE461A9222C500582A99 /* TableViewController.h */,
 				9492AE471A9222C500582A99 /* TableViewController.m */,
+				94153E6F1A924C200068BC4B /* CertDataStore.h */,
+				94153E731A924C5B0068BC4B /* CertDataStore.m */,
 				9492AE5D1A9238A100582A99 /* Security */,
 				9492AE4C1A92243500582A99 /* Resources */,
 				946E2E811A1AD24C00FE227C /* Supporting Files */,
@@ -177,10 +182,10 @@
 		9492AE4C1A92243500582A99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9492AE631A92495A00582A99 /* blacklist.plist */,
 				9492AE4D1A92243500582A99 /* icon.png */,
 				9492AE5E1A923A0D00582A99 /* icon-jb.png */,
 				9492AE4E1A92243500582A99 /* Info.plist */,
-				9492AE4F1A92243500582A99 /* LaunchScreen.nib */,
 				9492AE501A92243500582A99 /* LaunchScreen.xib */,
 				9492AE511A92243500582A99 /* trusted.png */,
 				9492AE521A92243500582A99 /* trusted@2x.png */,
@@ -283,7 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */,
-				9492AE571A92243500582A99 /* LaunchScreen.nib in Resources */,
+				9492AE641A92495A00582A99 /* blacklist.plist in Resources */,
 				9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */,
 				9492AE561A92243500582A99 /* Info.plist in Resources */,
 				9492AE451A92217B00582A99 /* control in Resources */,
@@ -316,6 +321,7 @@
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
 				9492AE481A9222C500582A99 /* TableViewController.m in Sources */,
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
+				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,12 @@
 
 @implementation X509Wrapper
 
-+(NSString *) CertificateGetIssuerName:(X509 *)certificateX509
++(NSString *) CertificateGetIssuerName:(SecCertificateRef) cert
 {
+    NSData *certificateData                   = (__bridge NSData *) SecCertificateCopyData(cert);
+    const unsigned char *certificateDataBytes = (const unsigned char *)[certificateData bytes];
+    X509 *certificateX509                     = d2i_X509(NULL, &certificateDataBytes, [certificateData length]);
+    
     NSString *issuer = nil;
     if (certificateX509 != NULL) {
         X509_NAME *issuerX509Name = X509_get_issuer_name(certificateX509);

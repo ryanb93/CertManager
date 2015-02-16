@@ -9,8 +9,5 @@
 
 @interface TableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, atomic) NSMutableDictionary* certificates;
-
-@property (strong, atomic) NSMutableArray* names;
 
 @end

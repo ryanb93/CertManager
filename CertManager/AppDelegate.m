@@ -18,11 +18,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    //Create an instance of our table view controller.
     TableViewController *tableViewController = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:tableViewController];
+    
+    //Add this controller to a navigation controller.
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
 
+    //Create the window object with the screen bounds.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = navController;
+    
+    //Set the window root view controller to our navigation controller.
+    [self.window setRootViewController:navController];
+    
+    //Make the window visible.
     [self.window makeKeyAndVisible];
 
     return YES;
