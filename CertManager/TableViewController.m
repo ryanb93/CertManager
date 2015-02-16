@@ -88,7 +88,7 @@
             }
         }
 
-        [_certificates setObject:tmp forKey:name];
+        _certificates[name] = tmp;
     }
 
 }
@@ -110,12 +110,12 @@ NSInteger sortCerts(id id1, id id2, void *context)
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return [[_certificates objectForKey:[_names objectAtIndex:section]] count];
+    return [_certificates[_names[section]] count];
 
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [_names objectAtIndex:section];
+    return _names[section];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -140,9 +140,9 @@ NSInteger sortCerts(id id1, id id2, void *context)
                                       reuseIdentifier:@"caCell"];
     }
 
-    NSString *name = [_names objectAtIndex:[indexPath section]];
+    NSString *name = _names[[indexPath section]];
 
-    SecCertificateRef cert = (__bridge SecCertificateRef)[[_certificates objectForKey:name] objectAtIndex:[indexPath row]];
+    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[name][[indexPath row]];
 
     NSData *certificateData = (__bridge NSData *) SecCertificateCopyData(cert);
 
@@ -166,8 +166,8 @@ NSInteger sortCerts(id id1, id id2, void *context)
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSString *name = [_names objectAtIndex:[indexPath section]];
-    id cert_data = [[_certificates objectForKey:name] objectAtIndex:[indexPath row]];
+    NSString *name = _names[[indexPath section]];
+    id cert_data = _certificates[name][[indexPath row]];
 
     SecCertificateRef cert = (__bridge SecCertificateRef) cert_data;
 
@@ -188,7 +188,7 @@ NSInteger sortCerts(id id1, id id2, void *context)
 
     UITableViewRowAction *untrustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Untrust"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
 
-        NSString *certName = [_names objectAtIndex:[indexPath section]];
+        NSString *certName = _names[[indexPath section]];
 
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Untrust Certificate" message:[NSString stringWithFormat:@"You are about to untrust the %@ certificate. This will stop all secure communications with servers identifying with this certificate. Are you sure you want to do this?", certName] delegate:nil cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
         [alert show];

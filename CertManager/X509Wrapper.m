@@ -27,7 +27,7 @@
                 
                 if (issuerNameASN1 != NULL) {
                     unsigned char *issuerName = ASN1_STRING_data(issuerNameASN1);
-                    issuer = [NSString stringWithUTF8String:(char *)issuerName];
+                    issuer = @((char *)issuerName);
                 }
             }
         }
