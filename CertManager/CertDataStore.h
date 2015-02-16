@@ -15,7 +15,7 @@
 @interface CertDataStore : NSObject
 
 - (int)trustStoreVersion;
-- (NSInteger)numberOfCertificates;
+- (NSInteger)numberOfTitles;
 - (NSInteger)numberOfCertificatesInSection:(NSInteger)section;
 - (NSString *)titleForCertificatesInSection:(NSInteger)section;
 

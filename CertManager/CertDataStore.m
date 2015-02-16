@@ -85,8 +85,8 @@ NSInteger sortCerts(id id1, id id2, void *context)
 }
 
 
-- (NSInteger)numberOfCertificates {
-    return [_certificates count];
+- (NSInteger)numberOfTitles {
+    return [_titles count];
 }
 
 - (NSInteger)numberOfCertificatesInSection:(NSInteger)section {
