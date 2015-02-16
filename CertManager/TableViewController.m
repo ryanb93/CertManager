@@ -207,7 +207,9 @@
             trusts = @"untrust";
             action = @"stop";
         }
-        return [NSString stringWithFormat:@"You are about to %@ the \"%@\" root certificate. This will %@ all secure communications with servers identifying with this certificate. Are you sure you want to do this?", trusts, certName, action];
+        return [NSString stringWithFormat:@"You are about to %@ the \"%@\" root certificate. This will %@ all secure communications"
+                                            "with servers identifying with this certificate. Are you sure you want to do this?",
+                                            trusts, certName, action];
     };
     
 
