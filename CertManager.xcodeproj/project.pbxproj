@@ -8,18 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		946E2E841A1AD24C00FE227C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E831A1AD24C00FE227C /* main.m */; };
-		946E2E8F1A1AD24C00FE227C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946E2E8E1A1AD24C00FE227C /* Images.xcassets */; };
-		946E2E921A1AD24C00FE227C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946E2E901A1AD24C00FE227C /* LaunchScreen.xib */; };
 		946E2E9E1A1AD24C00FE227C /* CertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */; };
-		946E2EA81A1AD26200FE227C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 946E2EA71A1AD26200FE227C /* Main.storyboard */; };
 		946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAA1A1AD2A500FE227C /* AppDelegate.m */; };
 		946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */; };
 		946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */; };
-		946E2EB41A1AD2A500FE227C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAE1A1AD2A500FE227C /* ViewController.m */; };
 		946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EB01A1AD2A500FE227C /* X509Wrapper.m */; };
 		946E2EBD1A1AD2E000FE227C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBB1A1AD2D800FE227C /* libcrypto.a */; };
 		946E2EBE1A1AD2E200FE227C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBC1A1AD2D800FE227C /* libssl.a */; };
 		946E2EC41A1AD3CC00FE227C /* CertUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EC31A1AD3CC00FE227C /* CertUI.framework */; };
+		9492AE431A92216F00582A99 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE421A92216F00582A99 /* Makefile */; };
+		9492AE451A92217B00582A99 /* control in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE441A92217B00582A99 /* control */; };
+		9492AE481A9222C500582A99 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TableViewController.m */; };
+		9492AE551A92243500582A99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4D1A92243500582A99 /* icon.png */; };
+		9492AE561A92243500582A99 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4E1A92243500582A99 /* Info.plist */; };
+		9492AE571A92243500582A99 /* LaunchScreen.nib in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4F1A92243500582A99 /* LaunchScreen.nib */; };
+		9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE501A92243500582A99 /* LaunchScreen.xib */; };
+		9492AE591A92243500582A99 /* trusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE511A92243500582A99 /* trusted.png */; };
+		9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE521A92243500582A99 /* trusted@2x.png */; };
+		9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE531A92243500582A99 /* trusted@3x.png */; };
+		9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,24 +43,31 @@
 		946E2E7E1A1AD24C00FE227C /* CertManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E821A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E831A1AD24C00FE227C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		946E2E8E1A1AD24C00FE227C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		946E2E911A1AD24C00FE227C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		946E2E971A1AD24C00FE227C /* CertManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E9C1A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertManagerTests.m; sourceTree = "<group>"; };
-		946E2EA71A1AD26200FE227C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		946E2EA91A1AD2A500FE227C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		946E2EAA1A1AD2A500FE227C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OTATrustUtilities.c; sourceTree = "<group>"; };
 		946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SecTrustServer.c; sourceTree = "<group>"; };
-		946E2EAD1A1AD2A500FE227C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		946E2EAE1A1AD2A500FE227C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		946E2EAF1A1AD2A500FE227C /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
 		946E2EB01A1AD2A500FE227C /* X509Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = X509Wrapper.m; sourceTree = "<group>"; };
 		946E2EBB1A1AD2D800FE227C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		946E2EBC1A1AD2D800FE227C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		946E2EC11A1AD3B200FE227C /* OpenSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenSSL.framework; path = "../../../../Developer/OpenSSL-for-iPhone/include/OpenSSL.framework"; sourceTree = "<group>"; };
 		946E2EC31A1AD3CC00FE227C /* CertUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CertUI.framework; path = ../../../../Developer/CertUI.framework; sourceTree = "<group>"; };
+		9492AE421A92216F00582A99 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		9492AE441A92217B00582A99 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
+		9492AE461A9222C500582A99 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		9492AE471A9222C500582A99 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		9492AE4D1A92243500582A99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		9492AE4E1A92243500582A99 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9492AE4F1A92243500582A99 /* LaunchScreen.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LaunchScreen.nib; sourceTree = "<group>"; };
+		9492AE501A92243500582A99 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		9492AE511A92243500582A99 /* trusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trusted.png; sourceTree = "<group>"; };
+		9492AE521A92243500582A99 /* trusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@2x.png"; sourceTree = "<group>"; };
+		9492AE531A92243500582A99 /* trusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@3x.png"; sourceTree = "<group>"; };
+		9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = University_of_Surrey_coat_of_arms.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,18 +113,18 @@
 		946E2E801A1AD24C00FE227C /* CertManager */ = {
 			isa = PBXGroup;
 			children = (
+				9492AE441A92217B00582A99 /* control */,
+				9492AE421A92216F00582A99 /* Makefile */,
 				946E2EA91A1AD2A500FE227C /* AppDelegate.h */,
 				946E2EAA1A1AD2A500FE227C /* AppDelegate.m */,
-				946E2E8E1A1AD24C00FE227C /* Images.xcassets */,
-				946E2E901A1AD24C00FE227C /* LaunchScreen.xib */,
-				946E2EA71A1AD26200FE227C /* Main.storyboard */,
+				9492AE461A9222C500582A99 /* TableViewController.h */,
+				9492AE471A9222C500582A99 /* TableViewController.m */,
 				946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */,
 				946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */,
-				946E2E811A1AD24C00FE227C /* Supporting Files */,
-				946E2EAD1A1AD2A500FE227C /* ViewController.h */,
-				946E2EAE1A1AD2A500FE227C /* ViewController.m */,
 				946E2EAF1A1AD2A500FE227C /* X509Wrapper.h */,
 				946E2EB01A1AD2A500FE227C /* X509Wrapper.m */,
+				9492AE4C1A92243500582A99 /* Resources */,
+				946E2E811A1AD24C00FE227C /* Supporting Files */,
 			);
 			path = CertManager;
 			sourceTree = "<group>";
@@ -159,6 +173,21 @@
 				946E2EC11A1AD3B200FE227C /* OpenSSL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9492AE4C1A92243500582A99 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9492AE4D1A92243500582A99 /* icon.png */,
+				9492AE4E1A92243500582A99 /* Info.plist */,
+				9492AE4F1A92243500582A99 /* LaunchScreen.nib */,
+				9492AE501A92243500582A99 /* LaunchScreen.xib */,
+				9492AE511A92243500582A99 /* trusted.png */,
+				9492AE521A92243500582A99 /* trusted@2x.png */,
+				9492AE531A92243500582A99 /* trusted@3x.png */,
+				9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,9 +271,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				946E2E921A1AD24C00FE227C /* LaunchScreen.xib in Resources */,
-				946E2E8F1A1AD24C00FE227C /* Images.xcassets in Resources */,
-				946E2EA81A1AD26200FE227C /* Main.storyboard in Resources */,
+				9492AE571A92243500582A99 /* LaunchScreen.nib in Resources */,
+				9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */,
+				9492AE561A92243500582A99 /* Info.plist in Resources */,
+				9492AE451A92217B00582A99 /* control in Resources */,
+				9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */,
+				9492AE551A92243500582A99 /* icon.png in Resources */,
+				9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */,
+				9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */,
+				9492AE591A92243500582A99 /* trusted.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +302,8 @@
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
-				946E2EB41A1AD2A500FE227C /* ViewController.m in Sources */,
+				9492AE481A9222C500582A99 /* TableViewController.m in Sources */,
+				9492AE431A92216F00582A99 /* Makefile in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,17 +324,6 @@
 			targetProxy = 946E2E981A1AD24C00FE227C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		946E2E901A1AD24C00FE227C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				946E2E911A1AD24C00FE227C /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		946E2E9F1A1AD24C00FE227C /* Debug */ = {
