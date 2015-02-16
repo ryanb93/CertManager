@@ -1,0 +1,3 @@
+[submodule "CertManager/theos"]
+	path = CertManager/theos
+	url = git@github.com:ryanb93/theos.git
