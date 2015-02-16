@@ -19,7 +19,7 @@
 
 @implementation CertDataStore
 
-- (id)init
+- (instancetype)init
 {
  
     //Init the OTA Directory.
@@ -94,7 +94,7 @@ NSInteger sortCerts(id id1, id id2, void *context)
 }
 
 - (NSArray *)titleForCertificatesInSection:(NSInteger)section {
-    return [_titles objectAtIndex:section];
+    return _titles[section];
 }
 
 - (NSString *)nameForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
