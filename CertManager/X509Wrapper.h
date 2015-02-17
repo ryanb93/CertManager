@@ -10,6 +10,6 @@
 #import <OpenSSL/x509.h>
 
 @interface X509Wrapper : NSObject
-    +(NSString *) CertificateGetIssuerName:(SecCertificateRef)certificateX509;
-    +(int) CertificateGetTrusted:(X509 *)certificateX509;
+    +(NSString *) CertificateGetIssuerName:(SecCertificateRef)cert;
+    +(NSString *) CertificateGetSHA1:(SecCertificateRef)cert;
 @end

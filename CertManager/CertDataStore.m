@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "CertDataStore.h"
+#import "FSHandler.h"
 
 @interface CertDataStore ()
 
 @property (strong, atomic) NSMutableDictionary * certificates;
-@property (strong, atomic) NSMutableArray      * trusted;
 @property (strong, atomic) NSMutableArray      * untrusted;
 
 @end
@@ -71,7 +71,7 @@
         [[_certificates valueForKey:first] addObject:cert];
     }
     
-    
+    _untrusted = [FSHandler readFromPlist:@"blacklist"];
     
     return self;
     
@@ -100,7 +100,6 @@ NSInteger sortCerts(id id1, id id2, void *context)
 - (NSString *)nameForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
     SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
     return (__bridge NSString *)(SecCertificateCopySubjectSummary(cert));
-    
 }
 
 - (NSString *)issuerForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
@@ -108,6 +107,22 @@ NSInteger sortCerts(id id1, id id2, void *context)
     return [X509Wrapper CertificateGetIssuerName:cert];
 }
 
+- (BOOL)isTrustedForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
+    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+    return ![_untrusted containsObject:[X509Wrapper CertificateGetSHA1:cert]];
+}
+
+- (void)untrustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
+    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+    [_untrusted addObject:[X509Wrapper CertificateGetSHA1:cert]];
+    [FSHandler writeToPlist:@"blacklist" withData:_untrusted];
+}
+
+- (void)trustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
+    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+    [_untrusted removeObject:[X509Wrapper CertificateGetSHA1:cert]];
+    [FSHandler writeToPlist:@"blacklist" withData:_untrusted];
+}
 
 
 @end

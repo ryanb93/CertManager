@@ -139,7 +139,12 @@
     NSString *issuer   = [_certStore issuerForCertificateWithTitle:title andOffset:row];
 
     //Style the cell.
-    cell.imageView.image = [UIImage imageNamed:@"trusted"];
+    if([_certStore isTrustedForCertificateWithTitle:title andOffset:row]) {
+        cell.imageView.image = [UIImage imageNamed:@"trusted"];
+    }
+    else {
+        cell.imageView.image = [UIImage imageNamed:@"untrusted"];
+    }
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     //Set the cell text.
@@ -179,17 +184,21 @@
     //Untrust event handler.
     UIAlertAction *untrustAlertAction = [UIAlertAction actionWithTitle:@"Untrust" style:UIAlertActionStyleDestructive
                                                           handler:^(UIAlertAction * action) {
-                                                              
-                                                              NSLog(@"Untrusting: %@", certName);
-                                                              
+                                                              [self.certStore untrustCertificateWithTitle:title andOffSet:row];
+                                                              [self.tableView beginUpdates];
+                                                              [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                                                                    withRowAnimation:UITableViewRowAnimationRight];
+                                                              [self.tableView endUpdates];
                                                           }];
     
     //Trust event handler.
     UIAlertAction *trustAlertAction = [UIAlertAction actionWithTitle:@"Trust" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * action) {
-                                                            
-                                                            NSLog(@"Trusting: %@", certName);
-                                                            
+                                                            [self.certStore trustCertificateWithTitle:title andOffSet:row];
+                                                            [self.tableView beginUpdates];
+                                                            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                                                                  withRowAnimation:UITableViewRowAnimationRight];
+                                                            [self.tableView endUpdates];
                                                         }];
     
     
@@ -265,7 +274,7 @@
     
     //Create a trust action object which calls the trustAlert function when tapped.
     UITableViewRowAction *trustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-                                                                             title:@"Untrust"
+                                                                             title:@"Trust"
                                                                            handler:trustAlert];
 
     //Set the trust background colour to green.

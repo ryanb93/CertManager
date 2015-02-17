@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 94153E731A924C5B0068BC4B /* CertDataStore.m */; };
+		9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DA1A9350490075CD97 /* FSHandler.m */; };
+		9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */; };
+		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
+		9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E41A93A7450075CD97 /* untrusted@2x.png */; };
+		9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E51A93A7450075CD97 /* untrusted@3x.png */; };
 		946E2E841A1AD24C00FE227C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E831A1AD24C00FE227C /* main.m */; };
 		946E2E9E1A1AD24C00FE227C /* CertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */; };
 		946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAA1A1AD2A500FE227C /* AppDelegate.m */; };
@@ -44,6 +49,13 @@
 /* Begin PBXFileReference section */
 		94153E6F1A924C200068BC4B /* CertDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertDataStore.h; sourceTree = "<group>"; };
 		94153E731A924C5B0068BC4B /* CertDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertDataStore.m; sourceTree = "<group>"; };
+		9449B8D91A9350490075CD97 /* FSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSHandler.h; sourceTree = "<group>"; };
+		9449B8DA1A9350490075CD97 /* FSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSHandler.m; sourceTree = "<group>"; };
+		9449B8DC1A9368420075CD97 /* NSData+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA1.h"; sourceTree = "<group>"; };
+		9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SHA1.m"; sourceTree = "<group>"; };
+		9449B8E31A93A7450075CD97 /* untrusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = untrusted.png; sourceTree = "<group>"; };
+		9449B8E41A93A7450075CD97 /* untrusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@2x.png"; sourceTree = "<group>"; };
+		9449B8E51A93A7450075CD97 /* untrusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@3x.png"; sourceTree = "<group>"; };
 		946E2E7E1A1AD24C00FE227C /* CertManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E821A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E831A1AD24C00FE227C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +108,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9449B8E21A937E130075CD97 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				9449B8DC1A9368420075CD97 /* NSData+SHA1.h */,
+				9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		946E2E751A1AD24C00FE227C = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +147,9 @@
 				9492AE471A9222C500582A99 /* TableViewController.m */,
 				94153E6F1A924C200068BC4B /* CertDataStore.h */,
 				94153E731A924C5B0068BC4B /* CertDataStore.m */,
+				9449B8D91A9350490075CD97 /* FSHandler.h */,
+				9449B8DA1A9350490075CD97 /* FSHandler.m */,
+				9449B8E21A937E130075CD97 /* Categories */,
 				9492AE5D1A9238A100582A99 /* Security */,
 				9492AE4C1A92243500582A99 /* Resources */,
 				946E2E811A1AD24C00FE227C /* Supporting Files */,
@@ -182,6 +206,9 @@
 		9492AE4C1A92243500582A99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9449B8E31A93A7450075CD97 /* untrusted.png */,
+				9449B8E41A93A7450075CD97 /* untrusted@2x.png */,
+				9449B8E51A93A7450075CD97 /* untrusted@3x.png */,
 				9492AE631A92495A00582A99 /* blacklist.plist */,
 				9492AE4D1A92243500582A99 /* icon.png */,
 				9492AE5E1A923A0D00582A99 /* icon-jb.png */,
@@ -289,10 +316,13 @@
 			files = (
 				9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */,
 				9492AE641A92495A00582A99 /* blacklist.plist in Resources */,
+				9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */,
 				9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */,
 				9492AE561A92243500582A99 /* Info.plist in Resources */,
 				9492AE451A92217B00582A99 /* control in Resources */,
 				9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */,
+				9449B8E61A93A7450075CD97 /* untrusted.png in Resources */,
+				9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */,
 				9492AE551A92243500582A99 /* icon.png in Resources */,
 				9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */,
 				9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */,
@@ -315,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */,
+				9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */,
 				946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */,
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
@@ -322,6 +353,7 @@
 				9492AE481A9222C500582A99 /* TableViewController.m in Sources */,
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
+				9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

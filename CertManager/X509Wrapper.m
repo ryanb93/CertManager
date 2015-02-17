@@ -7,6 +7,7 @@
 //
 
 #import "X509Wrapper.h"
+#import "NSData+SHA1.h"
 
 @implementation X509Wrapper
 
@@ -40,13 +41,13 @@
     return issuer;
 }
 
-+(int) CertificateGetTrusted:(X509 *)certificateX509 {
-    int trusted = -1;
-    if (certificateX509 != NULL) {
-        trusted = X509_check_trust(certificateX509, X509_TRUST_DEFAULT, 0);
-    }
-    return trusted;
++(NSString *) CertificateGetSHA1:(SecCertificateRef)cert {
+    CFDataRef data = SecCertificateCopyData(cert);
+    NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(data) length:CFDataGetLength(data)] sha1Digest];
+    CFRelease(data);
+    return [out hexStringValue];
 }
+
 
 
 @end

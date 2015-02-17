@@ -10,24 +10,31 @@
 
 @implementation FSHandler
 
++ (NSString *) getFilePathForFileName:(NSString *)fileName {
+    
+    NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    filePath = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", fileName]];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+        [fileManager copyItemAtPath:sourcePath toPath:filePath error:nil];
+    }
+    
+    return filePath;
+}
+
+
 + (void) writeToPlist: (NSString*)fileName withData:(NSMutableArray *)data
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+    NSString *filePath = [self getFilePathForFileName:fileName];
     [data writeToFile:filePath atomically: YES];
 }
 
 + (NSMutableArray *) readFromPlist: (NSString *)fileName {
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
-    
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-    
-    if (fileExists) {
-        NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
-        return arr;
-    } else {
-        return nil;
-    }
+    NSString *filePath = [self getFilePathForFileName:fileName];
+    NSArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+    return [NSMutableArray arrayWithArray:arr];
 }
 
 @end

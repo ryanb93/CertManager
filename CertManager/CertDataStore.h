@@ -22,6 +22,11 @@
 - (NSString *)nameForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset;
 - (NSString *)issuerForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset;
 
+- (BOOL)isTrustedForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset;
+
+- (void)untrustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
+- (void)trustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
+
 @property (atomic) int trustStoreVersion;
 @property (strong, atomic) NSMutableArray * titles;
 
