@@ -7,11 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "TableViewController.h"
-
-@interface AppDelegate ()
-
-@end
 
 @implementation AppDelegate
 
