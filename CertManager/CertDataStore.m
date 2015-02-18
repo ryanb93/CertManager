@@ -109,7 +109,8 @@ NSInteger sortCerts(id id1, id id2, void *context)
 
 - (BOOL)isTrustedForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
     SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
-    return ![_untrusted containsObject:[X509Wrapper CertificateGetSHA1:cert]];
+    NSString* sha1 = [X509Wrapper CertificateGetSHA1:cert];
+    return ![_untrusted containsObject:sha1];
 }
 
 - (void)untrustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {

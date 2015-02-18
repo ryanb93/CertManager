@@ -23,16 +23,13 @@
 - (NSString *)hexStringValue
 {
     NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:([self length] * 2)];
-    
     const unsigned char *dataBuffer = [self bytes];
-    int i;
-    
-    for (i = 0; i < [self length]; ++i)
+    for (int i = 0; i < [self length]; ++i)
     {
         [stringBuffer appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
     }
-    
-    return [stringBuffer copy];
+    NSString *value = [stringBuffer copy];
+    return value;
 }
 
 - (NSString *)hexColonSeperatedStringValueWithCapitals:(BOOL)capitalize {
@@ -40,9 +37,7 @@
     
     const unsigned char *dataBuffer = [self bytes];
     NSString * format = capitalize ? @"%02X" : @"%02x";
-    int i;
-    
-    for (i = 0; i < [self length]; ++i)
+    for (int i = 0; i < [self length]; ++i)
     {
         if (i)
             [stringBuffer appendString:@":"];

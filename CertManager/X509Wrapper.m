@@ -45,7 +45,8 @@
     CFDataRef data = SecCertificateCopyData(cert);
     NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(data) length:CFDataGetLength(data)] sha1Digest];
     CFRelease(data);
-    return [out hexStringValue];
+    NSString *sha1 = [out hexStringValue];
+    return sha1;
 }
 
 
