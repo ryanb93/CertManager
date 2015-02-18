@@ -13,6 +13,8 @@
 		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
 		9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E41A93A7450075CD97 /* untrusted@2x.png */; };
 		9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E51A93A7450075CD97 /* untrusted@3x.png */; };
+		9452E2081A94E34900C8A737 /* CertHook.xm in Resources */ = {isa = PBXBuildFile; fileRef = 9452E2061A94E34900C8A737 /* CertHook.xm */; };
+		9452E2091A94E34900C8A737 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9452E2071A94E34900C8A737 /* Makefile */; };
 		946E2E841A1AD24C00FE227C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E831A1AD24C00FE227C /* main.m */; };
 		946E2E9E1A1AD24C00FE227C /* CertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */; };
 		946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAA1A1AD2A500FE227C /* AppDelegate.m */; };
@@ -56,6 +58,8 @@
 		9449B8E31A93A7450075CD97 /* untrusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = untrusted.png; sourceTree = "<group>"; };
 		9449B8E41A93A7450075CD97 /* untrusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@2x.png"; sourceTree = "<group>"; };
 		9449B8E51A93A7450075CD97 /* untrusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@3x.png"; sourceTree = "<group>"; };
+		9452E2061A94E34900C8A737 /* CertHook.xm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CertHook.xm; sourceTree = "<group>"; };
+		9452E2071A94E34900C8A737 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		946E2E7E1A1AD24C00FE227C /* CertManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E821A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E831A1AD24C00FE227C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -117,9 +121,20 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		9452E2021A94E2E100C8A737 /* CertHook */ = {
+			isa = PBXGroup;
+			children = (
+				9452E2061A94E34900C8A737 /* CertHook.xm */,
+				9452E2071A94E34900C8A737 /* Makefile */,
+			);
+			name = CertHook;
+			path = CertManager/CertHook;
+			sourceTree = "<group>";
+		};
 		946E2E751A1AD24C00FE227C = {
 			isa = PBXGroup;
 			children = (
+				9452E2021A94E2E100C8A737 /* CertHook */,
 				946E2E801A1AD24C00FE227C /* CertManager */,
 				946E2E9A1A1AD24C00FE227C /* CertManagerTests */,
 				946E2E7F1A1AD24C00FE227C /* Products */,
@@ -325,6 +340,7 @@
 				9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */,
 				9492AE551A92243500582A99 /* icon.png in Resources */,
 				9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */,
+				9452E2081A94E34900C8A737 /* CertHook.xm in Resources */,
 				9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */,
 				9492AE591A92243500582A99 /* trusted.png in Resources */,
 			);
@@ -347,6 +363,7 @@
 				946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */,
 				9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */,
 				946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */,
+				9452E2091A94E34900C8A737 /* Makefile in Sources */,
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
