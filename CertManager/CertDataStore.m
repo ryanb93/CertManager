@@ -10,6 +10,8 @@
 #import "CertDataStore.h"
 #import "FSHandler.h"
 
+#define TRUSTED_PATH @"CertManagerTrustedRoots"
+
 @interface CertDataStore ()
 
 @property (strong, atomic) NSMutableDictionary * certificates;
@@ -71,7 +73,7 @@
         [[_certificates valueForKey:first] addObject:cert];
     }
     
-    _untrusted = [FSHandler readFromPlist:@"blacklist"];
+    _untrusted = [FSHandler readFromPlist:TRUSTED_PATH];
     
     return self;
     
@@ -116,13 +118,13 @@ NSInteger sortCerts(id id1, id id2, void *context)
 - (void)untrustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
     SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
     [_untrusted addObject:[X509Wrapper CertificateGetSHA1:cert]];
-    [FSHandler writeToPlist:@"blacklist" withData:_untrusted];
+    [FSHandler writeToPlist:TRUSTED_PATH withData:_untrusted];
 }
 
 - (void)trustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
     SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
     [_untrusted removeObject:[X509Wrapper CertificateGetSHA1:cert]];
-    [FSHandler writeToPlist:@"blacklist" withData:_untrusted];
+    [FSHandler writeToPlist:TRUSTED_PATH withData:_untrusted];
 }
 
 
