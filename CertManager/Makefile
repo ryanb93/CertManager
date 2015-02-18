@@ -1,15 +1,19 @@
 ARCHS = armv7 arm64
 TARGET = iphone:8.1
 
-include theos/makefiles/common.mk
-
 SOURCE_DIR = .
+
 APPLICATION_NAME = CertManager
+
 CertManager_FILES = $(foreach ext, c cpp m mm x xm xi xmi, $(wildcard $(SOURCE_DIR)/*.$(ext)))
 CertManager_FRAMEWORKS = UIKit CoreGraphics Foundation Security
 CertManager_LDFLAGS = -lcrypto -lssl
 
-include $(THEOS_MAKE_PATH)/application.mk
+include theos/makefiles/common.mk
+include theos/makefiles/application.mk
 
 SUBPROJECTS += CertHook
-include $(THEOS_MAKE_PATH)/aggregate.mk
+include theos/makefiles/aggregate.mk
+
+after-install::
+	install.exec "killall -9 backboardd"
