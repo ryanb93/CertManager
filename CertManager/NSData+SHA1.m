@@ -9,7 +9,6 @@
 //  https://stackoverflow.com/questions/9749560/how-to-calculate-x-509-certificates-sha-1-fingerprint-in-c-c-objective-c
 //
 #import "NSData+SHA1.h"
-#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSData (SHA1)
 

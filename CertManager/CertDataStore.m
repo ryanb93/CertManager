@@ -5,12 +5,11 @@
 //  Created by Ryan Burke on 16/02/2015.
 //  Copyright (c) 2015 Ryan Burke. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import "CertDataStore.h"
 #import "FSHandler.h"
+#import <Security/SecureTransport.h>
 
-#define TRUSTED_PATH @"CertManagerTrustedRoots"
+#define TRUSTED_PATH @"CertManagerUntrustedRoots"
 
 @interface CertDataStore ()
 
@@ -23,7 +22,7 @@
 
 - (instancetype)init
 {
- 
+     
     //Init the OTA Directory.
     self.trustStoreVersion = InitOTADirectory();
     

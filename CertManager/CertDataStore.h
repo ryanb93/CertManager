@@ -5,6 +5,8 @@
 //  Created by Ryan Burke on 16/02/2015.
 //  Copyright (c) 2015 Ryan Burke. All rights reserved.
 //
+#import <Foundation/Foundation.h>
+#import <Security/SecureTransport.h>
 #import <Securityd/OTATrustUtilities.h>
 #import <Securityd/SecTrustServer.h>
 #import "X509Wrapper.h"

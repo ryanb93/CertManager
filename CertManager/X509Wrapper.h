@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <OpenSSL/x509.h>
+#import "NSData+SHA1.h"
 
 @interface X509Wrapper : NSObject
     +(NSString *) CertificateGetIssuerName:(SecCertificateRef)cert;

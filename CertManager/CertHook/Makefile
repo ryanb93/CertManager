@@ -4,7 +4,7 @@ TARGET := iphone:8.1
 include ../theos/makefiles/common.mk
 
 TWEAK_NAME = CertHook
-CertHook_FILES = CertHook.xm
+CertHook_FILES = CertHook.xm NSData+SHA1.m
 CertHook_FRAMEWORKS = Security
 CertHook_LIBRARIES = substrate
 

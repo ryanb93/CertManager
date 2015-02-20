@@ -7,7 +7,6 @@
 //
 
 #import "X509Wrapper.h"
-#import "NSData+SHA1.h"
 
 @implementation X509Wrapper
 

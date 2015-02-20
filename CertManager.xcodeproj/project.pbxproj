@@ -24,6 +24,7 @@
 		946E2EBD1A1AD2E000FE227C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBB1A1AD2D800FE227C /* libcrypto.a */; };
 		946E2EBE1A1AD2E200FE227C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBC1A1AD2D800FE227C /* libssl.a */; };
 		946E2EC41A1AD3CC00FE227C /* CertUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EC31A1AD3CC00FE227C /* CertUI.framework */; };
+		948F7B041A977436002764B5 /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 948F7B031A977436002764B5 /* NSData+SHA1.m */; };
 		9492AE431A92216F00582A99 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE421A92216F00582A99 /* Makefile */; };
 		9492AE451A92217B00582A99 /* control in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE441A92217B00582A99 /* control */; };
 		9492AE481A9222C500582A99 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TableViewController.m */; };
@@ -75,6 +76,8 @@
 		946E2EBC1A1AD2D800FE227C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		946E2EC11A1AD3B200FE227C /* OpenSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenSSL.framework; path = "../../../../Developer/OpenSSL-for-iPhone/include/OpenSSL.framework"; sourceTree = "<group>"; };
 		946E2EC31A1AD3CC00FE227C /* CertUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CertUI.framework; path = ../../../../Developer/CertUI.framework; sourceTree = "<group>"; };
+		948F7B021A977436002764B5 /* NSData+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA1.h"; sourceTree = "<group>"; };
+		948F7B031A977436002764B5 /* NSData+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SHA1.m"; sourceTree = "<group>"; };
 		9492AE421A92216F00582A99 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		9492AE441A92217B00582A99 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
 		9492AE461A9222C500582A99 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				9452E2061A94E34900C8A737 /* CertHook.xm */,
+				948F7B021A977436002764B5 /* NSData+SHA1.h */,
+				948F7B031A977436002764B5 /* NSData+SHA1.m */,
 				9452E2071A94E34900C8A737 /* Makefile */,
 			);
 			name = CertHook;
@@ -367,6 +372,7 @@
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
+				948F7B041A977436002764B5 /* NSData+SHA1.m in Sources */,
 				9492AE481A9222C500582A99 /* TableViewController.m in Sources */,
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
