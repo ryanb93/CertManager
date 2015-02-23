@@ -7,7 +7,6 @@
 //
 #import <CertUI/CertUIPrompt.h>
 #import <OpenSSL/x509.h>
-#import <notify.h>
 
 #import "TableViewController.h"
 #import "CertDataStore.h"
@@ -43,7 +42,6 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 44.0;
-    
 }
 
 #pragma mark - UITableViewDataSource
@@ -133,7 +131,7 @@
     NSInteger row      = [indexPath row];
     NSString *certName = [_certStore nameForCertificateWithTitle:title andOffset:row];
     NSString *issuer   = [_certStore issuerForCertificateWithTitle:title andOffset:row];
-
+    
     TableCellSwitch *switchView = [[TableCellSwitch alloc] initWithFrame:CGRectZero];
     cell.accessoryView = switchView;
     [switchView setOn:NO animated:NO];
@@ -159,10 +157,8 @@
 }
 
 - (void) switchChanged:(id)sender {
+    
     TableCellSwitch* switchControl = sender;
-    NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
-    NSLog( @"The indexPath is %@", switchControl.indexPath);
-
     NSIndexPath *indexPath = switchControl.indexPath;
     
     //Get the name of the certificate to use in alerts.
@@ -177,11 +173,12 @@
     }
     
     [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
-
-    notify_post("ac.uk.surrey.rb00166.CertManager.settings_changed");
+    
+    //Send a notification to the user.
+    CFNotificationCenterRef notification = CFNotificationCenterGetDarwinNotifyCenter();
+    CFNotificationCenterPostNotification(notification, CFSTR("ac.uk.surrey.rb00166.CertManager-settings_changed"), NULL, NULL, YES);
     
 }
 

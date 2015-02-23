@@ -7,7 +7,8 @@ APPLICATION_NAME = CertManager
 
 CertManager_FILES = $(foreach ext, c cpp m mm x xm xi xmi, $(wildcard $(SOURCE_DIR)/*.$(ext)))
 CertManager_FRAMEWORKS = UIKit CoreGraphics Foundation Security
-CertManager_LDFLAGS = -lcrypto -lssl
+CertManager_LDFLAGS = -lcrypto -lssl -lrocketbootstrap
+CertManager_LIBRARIES = rocketbootstrap
 
 include theos/makefiles/common.mk
 include theos/makefiles/application.mk

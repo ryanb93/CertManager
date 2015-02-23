@@ -37,6 +37,7 @@
 		9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */; };
 		9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE5E1A923A0D00582A99 /* icon-jb.png */; };
 		9492AE641A92495A00582A99 /* blacklist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE631A92495A00582A99 /* blacklist.plist */; };
+		94D4AAA31A9B8F240049640A /* BulletinBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D4AAA21A9B8F240049640A /* BulletinBoard.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		9492AE5E1A923A0D00582A99 /* icon-jb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-jb.png"; sourceTree = "<group>"; };
 		9492AE601A92475C00582A99 /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
 		9492AE631A92495A00582A99 /* blacklist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blacklist.plist; sourceTree = "<group>"; };
+		94D4AAA21A9B8F240049640A /* BulletinBoard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BulletinBoard.framework; path = ../../../../Developer/BulletinBoard.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94D4AAA31A9B8F240049640A /* BulletinBoard.framework in Frameworks */,
 				946E2EBD1A1AD2E000FE227C /* libcrypto.a in Frameworks */,
 				946E2EC41A1AD3CC00FE227C /* CertUI.framework in Frameworks */,
 				946E2EBE1A1AD2E200FE227C /* libssl.a in Frameworks */,
@@ -218,6 +221,7 @@
 		946E2EC51A1AD56F00FE227C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94D4AAA21A9B8F240049640A /* BulletinBoard.framework */,
 				946E2EBA1A1AD2D800FE227C /* OpenSSL */,
 				946E2EC31A1AD3CC00FE227C /* CertUI.framework */,
 				946E2EC11A1AD3B200FE227C /* OpenSSL.framework */,
@@ -503,6 +507,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Ryan/Developer/OpenSSL-for-iPhone/lib",
+					"$(PROJECT_DIR)/CertManager/theos/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -532,6 +537,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Ryan/Developer/OpenSSL-for-iPhone/lib",
+					"$(PROJECT_DIR)/CertManager/theos/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
