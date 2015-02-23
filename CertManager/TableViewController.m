@@ -7,10 +7,12 @@
 //
 #import <CertUI/CertUIPrompt.h>
 #import <OpenSSL/x509.h>
+#include <spawn.h>
 
 #import "TableViewController.h"
 #import "CertDataStore.h"
 #import "X509Wrapper.h"
+#import "TableCellSwitch.h"
 
 @interface TableViewController ()
 
@@ -35,6 +37,24 @@
     
     //Set the title of the navigation bar to use the trust store version.
     [self setTitle:[NSString stringWithFormat:@"Trust Store Version: %i", [_certStore trustStoreVersion]]];
+    
+    //Stop selection on the table view.
+    [self.tableView setAllowsSelection:NO];
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 44.0;
+    
+}
+
+/**
+ *  Method which kills backboard, this in turn kills SpringBoard and restarts all the MS plugins.
+ *  We do this so that our plist does not have to be read from the system every time an SSL handshake
+ *  happens. Instead, we can be assured that when the tweak loads it has the latest user preferences.
+ */
+- (void)respring {
+    pid_t pid;
+    char *argv[] = {"killall", "-9", "backboardd", NULL};
+    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, argv, NULL);
 }
 
 #pragma mark - UITableViewDataSource
@@ -100,19 +120,6 @@
     return [[_certStore titles] indexOfObject:title];
 }
 
-
-/**
- *  This function enables the swipe on list elements.
- *
- *  @param tableView    The table view that called this function.
- *  @param editingStyle The editing style (unused)
- *  @param indexPath    The index of the cell (unused)
- */
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //Empty, shows the swipable buttons for all cells.
-}
-
 /**
  *  This is a function which creates the cell object and returns it back to the table view.
  *
@@ -138,15 +145,23 @@
     NSString *certName = [_certStore nameForCertificateWithTitle:title andOffset:row];
     NSString *issuer   = [_certStore issuerForCertificateWithTitle:title andOffset:row];
 
+    TableCellSwitch *switchView = [[TableCellSwitch alloc] initWithFrame:CGRectZero];
+    cell.accessoryView = switchView;
+    [switchView setOn:NO animated:NO];
+    [switchView setIndexPath:indexPath];
+    [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+    
     //Style the cell.
     if([_certStore isTrustedForCertificateWithTitle:title andOffset:row]) {
         cell.imageView.image = [UIImage imageNamed:@"trusted"];
     }
     else {
         cell.imageView.image = [UIImage imageNamed:@"untrusted"];
+        [switchView setOn:YES animated:NO];
     }
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
     //Set the cell text.
     [cell.textLabel setText: certName];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
@@ -154,134 +169,36 @@
     return cell;
 }
 
+- (void) switchChanged:(id)sender {
+    TableCellSwitch* switchControl = sender;
+    NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
+    NSLog( @"The indexPath is %@", switchControl.indexPath);
 
-#pragma mark - UITableViewDelegate
-
-/**
- *  This function creates the buttons used when the user swipes left on a table cell.
- *
- *  @param tableView The table view that called this function.
- *  @param indexPath The index of the cell that was swiped.
- *
- *  @return An array of actions that the cell can perform.
- */
-- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    NSIndexPath *indexPath = switchControl.indexPath;
+    
     //Get the name of the certificate to use in alerts.
     NSString  *title   = [self tableView:self.tableView titleForHeaderInSection:[indexPath section]];
     NSInteger row      = [indexPath row];
-    NSString *certName = [_certStore nameForCertificateWithTitle:title andOffset:row];
     
-    //Cancel event handler if the user presses the cancel button on an alert.
-    UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
-                                                         handler:^(UIAlertAction * action) {
-                                                             [self.tableView beginUpdates];
-                                                             [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                                                                   withRowAnimation:UITableViewRowAnimationRight];
-                                                             [self.tableView endUpdates];
-                                                         }];
+    if(switchControl.on) {
+        [self.certStore untrustCertificateWithTitle:title andOffSet:row];
+    }
+    else {
+        [self.certStore trustCertificateWithTitle:title andOffSet:row];
+    }
     
-    //Untrust event handler.
-    UIAlertAction *untrustAlertAction = [UIAlertAction actionWithTitle:@"Untrust" style:UIAlertActionStyleDestructive
-                                                          handler:^(UIAlertAction * action) {
-                                                              [self.certStore untrustCertificateWithTitle:title andOffSet:row];
-                                                              [self.tableView beginUpdates];
-                                                              [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                                                                    withRowAnimation:UITableViewRowAnimationRight];
-                                                              [self.tableView endUpdates];
-                                                          }];
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
     
-    //Trust event handler.
-    UIAlertAction *trustAlertAction = [UIAlertAction actionWithTitle:@"Trust" style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction * action) {
-                                                            [self.certStore trustCertificateWithTitle:title andOffSet:row];
-                                                            [self.tableView beginUpdates];
-                                                            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                                                                  withRowAnimation:UITableViewRowAnimationRight];
-                                                            [self.tableView endUpdates];
-                                                        }];
+    if(!self.navigationItem.rightBarButtonItem) {
+    	UIBarButtonItem *applyButton = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(respring)];
+    	self.navigationItem.rightBarButtonItem = applyButton;
+    }
     
     
-    /**
-     *  A block function that generates a message depending on the trust or untrust.
-     *
-     *  @param trust If the alert was for trusting the certificate.
-     *
-     *  @return A customised message for the user.
-     */
-    NSString* (^alertMessage)(BOOL) = ^NSString *(BOOL trust) {
-        NSString *trusts = @"trust";
-        NSString *action = @"start";
-        if(!trust) {
-            trusts = @"untrust";
-            action = @"stop";
-        }
-        return [NSString stringWithFormat:@"You are about to %@ the \"%@\" root certificate. This will %@ all secure communications"
-                                            "with servers identifying with this certificate. Are you sure you want to do this?",
-                                            trusts, certName, action];
-    };
-    
-
-    /**
-     *  This is a block function which shows the user an alert asking if they want to untrust the certificate.
-     *
-     *  @param action    The action taken.
-     *  @param indexPath The index of the row on the table which was swiped.
-     *
-     */
-    void (^untrustAlert)(UITableViewRowAction*, NSIndexPath*) = ^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-        //Create an alert controller and use the alert message function to generate a message.
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Untrust Certificate"
-                                                                       message:alertMessage(false)
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        //Add the alert actions to the controller. This adds the buttons automatically.
-        [alert addAction:untrustAlertAction];
-        [alert addAction:cancelAlertAction];
-        
-        //Show the alert to the user.
-        [self presentViewController:alert animated:YES completion:nil];
-    };
-
-    
-    /**
-     *  This is a block function which shows the user an alert asking if they want to trust the certificate.
-     *
-     *  @param action    The action taken.
-     *  @param indexPath The index of the row on the table which was swiped.
-     *
-     */
-    void (^trustAlert)(UITableViewRowAction*, NSIndexPath*) = ^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-        //Create an alert controller and use the alert message function to generate a message.
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Trust Certificate"
-                                                                       message:alertMessage(true)
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        //Add the alert actions to the controller. This adds the buttons automatically.
-        [alert addAction:trustAlertAction];
-        [alert addAction:cancelAlertAction];
-        
-        //Show the alert to the user.
-        [self presentViewController:alert animated:YES completion:nil];
-    };
-
-    //Create an untrust action object which calls the untrustAlert function when tapped.
-    UITableViewRowAction *untrustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
-                                                                             title:@"Untrust"
-                                                                           handler:untrustAlert];
-    
-    //Create a trust action object which calls the trustAlert function when tapped.
-    UITableViewRowAction *trustAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-                                                                             title:@"Trust"
-                                                                           handler:trustAlert];
-
-    //Set the trust background colour to green.
-    trustAction.backgroundColor = [UIColor colorWithRed:0.35 green:0.71 blue:0.2 alpha:1];
-    
-    //Return both the swipe actions back to the list.
-    return @[untrustAction, trustAction];
 }
+
 
 @end

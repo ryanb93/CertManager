@@ -52,6 +52,7 @@
 /* Begin PBXFileReference section */
 		94153E6F1A924C200068BC4B /* CertDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertDataStore.h; sourceTree = "<group>"; };
 		94153E731A924C5B0068BC4B /* CertDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertDataStore.m; sourceTree = "<group>"; };
+		9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellSwitch.h; sourceTree = "<group>"; };
 		9449B8D91A9350490075CD97 /* FSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSHandler.h; sourceTree = "<group>"; };
 		9449B8DA1A9350490075CD97 /* FSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSHandler.m; sourceTree = "<group>"; };
 		9449B8DC1A9368420075CD97 /* NSData+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA1.h"; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 				94153E731A924C5B0068BC4B /* CertDataStore.m */,
 				9449B8D91A9350490075CD97 /* FSHandler.h */,
 				9449B8DA1A9350490075CD97 /* FSHandler.m */,
+				9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */,
 				9449B8E21A937E130075CD97 /* Categories */,
 				9492AE5D1A9238A100582A99 /* Security */,
 				9492AE4C1A92243500582A99 /* Resources */,
@@ -492,6 +494,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/theos/include/**",
 					"$(SRCROOT)/../../../../Developer/CertUI.framework/Headers",
 					"$(SRCROOT)/../../../../Developer/OpenSSL-for-iPhone/include/OpenSSL.framework/Headers",
 				);
@@ -520,6 +523,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/theos/include/**",
 					"$(SRCROOT)/../../../../Developer/CertUI.framework/Headers",
 					"$(SRCROOT)/../../../../Developer/OpenSSL-for-iPhone/include/OpenSSL.framework/Headers",
 				);
