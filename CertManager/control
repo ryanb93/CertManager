@@ -1,9 +1,9 @@
 Package: ac.uk.surrey.rb00166.CertManager
 Name: CertManager
-Depends: mobilesubstrate
-Version: 0.0.1
+Depends: mobilesubstrate (>= 0.9.5001), com.rpetrich.rocketbootstrap (>= 1.0.2), firmware (>= 8.0)
+Version: 0.1.0
 Architecture: iphoneos-arm
-Description: An application which blocks root certificates.
+Description: Manage certificate authorities on your device.
 Maintainer: Ryan Burke
 Author: Ryan Burke
 Section: Utilities
