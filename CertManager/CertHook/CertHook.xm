@@ -8,6 +8,8 @@
 
 static BOOL LOCKED = NO;
 
+static NSMutableArray *untrustedRoots;
+
 // Hook SSLHandshake()
 static OSStatus (*original_SSLHandshake)(
 	SSLContextRef context
@@ -16,8 +18,6 @@ static OSStatus (*original_SSLHandshake)(
 static OSStatus replaced_SSLHandshake(
 	SSLContextRef context
 ) {
-	NSArray *arr = [[NSArray alloc] initWithContentsOfFile:KEYS];
-	NSMutableArray  *untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
 
 	NSLog(@"Untrusted Roots: %@", untrustedRoots);
 
@@ -26,20 +26,37 @@ static OSStatus replaced_SSLHandshake(
 	SSLCopyPeerTrust(context, &trustRef);
 	CFIndex count = SecTrustGetCertificateCount(trustRef);
 
+
+	SSLConnectionRef *connection = NULL;
+	SSLGetConnection (context, connection);
+
+	NSLog(@"SSLConnectionRef: %@", *connection);
+
+
 	NSLog(@"Certificate Count: %li", count);
 
+	//For each certificate in the certificate chain.
 	for (CFIndex i = 0; i < count; i++)
 	{
+		//Get a reference to the certificate.
 		SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);
+
 		CFStringRef certSummary = SecCertificateCopySubjectSummary(certRef);
+
+		//Convert the certificate to a data object.
 		CFDataRef certData = SecCertificateCopyData(certRef);
+		//Convert the CFData to NSData and get the SHA1.
 		NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(certData) length:CFDataGetLength(certData)] sha1Digest];
+		//Convert the SHA1 data object to a hex String.
 		NSString *sha1 = [out hexStringValue];
+
+		//If the SHA1 of this certificate is in our blocked list.
 		if([untrustedRoots containsObject:sha1]) {
 			NSLog(@"-------UNTRUSTED ROOT FOUND-------");
 			NSLog(@"BLOCKED ROOT CA: %@", (NSString *)certSummary);
 			NSLog(@"----------------------------------");
 			LOCKED = YES;
+            //Return the failure.
 			return errSSLUnknownRootCert;
 		}
 	}
@@ -64,8 +81,11 @@ static OSStatus replaced_SSLHandshake(
 %ctor {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	NSLog(@"CertHook running. Waiting for SSL connections.");
+	NSArray *arr = [[NSArray alloc] initWithContentsOfFile:KEYS];
+	untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
+
 	MSHookFunction((void *) SSLHandshake,(void *)  replaced_SSLHandshake, (void **) &original_SSLHandshake);
+	NSLog(@"CertHook running. Waiting for SSL connections.");
 
 	[pool drain];
 }
