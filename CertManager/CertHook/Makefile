@@ -6,7 +6,8 @@ include ../theos/makefiles/common.mk
 TWEAK_NAME = CertHook
 CertHook_FILES = CertHook.xm NSData+SHA1.m
 CertHook_FRAMEWORKS = Security, UIKit
-CertHook_LIBRARIES = substrate
+CertHook_PRIVATE_FRAMEWORKS = BulletinBoard
+CertHook_LIBRARIES = substrate rocketbootstrap
 
 
 include ../theos/makefiles/tweak.mk
