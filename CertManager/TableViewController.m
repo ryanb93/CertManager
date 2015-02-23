@@ -7,7 +7,7 @@
 //
 #import <CertUI/CertUIPrompt.h>
 #import <OpenSSL/x509.h>
-#include <spawn.h>
+#import <notify.h>
 
 #import "TableViewController.h"
 #import "CertDataStore.h"
@@ -44,17 +44,6 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 44.0;
     
-}
-
-/**
- *  Method which kills backboard, this in turn kills SpringBoard and restarts all the MS plugins.
- *  We do this so that our plist does not have to be read from the system every time an SSL handshake
- *  happens. Instead, we can be assured that when the tweak loads it has the latest user preferences.
- */
-- (void)respring {
-    pid_t pid;
-    char *argv[] = {"killall", "-9", "backboardd", NULL};
-    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, argv, NULL);
 }
 
 #pragma mark - UITableViewDataSource
@@ -191,12 +180,8 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
-    
-    if(!self.navigationItem.rightBarButtonItem) {
-    	UIBarButtonItem *applyButton = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(respring)];
-    	self.navigationItem.rightBarButtonItem = applyButton;
-    }
-    
+
+    notify_post("ac.uk.surrey.rb00166.CertManager.settings_changed");
     
 }
 

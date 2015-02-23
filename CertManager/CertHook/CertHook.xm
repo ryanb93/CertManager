@@ -1,7 +1,10 @@
 #import <Security/Security.h>
+#import <UIKit/UIApplication.h>
+#import <UIKit/UILocalNotification.h>
 #import <Security/SecureTransport.h>
 #import <substrate.h>
 #import "NSData+SHA1.h"
+#import <notify.h>
 
 #define KEYS @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist"
 
@@ -52,6 +55,14 @@ static OSStatus replaced_SSLHandshake(
 
 		//If the SHA1 of this certificate is in our blocked list.
 		if([untrustedRoots containsObject:sha1]) {
+
+			UILocalNotification *notification = [[UILocalNotification alloc]init];
+			[notification setAlertBody:@"Hello world"];
+			[notification setFireDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+			[notification setTimeZone:[NSTimeZone  defaultTimeZone]];
+			[[UIApplication sharedApplication] setScheduledLocalNotifications:[NSArray arrayWithObject:notification]];
+
+
 			NSLog(@"-------UNTRUSTED ROOT FOUND-------");
 			NSLog(@"BLOCKED ROOT CA: %@", (NSString *)certSummary);
 			NSLog(@"----------------------------------");
@@ -84,8 +95,21 @@ static OSStatus replaced_SSLHandshake(
 	NSArray *arr = [[NSArray alloc] initWithContentsOfFile:KEYS];
 	untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
 
+	int notifyToken;
+
+	notify_register_dispatch("ac.uk.surrey.rb00166.CertManager.settings_changed",
+		&notifyToken,
+		dispatch_get_main_queue(), ^(int t) {
+			NSLog(@"---- ROOOTS UPDATED -----");
+			NSArray *arr = [[NSArray alloc] initWithContentsOfFile:KEYS];
+			untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
+			NSLog(@"Untrusted Roots: %@", untrustedRoots);
+	});
+
 	MSHookFunction((void *) SSLHandshake,(void *)  replaced_SSLHandshake, (void **) &original_SSLHandshake);
 	NSLog(@"CertHook running. Waiting for SSL connections.");
+
+
 
 	[pool drain];
 }
