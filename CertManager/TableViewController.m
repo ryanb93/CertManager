@@ -72,7 +72,7 @@
  *  @return The number of items in a particular section of the table.
  */
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSString *title = [_titles objectAtIndex:section];
+    NSString *title = _titles[section];
     return [_certStore numberOfCertificatesForTitle:title];
 }
 
@@ -85,7 +85,7 @@
  *  @return A title for the table view.
  */
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [_titles objectAtIndex:section];
+    return _titles[section];
 }
 
 /**
@@ -130,35 +130,30 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:@"caCell"];
     }
-
-    //Get the name and issuer of the certificate for this row.
-    NSString  *title   = [self tableView:self.tableView titleForHeaderInSection:[indexPath section]];
-    NSInteger row      = [indexPath row];
     
-    SecCertificateRef certificate = [self.certStore certificateWithTitle:title andOffSet:row];
-    
-    NSString *certName = [_certStore nameForCertificate:certificate];
-    NSString *issuer   = [_certStore issuerForCertificate:certificate];
-        
     TableCellSwitch *switchView = [[TableCellSwitch alloc] initWithFrame:CGRectZero];
     cell.accessoryView = switchView;
     [switchView setOn:NO animated:NO];
     [switchView setIndexPath:indexPath];
     [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
     
+    //Set the cell text.
+    SecCertificateRef certificate = [_certStore certificateWithTitle:_titles[[indexPath section]]
+                                                           andOffSet:[indexPath row]];
+    NSString *certName = [_certStore nameForCertificate:certificate];
+    NSString *issuer   = [_certStore issuerForCertificate:certificate];
+    [cell.textLabel setText: certName];
+    [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
     
     //Style the cell.
-    if([_certStore isTrustedForCertificate:certificate]) {
+    BOOL trusted = [_certStore isTrustedForCertificate:certificate];
+    if(trusted) {
         cell.imageView.image = [UIImage imageNamed:@"trusted"];
     }
     else {
         cell.imageView.image = [UIImage imageNamed:@"untrusted"];
         [switchView setOn:YES animated:NO];
     }
-    
-    //Set the cell text.
-    [cell.textLabel setText: certName];
-    [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
     
     return cell;
 }
@@ -172,13 +167,13 @@
     NSString  *title   = [self tableView:self.tableView titleForHeaderInSection:[indexPath section]];
     NSInteger row      = [indexPath row];
     
-    SecCertificateRef certificate = [self.certStore certificateWithTitle:title andOffSet:row];
+    SecCertificateRef certificate = [_certStore certificateWithTitle:title andOffSet:row];
     
     if(switchControl.on) {
-        [self.certStore untrustCertificate:certificate];
+        [_certStore untrustCertificate:certificate];
     }
     else {
-        [self.certStore trustCertificate:certificate];
+        [_certStore trustCertificate:certificate];
     }
     
     [self.tableView beginUpdates];

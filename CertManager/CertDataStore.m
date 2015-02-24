@@ -8,9 +8,7 @@
 #import "CertDataStore.h"
 #import "FSHandler.h"
 
-#define TRUSTED_PATH @"CertManagerUntrustedRoots"
-
-@interface CertDataStore ()
+@interface CertDataStore()
 
 @property (strong, atomic) NSMutableDictionary * certificates;
 @property (strong, atomic) NSMutableArray      * untrusted;
@@ -22,6 +20,9 @@
  * Here we manage a dictionary of untrusted certificates which is backed by values stored on the disk.
  */
 @implementation CertDataStore
+
+//The name of the plist to read from.
+static NSString * const UNTRUSTED_PLIST = @"CertManagerUntrustedRoots";
 
 /**
  *  Init method for the CertDataStore. Loads the root certificates using the Security framework.
@@ -37,7 +38,7 @@
 
     //Set up our private data stores.
     _certificates = [[NSMutableDictionary alloc] init];
-    _untrusted    = [FSHandler readFromPlist:TRUSTED_PATH];
+    _untrusted    = [FSHandler readFromPlist:UNTRUSTED_PLIST];
     
     //Get the offsets for the certificates in the database index file.
     NSMutableArray *offsets = [[NSMutableArray alloc] init];
@@ -65,7 +66,7 @@
         NSString *first = [NSString stringWithFormat:@"%c", [summary characterAtIndex:0]];
         
         //If certificates already contains this object then create it.
-        if(![_certificates objectForKey:first]) {
+        if(!_certificates[first]) {
             _certificates[first] = [[NSMutableArray alloc] init];
         }
         
@@ -106,7 +107,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
 }
 
 - (NSInteger)numberOfCertificatesForTitle:(NSString*)title {
-    return [[_certificates objectForKey:title] count];
+    return [_certificates[title] count];
 }
 
 
@@ -155,7 +156,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  */
 - (void)untrustCertificate:(SecCertificateRef) cert  {
     [_untrusted addObject:[X509Wrapper CertificateGetSHA1:cert]];
-    [FSHandler writeToPlist:TRUSTED_PATH withData:_untrusted];
+    [FSHandler writeToPlist:UNTRUSTED_PLIST withData:_untrusted];
 }
 
 /**
@@ -165,7 +166,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  */
 - (void)trustCertificate:(SecCertificateRef) cert {
     [_untrusted removeObject:[X509Wrapper CertificateGetSHA1:cert]];
-    [FSHandler writeToPlist:TRUSTED_PATH withData:_untrusted];
+    [FSHandler writeToPlist:UNTRUSTED_PLIST withData:_untrusted];
 }
 
 
