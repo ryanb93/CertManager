@@ -13,8 +13,6 @@
 		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
 		9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E41A93A7450075CD97 /* untrusted@2x.png */; };
 		9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E51A93A7450075CD97 /* untrusted@3x.png */; };
-		9452E2081A94E34900C8A737 /* CertHook.mm in Resources */ = {isa = PBXBuildFile; fileRef = 9452E2061A94E34900C8A737 /* CertHook.mm */; };
-		9452E2091A94E34900C8A737 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9452E2071A94E34900C8A737 /* Makefile */; };
 		946E2E841A1AD24C00FE227C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E831A1AD24C00FE227C /* main.m */; };
 		946E2E9E1A1AD24C00FE227C /* CertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */; };
 		946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAA1A1AD2A500FE227C /* AppDelegate.m */; };
@@ -26,7 +24,6 @@
 		946E2EC41A1AD3CC00FE227C /* CertUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EC31A1AD3CC00FE227C /* CertUI.framework */; };
 		9470C8721A9C86BD00906059 /* libsubstrate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9470C8711A9C86BD00906059 /* libsubstrate.dylib */; };
 		9470C8741A9C86D900906059 /* substrate.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 9470C8731A9C86D900906059 /* substrate.h */; };
-		948F7B041A977436002764B5 /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 948F7B031A977436002764B5 /* NSData+SHA1.m */; };
 		9492AE431A92216F00582A99 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE421A92216F00582A99 /* Makefile */; };
 		9492AE451A92217B00582A99 /* control in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE441A92217B00582A99 /* control */; };
 		9492AE481A9222C500582A99 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TableViewController.m */; };
@@ -38,7 +35,6 @@
 		9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE531A92243500582A99 /* trusted@3x.png */; };
 		9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */; };
 		9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE5E1A923A0D00582A99 /* icon-jb.png */; };
-		9492AE641A92495A00582A99 /* blacklist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE631A92495A00582A99 /* blacklist.plist */; };
 		94D4AAA31A9B8F240049640A /* BulletinBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D4AAA21A9B8F240049640A /* BulletinBoard.framework */; };
 /* End PBXBuildFile section */
 
@@ -349,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9492AE5F1A923A0D00582A99 /* icon-jb.png in Resources */,
-				9492AE641A92495A00582A99 /* blacklist.plist in Resources */,
 				9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */,
 				9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */,
 				9492AE561A92243500582A99 /* Info.plist in Resources */,
@@ -359,7 +354,6 @@
 				9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */,
 				9492AE551A92243500582A99 /* icon.png in Resources */,
 				9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */,
-				9452E2081A94E34900C8A737 /* CertHook.mm in Resources */,
 				9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */,
 				9492AE591A92243500582A99 /* trusted.png in Resources */,
 			);
@@ -382,11 +376,9 @@
 				946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */,
 				9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */,
 				946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */,
-				9452E2091A94E34900C8A737 /* Makefile in Sources */,
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
-				948F7B041A977436002764B5 /* NSData+SHA1.m in Sources */,
 				9492AE481A9222C500582A99 /* TableViewController.m in Sources */,
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
