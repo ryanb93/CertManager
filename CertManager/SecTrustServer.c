@@ -25,14 +25,11 @@
  *  Created by Michael Brouwer on 12/12/08.
  *
  */
+#include <Securityd/OTATrustUtilities.h>
 #include <Securityd/SecTrustServer.h>
 #include <Securityd/SecCertificate.h>
-#include <CoreFoundation/CFSet.h>
-#include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFPropertyList.h>
-#include <Securityd/OTATrustUtilities.h>
 
  CFArrayRef CopyCertDataFromIndices(CFArrayRef offsets)
 {
