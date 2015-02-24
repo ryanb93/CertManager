@@ -7,7 +7,6 @@
 //
 #import "CertDataStore.h"
 #import "FSHandler.h"
-#import <Security/SecureTransport.h>
 
 #define TRUSTED_PATH @"CertManagerUntrustedRoots"
 
@@ -24,22 +23,22 @@
 {
      
     //Init the OTA Directory.
-    self.trustStoreVersion = InitOTADirectory();
-    
+    self.trustStoreVersion  = InitOTADirectory();
+
     //Create the array to hold the list of names.
-    _titles = [[NSMutableArray alloc] init];
+    _titles                 = [[NSMutableArray alloc] init];
     //Create array to hold list of certificates.
-    _certificates = [[NSMutableDictionary alloc] init];
+    _certificates           = [[NSMutableDictionary alloc] init];
 
     //Gets a reference to the current OTA PKI.
-    SecOTAPKIRef ref = SecOTAPKICopyCurrentOTAPKIRef();
-    
+    SecOTAPKIRef ref        = SecOTAPKICopyCurrentOTAPKIRef();
+
     //Dictionary of a hash in the Index file and an offset.
-    NSDictionary *lookup = (__bridge NSDictionary *) SecOTAPKICopyAnchorLookupTable(ref);
-    
+    NSDictionary *lookup    = (__bridge NSDictionary *) SecOTAPKICopyAnchorLookupTable(ref);
+
     //Create an array to hold the values of the offsets.
     NSMutableArray *offsets = [[NSMutableArray alloc] init];
-    
+
     //Loop through each value in the dictionary.
     for (NSString *value in lookup) {
         //For each String inside the array.
@@ -80,7 +79,7 @@
 
 NSInteger sortCerts(id id1, id id2, void *context)
 {
-    CFStringRef summary = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)(id1));
+    CFStringRef summary  = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)(id1));
     CFStringRef summary2 = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)id2);
     return CFStringCompare(summary, summary2, kCFCompareCaseInsensitive);
 }
