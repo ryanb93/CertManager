@@ -33,7 +33,8 @@ static void certificateWasBlocked(NSString *summary) {
 	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanager"];
 	rocketbootstrap_distributedmessagingcenter_apply(center);
 
-	NSDictionary *sumDict = [NSDictionary dictionaryWithObjectsAndKeys: summary, @"summary", nil];
+	NSString *process = [[NSProcessInfo processInfo] processName];
+	NSDictionary *sumDict = [NSDictionary dictionaryWithObjectsAndKeys: summary, @"summary", process, @"process", nil];
 
 	[center sendMessageName:@"certificateWasBlocked" userInfo:sumDict];
 
@@ -60,12 +61,16 @@ static void updateRoots() {
 
 %new
 - (void)handleMessageNamed:(NSString *)name userInfo:(NSDictionary *)userInfo {
+
+	NSString *title = [NSString stringWithFormat:@"%@ used a blocked certificate", [userInfo objectForKey:@"process"]];
+
+
 	//Create a bulletin request.
 	BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
 	bulletin.recordID                = @"uk.ac.surrey.rb00166.certmanager";
 	bulletin.bulletinID              = @"uk.ac.surrey.rb00166.certmanager";
 	bulletin.sectionID               = @"uk.ac..surrey.rb00166.certmanager";
-	bulletin.title                   = @"Connection Blocked by CertManager";
+	bulletin.title                   = title;
 	bulletin.message                 = [userInfo objectForKey:@"summary"];
 	bulletin.date                    = [NSDate date];
 	SBBulletinBannerController *ctrl = [objc_getClass("SBBulletinBannerController") sharedInstance];
