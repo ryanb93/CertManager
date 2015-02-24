@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>CertManager</string>
 	<key>CFBundleIdentifier</key>
-	<string>theos.rb00166.CertManager</string>
+	<string>uk.ac.surrey.rb00166.CertManager</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

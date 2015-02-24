@@ -175,11 +175,9 @@
     [self.tableView beginUpdates];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
-    
+        
     //Send a notification to the user.
-    CFNotificationCenterRef notification = CFNotificationCenterGetDarwinNotifyCenter();
-    CFNotificationCenterPostNotification(notification, CFSTR("ac.uk.surrey.rb00166.CertManager-settings_changed"), NULL, NULL, YES);
-    
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("uk.ac.surrey.rb00166.certmanager/reload"), NULL, NULL, YES);
 }
 
 

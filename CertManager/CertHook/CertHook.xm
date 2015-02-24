@@ -1,81 +1,93 @@
-#import <Security/Security.h>
-#import <Security/SecureTransport.h>
 #import <BulletinBoard/BulletinBoard.h>
-#import <substrate.h>
 #import <notify.h>
+#import <Security/SecureTransport.h>
+#import <Security/Security.h>
+#import <substrate.h>
+#import <rocketbootstrap.h>
+#import <UIKit/UIApplication.h>
 
 #import "NSData+SHA1.h"
 
+#define ROCKETBOOTSTRAP_LOAD_DYNAMIC
+
 #pragma mark - External Interfaces
+
+static NSMutableArray *untrustedRoots;
+
 
 @interface SBBulletinBannerController : NSObject
 	+ (SBBulletinBannerController *)sharedInstance;
 	- (void)observer:(id)observer addBulletin:(BBBulletinRequest *)bulletin forFeed:(int)feed;
 @end
 
-#pragma mark - CertHook
-
-@interface CertHook : NSObject
-+ (id)sharedInstance;
-- (BOOL)blockedSHA1:(NSString *)sha1;
-
-@property (strong, nonatomic) NSMutableArray *untrustedRoots;
-
+@interface CPDistributedMessagingCenter : NSObject
++ (id)centerNamed:(id)arg1;
+- (void)runServerOnCurrentThread;
+- (void)registerForMessageName:(id)arg1 target:(id)arg2 selector:(SEL)arg3;
+- (BOOL)sendMessageName:(id)arg1 userInfo:(id)arg2;
 @end
 
-@implementation CertHook
+static void certificateWasBlocked(NSString *summary) {
+	NSLog(@"--------certificateWasBlocked---------");
+	CPDistributedMessagingCenter *messagingCenter = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanger"];
 
-static CertHook *instance = nil;
 
-+ (id)sharedInstance
+void* handle = dlopen("/usr/lib/librocketbootstrap.dylib", RTLD_LAZY);
+if(handle)
 {
-	if(instance == nil) {
-		instance = [[self alloc] init];
-	}
-	return instance;
+void (*rocketbootstrap_distributedmessagingcenter_apply)(CPDistributedMessagingCenter*);
+rocketbootstrap_distributedmessagingcenter_apply = (void(*)(CPDistributedMessagingCenter*))dlsym(handle, "rocketbootstrap_distributedmessagingcenter_apply");
+rocketbootstrap_distributedmessagingcenter_apply(messagingCenter);
 }
 
-void blockedCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-	NSLog(@"Blocked Callback detected: \n\t name: %@ \n\t userInfo:%@", name, userInfo);
-	//Create a bulletin request.
-    BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
-    bulletin.recordID                = @"ac.uk.surrey.rb00166.certmanager";
-    bulletin.bulletinID              = @"ac.uk.surrey.rb00166.certmanager";
-    bulletin.sectionID               = @"ac.uk.surrey.rb00166.certmanager";
-    bulletin.title                   = @"Connection Blocked by CertManager";
-    //bulletin.message                 = (__bridge NSString*)CFDictionaryGetValue(userInfo, "summary");
-    bulletin.date                    = [NSDate date];
-    SBBulletinBannerController *ctrl = [objc_getClass("SBBulletinBannerController") sharedInstance];
-	[ctrl observer:nil addBulletin:bulletin forFeed:0];
+	[messagingCenter sendMessageName:@"certificateWasBlocked" userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+summary, @"certificate",
+nil]];
+
 }
 
-void updateCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-	NSLog(@"Blocked Callback detected: \n\t name: %@ \n\t object:%@", name, object);
-	[instance updateRoots];
-}
-
-- (void)updateRoots {
+static void updateRoots() {
+	NSLog(@"--------updateRoots---------");
 	NSString *roots     = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist";
 	NSArray *arr        = [[NSArray alloc] initWithContentsOfFile:roots];
-	_untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
+	NSLog(@"--------arr---------\n%@", arr);
+	untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
+	NSLog(@"--------_untrustedRoots---------\n%@", untrustedRoots);
 }
-
-
-- (BOOL)blockedSHA1:(NSString *)sha1 {
-	return [_untrustedRoots containsObject: sha1];
-}
-
-@end
 
 #pragma mark - SpringBoard hooks
 
-%hook SpringBoard
+%hook Springboard
 
 - (id)init {
+	NSLog(@"--------HOOK INIT METHOD---------");
+	self = %orig;
+	CPDistributedMessagingCenter *center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.CertManager"];
+void* handle = dlopen("/usr/lib/librocketbootstrap.dylib", RTLD_LAZY);
+if(handle)
+{
+void (*rocketbootstrap_distributedmessagingcenter_apply)(CPDistributedMessagingCenter*);
+rocketbootstrap_distributedmessagingcenter_apply = (void(*)(CPDistributedMessagingCenter*))dlsym(handle, "rocketbootstrap_distributedmessagingcenter_apply");
+rocketbootstrap_distributedmessagingcenter_apply(center);
+}
+	[center runServerOnCurrentThread];
+	[center registerForMessageName:@"certificateWasBlocked" target:self selector:@selector(handleMessageNamed:withUserInfo:)];
+	return self;
+}
 
-	CFNotificationCenterRef notification = CFNotificationCenterGetDarwinNotifyCenter();
-	CFNotificationCenterAddObserver(notification, (__bridge const void *)([CertHook sharedInstance]), blockedCallback, CFSTR("ac.uk.surrey.rb00166.CertManager-cert_blocked"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-	return %orig();
+%new
+- (void)handleMessageNamed:(NSString *)name withUserInfo:(NSDictionary *)userInfo {
+	NSLog(@"--------showBulletin---------");
+	//Create a bulletin request.
+	BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
+	bulletin.recordID                = @"uk.ac.surrey.rb00166.certmanager";
+	bulletin.bulletinID              = @"uk.ac.surrey.rb00166.certmanager";
+	bulletin.sectionID               = @"uk.ac..surrey.rb00166.certmanager";
+	bulletin.title                   = @"Connection Blocked by CertManager";
+	//bulletin.message                 = (__bridge NSString*)CFDictionaryGetValue(userInfo, "summary");
+	bulletin.date                    = [NSDate date];
+	SBBulletinBannerController *ctrl = [objc_getClass("SBBulletinBannerController") sharedInstance];
+	[ctrl observer:nil addBulletin:bulletin forFeed:0];
 }
 
 %end
@@ -83,7 +95,6 @@ void updateCallback(CFNotificationCenterRef center, void *observer, CFStringRef 
 #pragma mark - SecureTransport hooks
 
 static BOOL LOCKED = NO;
-
 
 /**
  *  A reference to the original SSLHandshake method.
@@ -126,21 +137,14 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 		NSString *sha1 = [out hexStringValue];
 
 		//If the SHA1 of this certificate is in our blocked list.
-		if([[CertHook sharedInstance] blockedSHA1:sha1]) {
+		if([untrustedRoots containsObject:sha1]) {
 
-            //NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
+            NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
 
 			NSLog(@"--------BLOCKED CERTIFICATE---------");
-
-			//Send a notification to the user.
-			//NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:summary, @"summary", nil];
-			//CFStringRef message = (CFStringRef)"ac.uk.surrey.rb00166.CertManager-cert_blocked";
-			//CFDictionaryRef dictionary = (__bridge CFDictionaryRef) dic;
-
             NSLog(@"--------NOTIFICATION ABOUT TO BE SENT---------");
-			CFNotificationCenterRef notification = CFNotificationCenterGetDarwinNotifyCenter();
-            NSLog(@"--------NOTIFICATION: %@---------", notification);
-			CFNotificationCenterPostNotification(notification, CFSTR("ac.uk.surrey.rb00166.CertManager-cert_blocked"), NULL, NULL, YES);
+
+			certificateWasBlocked(summary);
 
 			NSLog(@"--------NOTIFICATION SENT---------");
 
@@ -161,16 +165,24 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 	return original_SSLHandshake(context);
 }
 
+static void reloadPrefsNotification(CFNotificationCenterRef center,
+	void *observer,
+	CFStringRef name,
+	const void *object,
+	CFDictionaryRef userInfo) {
+	updateRoots();
+}
+
 #pragma mark - Constructor
 
 %ctor {
+	%init;
 
-	[[CertHook sharedInstance] updateRoots];
+	CFNotificationCenterRef reload = CFNotificationCenterGetDarwinNotifyCenter();
+	CFNotificationCenterAddObserver(reload, NULL, &reloadPrefsNotification,
+	CFSTR("uk.ac.surrey.rb00166.certmanager/reload"), NULL, 0);
 
-	CFNotificationCenterRef notification = CFNotificationCenterGetDarwinNotifyCenter();
-	CFNotificationCenterAddObserver(notification, (__bridge const void *)([CertHook sharedInstance]), updateCallback, CFSTR("ac.uk.surrey.rb00166.CertManager-settings_changed"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-
+	updateRoots();
 
 	MSHookFunction((void *) SSLHandshake,(void *)  hooked_SSLHandshake, (void **) &original_SSLHandshake);
-
 }
