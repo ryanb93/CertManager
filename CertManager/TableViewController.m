@@ -7,6 +7,7 @@
 //
 #import <CertUI/CertUIPrompt.h>
 #import <OpenSSL/x509.h>
+#import <Security/SecBase.h>
 
 #import "TableViewController.h"
 #import "CertDataStore.h"
@@ -16,6 +17,8 @@
 @interface TableViewController ()
 
 @property (strong, atomic) CertDataStore * certStore;
+@property (strong, atomic) NSArray * titles;
+
 
 @end
 
@@ -33,6 +36,7 @@
     
     //Create our certificate store object.
     _certStore = [[CertDataStore alloc] init];
+    _titles = [[_certStore titlesForCertificates] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     //Set the title of the navigation bar to use the trust store version.
     [self setTitle:[NSString stringWithFormat:@"Trust Store Version: %i", [_certStore trustStoreVersion]]];
@@ -56,7 +60,7 @@
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_certStore numberOfTitles];
+    return [_titles count];
 }
 
 /**
@@ -68,7 +72,8 @@
  *  @return The number of items in a particular section of the table.
  */
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_certStore numberOfCertificatesInSection:section];
+    NSString *title = [_titles objectAtIndex:section];
+    return [_certStore numberOfCertificatesForTitle:title];
 }
 
 /**
@@ -80,7 +85,7 @@
  *  @return A title for the table view.
  */
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [_certStore titleForCertificatesInSection:section];
+    return [_titles objectAtIndex:section];
 }
 
 /**
@@ -91,7 +96,7 @@
  *  @return An array containing the titles.
  */
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [_certStore titles];
+    return _titles;
 }
 
 /**
@@ -104,7 +109,7 @@
  *  @return The index of the object in the list of titles.
  */
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return [[_certStore titles] indexOfObject:title];
+    return [_titles indexOfObject:title];
 }
 
 /**
@@ -125,12 +130,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:@"caCell"];
     }
-    
+
     //Get the name and issuer of the certificate for this row.
     NSString  *title   = [self tableView:self.tableView titleForHeaderInSection:[indexPath section]];
     NSInteger row      = [indexPath row];
-    NSString *certName = [_certStore nameForCertificateWithTitle:title andOffset:row];
-    NSString *issuer   = [_certStore issuerForCertificateWithTitle:title andOffset:row];
+    
+    SecCertificateRef certificate = [self.certStore certificateWithTitle:title andOffSet:row];
+    
+    NSString *certName = [_certStore nameForCertificate:certificate];
+    NSString *issuer   = [_certStore issuerForCertificate:certificate];
         
     TableCellSwitch *switchView = [[TableCellSwitch alloc] initWithFrame:CGRectZero];
     cell.accessoryView = switchView;
@@ -138,17 +146,16 @@
     [switchView setIndexPath:indexPath];
     [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
     
+    
     //Style the cell.
-    if([_certStore isTrustedForCertificateWithTitle:title andOffset:row]) {
+    if([_certStore isTrustedForCertificate:certificate]) {
         cell.imageView.image = [UIImage imageNamed:@"trusted"];
     }
     else {
         cell.imageView.image = [UIImage imageNamed:@"untrusted"];
         [switchView setOn:YES animated:NO];
     }
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
+    
     //Set the cell text.
     [cell.textLabel setText: certName];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
@@ -158,22 +165,24 @@
 
 - (void) switchChanged:(id)sender {
     
-    TableCellSwitch* switchControl = sender;
-    NSIndexPath *indexPath = switchControl.indexPath;
+    TableCellSwitch *switchControl = sender;
+    NSIndexPath *indexPath         = switchControl.indexPath;
     
     //Get the name of the certificate to use in alerts.
     NSString  *title   = [self tableView:self.tableView titleForHeaderInSection:[indexPath section]];
     NSInteger row      = [indexPath row];
     
+    SecCertificateRef certificate = [self.certStore certificateWithTitle:title andOffSet:row];
+    
     if(switchControl.on) {
-        [self.certStore untrustCertificateWithTitle:title andOffSet:row];
+        [self.certStore untrustCertificate:certificate];
     }
     else {
-        [self.certStore trustCertificateWithTitle:title andOffSet:row];
+        [self.certStore trustCertificate:certificate];
     }
     
     [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView endUpdates];
         
     //Send a notification to the user.

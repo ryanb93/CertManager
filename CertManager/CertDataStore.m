@@ -17,39 +17,40 @@
 
 @end
 
+/**
+ * The CertDataStore is an encapsulation for references to the data store used by the application.
+ * Here we manage a dictionary of untrusted certificates which is backed by values stored on the disk.
+ */
 @implementation CertDataStore
 
+/**
+ *  Init method for the CertDataStore. Loads the root certificates using the Security framework.
+ *
+ *  @return A new CertDataStore object.
+ */
 - (instancetype)init
 {
      
     //Init the OTA Directory.
-    self.trustStoreVersion  = InitOTADirectory();
+    self.trustStoreVersion = InitOTADirectory();
+    SecOTAPKIRef ref       = SecOTAPKICopyCurrentOTAPKIRef();
 
-    //Create the array to hold the list of names.
-    _titles                 = [[NSMutableArray alloc] init];
-    //Create array to hold list of certificates.
-    _certificates           = [[NSMutableDictionary alloc] init];
-
-    //Gets a reference to the current OTA PKI.
-    SecOTAPKIRef ref        = SecOTAPKICopyCurrentOTAPKIRef();
-
-    //Dictionary of a hash in the Index file and an offset.
-    NSDictionary *lookup    = (__bridge NSDictionary *) SecOTAPKICopyAnchorLookupTable(ref);
-
-    //Create an array to hold the values of the offsets.
+    //Set up our private data stores.
+    _certificates = [[NSMutableDictionary alloc] init];
+    _untrusted    = [FSHandler readFromPlist:TRUSTED_PATH];
+    
+    //Get the offsets for the certificates in the database index file.
     NSMutableArray *offsets = [[NSMutableArray alloc] init];
-
-    //Loop through each value in the dictionary.
+    NSDictionary *lookup    = (__bridge NSDictionary *) SecOTAPKICopyAnchorLookupTable(ref);
     for (NSString *value in lookup) {
-        //For each String inside the array.
         for (NSString *nums in lookup[value]) {
-            //Add the offset String to the offsets array.
             [offsets addObject:nums];
         }
     }
     
-    //Use function from SecTrustServer to get certificates from offsets.
-    NSMutableArray *certs = (__bridge NSMutableArray *) CopyCertsFromIndices((__bridge CFArrayRef) offsets);
+    //Get an array of certificate references.
+    CFArrayRef cfOffsets = (__bridge CFArrayRef) offsets;
+    NSMutableArray *certs = (__bridge NSMutableArray *) CopyCertsFromIndices(cfOffsets);
     
     //Sort the data alphabetically.
     [certs sortUsingFunction:sortCerts context:nil];
@@ -62,65 +63,107 @@
         NSString *summary = (__bridge NSString *)(SecCertificateCopySubjectSummary(certRef));
         //Get the first character from the summary.
         NSString *first = [NSString stringWithFormat:@"%c", [summary characterAtIndex:0]];
-        //If titles already contains this object don't add it.
-        if(![_titles containsObject:first]) {
-            [_titles addObject:first];
+        
+        //If certificates already contains this object then create it.
+        if(![_certificates objectForKey:first]) {
             _certificates[first] = [[NSMutableArray alloc] init];
         }
+        
         //Add the certificate to the end of the array within the dictionary.
         [[_certificates valueForKey:first] addObject:cert];
     }
-    
-    _untrusted = [FSHandler readFromPlist:TRUSTED_PATH];
     
     return self;
     
 }
 
-NSInteger sortCerts(id id1, id id2, void *context)
+/**
+ *  A function which compares the summary of the certificate.
+ *
+ *  @param certificate1     The first certificate.
+ *  @param certificate2     The second certificate.
+ *  @param context The context of the sort.
+ *
+ *  @return the result of the comparision between the summary of the certificates.
+ */
+NSInteger sortCerts(id certificate1, id certificate2, void *context)
 {
-    CFStringRef summary  = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)(id1));
-    CFStringRef summary2 = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)id2);
+    CFStringRef summary  = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)(certificate1));
+    CFStringRef summary2 = SecCertificateCopySubjectSummary((__bridge SecCertificateRef)certificate2);
     return CFStringCompare(summary, summary2, kCFCompareCaseInsensitive);
 }
 
-
-- (NSInteger)numberOfTitles {
-    return [_titles count];
+/**
+ *  Returns a certificate for a title at an index.
+ *
+ *  @param title  The first letter of the certificate.
+ *  @param offset The offset of the certificate.
+ *
+ *  @return The reference to the certificate.
+ */
+- (SecCertificateRef)certificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
+    return (__bridge SecCertificateRef)(_certificates[title][offset]);
 }
 
-- (NSInteger)numberOfCertificatesInSection:(NSInteger)section {
-    return [_certificates[_titles[section]] count];
+- (NSInteger)numberOfCertificatesForTitle:(NSString*)title {
+    return [[_certificates objectForKey:title] count];
 }
 
-- (NSArray *)titleForCertificatesInSection:(NSInteger)section {
-    return _titles[section];
+
+- (NSArray *)titlesForCertificates {
+    return [_certificates allKeys];
 }
 
-- (NSString *)nameForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
-    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+/**
+ *  Returns the summary name for a given certificate.
+ *
+ *  @param cert The certificate to get the name of.
+ *
+ *  @return The summary name.
+ */
+- (NSString *)nameForCertificate:(SecCertificateRef) cert  {
     return (__bridge NSString *)(SecCertificateCopySubjectSummary(cert));
 }
 
-- (NSString *)issuerForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
-    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+/**
+ *  Returns the issuer name for a given certificate.
+ *
+ *  @param cert The certificate to get the issuer of.
+ *
+ *  @return The issuer name.
+ */
+- (NSString *)issuerForCertificate:(SecCertificateRef) cert  {
     return [X509Wrapper CertificateGetIssuerName:cert];
 }
 
-- (BOOL)isTrustedForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset {
-    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+/**
+ *  Returns if the certificate is trusted by CertManager.
+ *
+ *  @param cert The certificate to check the trust of.
+ *
+ *  @return If the certificate is trusted by CertManager. By default, true.
+ */
+- (BOOL)isTrustedForCertificate:(SecCertificateRef) cert {
     NSString* sha1 = [X509Wrapper CertificateGetSHA1:cert];
     return ![_untrusted containsObject:sha1];
 }
 
-- (void)untrustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
-    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+/**
+ *  Function which adds a certificate to the list of untrusted certificates.
+ *
+ *  @param cert The certificate to add.
+ */
+- (void)untrustCertificate:(SecCertificateRef) cert  {
     [_untrusted addObject:[X509Wrapper CertificateGetSHA1:cert]];
     [FSHandler writeToPlist:TRUSTED_PATH withData:_untrusted];
 }
 
-- (void)trustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
-    SecCertificateRef cert = (__bridge SecCertificateRef)_certificates[title][offset];
+/**
+ *  Function which removes a certificate to the list of untrusted certificates.
+ *
+ *  @param cert The certificate to remove.
+ */
+- (void)trustCertificate:(SecCertificateRef) cert {
     [_untrusted removeObject:[X509Wrapper CertificateGetSHA1:cert]];
     [FSHandler writeToPlist:TRUSTED_PATH withData:_untrusted];
 }

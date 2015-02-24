@@ -17,20 +17,20 @@
 @interface CertDataStore : NSObject
 
 - (int)trustStoreVersion;
-- (NSInteger)numberOfTitles;
-- (NSInteger)numberOfCertificatesInSection:(NSInteger)section;
-- (NSString *)titleForCertificatesInSection:(NSInteger)section;
 
-- (NSString *)nameForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset;
-- (NSString *)issuerForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset;
+- (SecCertificateRef)certificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
 
-- (BOOL)isTrustedForCertificateWithTitle:(NSString *)title andOffset:(NSInteger)offset;
+- (NSArray *)titlesForCertificates;
 
-- (void)untrustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
-- (void)trustCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
+- (NSInteger)numberOfCertificatesForTitle:(NSString*)title;
 
-@property (atomic) int trustStoreVersion;
-@property (strong, atomic) NSMutableArray * titles;
+- (NSString*)nameForCertificate:	(SecCertificateRef) cert;
+- (NSString*)issuerForCertificate:	(SecCertificateRef) cert;
+- (BOOL)isTrustedForCertificate:	(SecCertificateRef) cert;
+- (void)untrustCertificate:			(SecCertificateRef) cert;
+- (void)trustCertificate:			(SecCertificateRef) cert;
+
+@property (assign ,atomic) int trustStoreVersion;
 
 @end
 
