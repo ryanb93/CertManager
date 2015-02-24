@@ -28,63 +28,45 @@ static NSMutableArray *untrustedRoots;
 @end
 
 static void certificateWasBlocked(NSString *summary) {
-	NSLog(@"--------certificateWasBlocked---------");
-	CPDistributedMessagingCenter *messagingCenter = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanger"];
 
+	CPDistributedMessagingCenter *center;
+	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanager"];
+	rocketbootstrap_distributedmessagingcenter_apply(center);
 
-void* handle = dlopen("/usr/lib/librocketbootstrap.dylib", RTLD_LAZY);
-if(handle)
-{
-void (*rocketbootstrap_distributedmessagingcenter_apply)(CPDistributedMessagingCenter*);
-rocketbootstrap_distributedmessagingcenter_apply = (void(*)(CPDistributedMessagingCenter*))dlsym(handle, "rocketbootstrap_distributedmessagingcenter_apply");
-rocketbootstrap_distributedmessagingcenter_apply(messagingCenter);
-}
+	NSDictionary *sumDict = [NSDictionary dictionaryWithObjectsAndKeys: summary, @"summary", nil];
 
-	[messagingCenter sendMessageName:@"certificateWasBlocked" userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-summary, @"certificate",
-nil]];
+	[center sendMessageName:@"certificateWasBlocked" userInfo:sumDict];
 
 }
 
 static void updateRoots() {
-	NSLog(@"--------updateRoots---------");
 	NSString *roots     = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist";
 	NSArray *arr        = [[NSArray alloc] initWithContentsOfFile:roots];
-	NSLog(@"--------arr---------\n%@", arr);
 	untrustedRoots = [[NSMutableArray alloc] initWithArray:arr];
-	NSLog(@"--------_untrustedRoots---------\n%@", untrustedRoots);
 }
 
 #pragma mark - SpringBoard hooks
 
-%hook Springboard
+%hook SpringBoard
 
 - (id)init {
-	NSLog(@"--------HOOK INIT METHOD---------");
-	self = %orig;
-	CPDistributedMessagingCenter *center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.CertManager"];
-void* handle = dlopen("/usr/lib/librocketbootstrap.dylib", RTLD_LAZY);
-if(handle)
-{
-void (*rocketbootstrap_distributedmessagingcenter_apply)(CPDistributedMessagingCenter*);
-rocketbootstrap_distributedmessagingcenter_apply = (void(*)(CPDistributedMessagingCenter*))dlsym(handle, "rocketbootstrap_distributedmessagingcenter_apply");
-rocketbootstrap_distributedmessagingcenter_apply(center);
-}
+	CPDistributedMessagingCenter *center;
+	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanager"];
+	rocketbootstrap_distributedmessagingcenter_apply(center);
 	[center runServerOnCurrentThread];
-	[center registerForMessageName:@"certificateWasBlocked" target:self selector:@selector(handleMessageNamed:withUserInfo:)];
-	return self;
+	[center registerForMessageName:@"certificateWasBlocked" target:self selector:@selector(handleMessageNamed:userInfo:)];
+	return %orig;
 }
 
 %new
-- (void)handleMessageNamed:(NSString *)name withUserInfo:(NSDictionary *)userInfo {
-	NSLog(@"--------showBulletin---------");
+- (void)handleMessageNamed:(NSString *)name userInfo:(NSDictionary *)userInfo {
 	//Create a bulletin request.
 	BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
 	bulletin.recordID                = @"uk.ac.surrey.rb00166.certmanager";
 	bulletin.bulletinID              = @"uk.ac.surrey.rb00166.certmanager";
 	bulletin.sectionID               = @"uk.ac..surrey.rb00166.certmanager";
 	bulletin.title                   = @"Connection Blocked by CertManager";
-	//bulletin.message                 = (__bridge NSString*)CFDictionaryGetValue(userInfo, "summary");
+	bulletin.message                 = [userInfo objectForKey:@"summary"];
 	bulletin.date                    = [NSDate date];
 	SBBulletinBannerController *ctrl = [objc_getClass("SBBulletinBannerController") sharedInstance];
 	[ctrl observer:nil addBulletin:bulletin forFeed:0];
