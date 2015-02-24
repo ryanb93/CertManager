@@ -131,7 +131,7 @@
     NSInteger row      = [indexPath row];
     NSString *certName = [_certStore nameForCertificateWithTitle:title andOffset:row];
     NSString *issuer   = [_certStore issuerForCertificateWithTitle:title andOffset:row];
-    
+        
     TableCellSwitch *switchView = [[TableCellSwitch alloc] initWithFrame:CGRectZero];
     cell.accessoryView = switchView;
     [switchView setOn:NO animated:NO];
@@ -148,7 +148,7 @@
     }
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    
+        
     //Set the cell text.
     [cell.textLabel setText: certName];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
@@ -177,7 +177,7 @@
     [self.tableView endUpdates];
         
     //Send a notification to the user.
-    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("uk.ac.surrey.rb00166.certmanager/reload"), NULL, NULL, YES);
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("uk.ac.surrey.rb00166.CertManager/reload"), NULL, NULL, YES);
 }
 
 

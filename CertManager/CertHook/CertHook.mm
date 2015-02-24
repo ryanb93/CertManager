@@ -35,7 +35,7 @@ static NSMutableArray *untrustedRoots;
 static void certificateWasBlocked(NSString *summary) {
 
 	CPDistributedMessagingCenter *center;
-	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanager"];
+	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.CertManager"];
 	rocketbootstrap_distributedmessagingcenter_apply(center);
 
     NSString *process     = [[NSProcessInfo processInfo] processName];
@@ -73,7 +73,7 @@ static void updateRootsNotification(CFNotificationCenterRef center, void *observ
 
 - (id)init {
 	CPDistributedMessagingCenter *center;
-	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.certmanager"];
+	center = [%c(CPDistributedMessagingCenter) centerNamed:@"uk.ac.surrey.rb00166.CertManager"];
 	rocketbootstrap_distributedmessagingcenter_apply(center);
 	[center runServerOnCurrentThread];
 	[center registerForMessageName:@"certificateWasBlocked" target:self selector:@selector(handleMessageNamed:userInfo:)];
@@ -85,9 +85,9 @@ static void updateRootsNotification(CFNotificationCenterRef center, void *observ
 
 	//Create a bulletin request.
 	BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
-	bulletin.recordID                = @"uk.ac.surrey.rb00166.certmanager";
-	bulletin.bulletinID              = @"uk.ac.surrey.rb00166.certmanager";
-	bulletin.sectionID               = @"uk.ac..surrey.rb00166.certmanager";
+	bulletin.recordID                = @"uk.ac.surrey.rb00166.CertManager";
+	bulletin.bulletinID              = @"uk.ac.surrey.rb00166.CertManager";
+	bulletin.sectionID               = @"uk.ac..surrey.rb00166.CertManager";
 	bulletin.title                   = @"Certificate Blocked.";
 	bulletin.subtitle 				 = [userInfo objectForKey:@"process"];
     bulletin.message                 = [userInfo objectForKey:@"summary"];
@@ -100,7 +100,7 @@ static void updateRootsNotification(CFNotificationCenterRef center, void *observ
 
 #pragma mark - SecureTransport hooks
 
-static BOOL LOCKED = NO;
+static NSString * BLOCKED_PEER = @"";
 
 /**
  *  A reference to the original SSLHandshake method.
@@ -130,9 +130,21 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
     size_t len;
     SSLGetPeerDomainNameLength(context, &len);
 
+    char peerName[len];
+    SSLGetPeerDomainName(context, peerName, &len);
+
+    NSString *peer = [[NSString alloc] initWithCString:peerName encoding:NSUTF8StringEncoding];
+
+    
+    if(BLOCKED_PEER) {
+    	if([peer isEqualToString:BLOCKED_PEER]) {
+        	//We just blocked this peer, fail again.
+        	return errSSLUnknownRootCert;
+    	}
+    }
     
     CFIndex count = SecTrustGetCertificateCount(trustRef);
-    
+
 	//For each certificate in the certificate chain.
 	for (CFIndex i = 0; i < count; i++)
 	{
@@ -153,20 +165,18 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 
             NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
 			certificateWasBlocked(summary);
+            NSLog(@"loop peer to be blocked is: %@", peer);
 
-			LOCKED = YES;
+            BLOCKED_PEER = peer;
+
+            NSLog(@"loop BLOCKED_PEER is: %@", BLOCKED_PEER);
 
             //Return the failure.
 			return errSSLUnknownRootCert;
 		}
 	}
-
-	if(LOCKED && count == 0) {
-		NSLog(@"Recieved one of those handshakes with no certificates");
-		return errSSLUnknownRootCert;
-	}
-
-	LOCKED = NO;
+    
+    BLOCKED_PEER = @"";
 
 	return original_SSLHandshake(context);
 }
@@ -174,12 +184,15 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 #pragma mark - Constructor
 
 %ctor {
-	%init;
+    
+    @autoreleasepool {
+		%init;
 
-	CFNotificationCenterRef reload = CFNotificationCenterGetDarwinNotifyCenter();
-	CFNotificationCenterAddObserver(reload, NULL, &updateRootsNotification, CFSTR("uk.ac.surrey.rb00166.certmanager/reload"), NULL, 0);
+		CFNotificationCenterRef reload = CFNotificationCenterGetDarwinNotifyCenter();
+		CFNotificationCenterAddObserver(reload, NULL, &updateRootsNotification, CFSTR("uk.ac.surrey.rb00166.CertManager/reload"), NULL, 0);
 
-	updateRoots();
+		updateRoots();
 
-	MSHookFunction((void *) SSLHandshake,(void *)  hooked_SSLHandshake, (void **) &original_SSLHandshake);
+		MSHookFunction((void *) SSLHandshake,(void *)  hooked_SSLHandshake, (void **) &original_SSLHandshake);
+    }
 }
