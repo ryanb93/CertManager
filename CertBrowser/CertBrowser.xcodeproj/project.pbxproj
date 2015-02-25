@@ -15,6 +15,9 @@
 		94E803C61A9E0CAD00E99CBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E803C51A9E0CAD00E99CBF /* Images.xcassets */; };
 		94E803C91A9E0CAD00E99CBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E803C71A9E0CAD00E99CBF /* LaunchScreen.xib */; };
 		94E803D51A9E0CAD00E99CBF /* CertBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803D41A9E0CAD00E99CBF /* CertBrowserTests.m */; };
+		94E803E91A9E237300E99CBF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E803E81A9E237300E99CBF /* FontAwesome.ttf */; };
+		94E803EC1A9E23D200E99CBF /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803EB1A9E23D200E99CBF /* NSString+FontAwesome.m */; };
+		94E803F11A9E33E600E99CBF /* CertificateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803F01A9E33E600E99CBF /* CertificateViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,11 @@
 		94E803CE1A9E0CAD00E99CBF /* CertBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CertBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E803D31A9E0CAD00E99CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94E803D41A9E0CAD00E99CBF /* CertBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CertBrowserTests.m; sourceTree = "<group>"; };
+		94E803E81A9E237300E99CBF /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		94E803EA1A9E23BA00E99CBF /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		94E803EB1A9E23D200E99CBF /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		94E803EF1A9E33D700E99CBF /* CertificateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateViewController.h; sourceTree = "<group>"; };
+		94E803F01A9E33E600E99CBF /* CertificateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +95,15 @@
 				94E803BA1A9E0CAD00E99CBF /* AppDelegate.m */,
 				94E803BF1A9E0CAD00E99CBF /* ViewController.h */,
 				94E803C01A9E0CAD00E99CBF /* ViewController.m */,
+				94E803EF1A9E33D700E99CBF /* CertificateViewController.h */,
+				94E803F01A9E33E600E99CBF /* CertificateViewController.m */,
 				94E803C21A9E0CAD00E99CBF /* Main.storyboard */,
 				94E803C51A9E0CAD00E99CBF /* Images.xcassets */,
 				94E803C71A9E0CAD00E99CBF /* LaunchScreen.xib */,
 				94E803BC1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld */,
 				94E803B51A9E0CAC00E99CBF /* Supporting Files */,
+				94E803EA1A9E23BA00E99CBF /* NSString+FontAwesome.h */,
+				94E803EB1A9E23D200E99CBF /* NSString+FontAwesome.m */,
 			);
 			path = CertBrowser;
 			sourceTree = "<group>";
@@ -99,6 +111,7 @@
 		94E803B51A9E0CAC00E99CBF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				94E803E81A9E237300E99CBF /* FontAwesome.ttf */,
 				94E803B61A9E0CAC00E99CBF /* Info.plist */,
 				94E803B71A9E0CAC00E99CBF /* main.m */,
 			);
@@ -205,6 +218,7 @@
 				94E803C41A9E0CAD00E99CBF /* Main.storyboard in Resources */,
 				94E803C91A9E0CAD00E99CBF /* LaunchScreen.xib in Resources */,
 				94E803C61A9E0CAD00E99CBF /* Images.xcassets in Resources */,
+				94E803E91A9E237300E99CBF /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +236,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94E803F11A9E33E600E99CBF /* CertificateViewController.m in Sources */,
+				94E803EC1A9E23D200E99CBF /* NSString+FontAwesome.m in Sources */,
 				94E803BB1A9E0CAD00E99CBF /* AppDelegate.m in Sources */,
 				94E803BE1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld in Sources */,
 				94E803C11A9E0CAD00E99CBF /* ViewController.m in Sources */,

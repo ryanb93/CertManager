@@ -190,7 +190,7 @@
         [_certStore trustCertificate:certificate];
     }
     
-    [self.tableView reloadData];    
+    [self.tableView reloadData];
 }
 
 
