@@ -45,8 +45,18 @@
     [self.tableView setAllowsSelection:NO];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:44.0f];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 
 
+}
+
+- (void)reloadData {
+    [_certStore reloadUntrustedCertificates];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -180,7 +190,7 @@
         [_certStore trustCertificate:certificate];
     }
     
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];    
 }
 
 

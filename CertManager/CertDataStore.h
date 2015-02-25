@@ -21,6 +21,7 @@
 - (BOOL)isTrustedForCertificate:	(SecCertificateRef) cert;
 - (void)untrustCertificate:			(SecCertificateRef) cert;
 - (void)trustCertificate:			(SecCertificateRef) cert;
+- (void)reloadUntrustedCertificates;
 
 @property (assign ,atomic) int trustStoreVersion;
 

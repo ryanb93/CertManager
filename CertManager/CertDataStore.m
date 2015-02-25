@@ -169,5 +169,9 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
     [FSHandler writeToPlist:UNTRUSTED_PLIST withData:_untrusted];
 }
 
+-(void)reloadUntrustedCertificates {
+    _untrusted    = [FSHandler readFromPlist:UNTRUSTED_PLIST];
+}
+
 
 @end
