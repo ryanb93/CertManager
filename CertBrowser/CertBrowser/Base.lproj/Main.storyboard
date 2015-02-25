@@ -79,7 +79,7 @@
                             <constraint firstItem="gpu-fL-9jm" firstAttribute="trailing" secondItem="4xO-tL-8N7" secondAttribute="trailing" id="nfC-Mq-SUI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZcH-LP-Tdk"/>
+                    <navigationItem key="navigationItem" id="JLp-u4-LAF"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
