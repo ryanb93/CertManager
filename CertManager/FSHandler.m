@@ -8,10 +8,9 @@
 
 #import "FSHandler.h"
 
-#define PREFERENCES @"/private/var/mobile/Library/Preferences"
-
 @implementation FSHandler
 
+static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences";
 
 /**
  *  Writes an array to the plist.
@@ -21,7 +20,11 @@
  */
 + (void) writeToPlist: (NSString*)fileName withData:(NSMutableArray *)data
 {
-    [data writeToFile:[NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName] atomically: YES];
+    BOOL success = [data writeToFile:[NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName] atomically:YES];
+    if(success) {
+    	//Send a notification to the system that we have changed values.
+    	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("uk.ac.surrey.rb00166.CertManager/reload"), NULL, NULL, YES);
+    }
 }
 
 /**

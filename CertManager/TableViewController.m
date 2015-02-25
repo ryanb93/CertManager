@@ -43,9 +43,10 @@
     
     //Stop selection on the table view.
     [self.tableView setAllowsSelection:NO];
-    
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 44.0;
+    [self.tableView setRowHeight:UITableViewAutomaticDimension];
+    [self.tableView setEstimatedRowHeight:44.0f];
+
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -132,8 +133,6 @@
     }
     
     TableCellSwitch *switchView = [[TableCellSwitch alloc] initWithFrame:CGRectZero];
-    cell.accessoryView = switchView;
-    [switchView setOn:NO animated:NO];
     [switchView setIndexPath:indexPath];
     [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
     
@@ -143,17 +142,22 @@
     NSString *certName = [_certStore nameForCertificate:certificate];
     NSString *issuer   = [_certStore issuerForCertificate:certificate];
     [cell.textLabel setText: certName];
+    [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [cell.textLabel setNumberOfLines:0];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
     
     //Style the cell.
     BOOL trusted = [_certStore isTrustedForCertificate:certificate];
     if(trusted) {
         cell.imageView.image = [UIImage imageNamed:@"trusted"];
+        [switchView setOn:NO animated:NO];
     }
     else {
         cell.imageView.image = [UIImage imageNamed:@"untrusted"];
         [switchView setOn:YES animated:NO];
     }
+    
+    [cell setAccessoryView:switchView];
     
     return cell;
 }
@@ -169,19 +173,14 @@
     
     SecCertificateRef certificate = [_certStore certificateWithTitle:title andOffSet:row];
     
-    if(switchControl.on) {
+    if([switchControl isOn]) {
         [_certStore untrustCertificate:certificate];
     }
     else {
         [_certStore trustCertificate:certificate];
     }
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
-        
-    //Send a notification to the user.
-    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("uk.ac.surrey.rb00166.CertManager/reload"), NULL, NULL, YES);
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
