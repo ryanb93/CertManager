@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94244BF11A9E623F0084B8DC /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94244BEF1A9E623F0084B8DC /* libcrypto.a */; };
+		94244BF21A9E623F0084B8DC /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94244BF01A9E623F0084B8DC /* libssl.a */; };
+		94244BF91A9E638D0084B8DC /* X509Wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 94244BF81A9E638D0084B8DC /* X509Wrapper.m */; };
+		94244BFE1A9E65CD0084B8DC /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 94244BFD1A9E65CD0084B8DC /* NSData+SHA1.m */; };
 		94E803B81A9E0CAC00E99CBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803B71A9E0CAC00E99CBF /* main.m */; };
 		94E803BB1A9E0CAD00E99CBF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803BA1A9E0CAD00E99CBF /* AppDelegate.m */; };
 		94E803BE1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94E803BC1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld */; };
@@ -31,6 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		94244BEF1A9E623F0084B8DC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../../../../../Developer/OpenSSL-for-iPhone/lib/libcrypto.a"; sourceTree = "<group>"; };
+		94244BF01A9E623F0084B8DC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../../../../../Developer/OpenSSL-for-iPhone/lib/libssl.a"; sourceTree = "<group>"; };
+		94244BF71A9E638D0084B8DC /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
+		94244BF81A9E638D0084B8DC /* X509Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = X509Wrapper.m; sourceTree = "<group>"; };
+		94244BFC1A9E65CD0084B8DC /* NSData+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA1.h"; sourceTree = "<group>"; };
+		94244BFD1A9E65CD0084B8DC /* NSData+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SHA1.m"; sourceTree = "<group>"; };
 		94E803B21A9E0CAC00E99CBF /* CertBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E803B61A9E0CAC00E99CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94E803B71A9E0CAC00E99CBF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -57,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94244BF11A9E623F0084B8DC /* libcrypto.a in Frameworks */,
+				94244BF21A9E623F0084B8DC /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +82,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94244BF41A9E62530084B8DC /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				94244BEF1A9E623F0084B8DC /* libcrypto.a */,
+				94244BF01A9E623F0084B8DC /* libssl.a */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		94244C021A9E96800084B8DC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				94244BFC1A9E65CD0084B8DC /* NSData+SHA1.h */,
+				94244BFD1A9E65CD0084B8DC /* NSData+SHA1.m */,
+				94244BF71A9E638D0084B8DC /* X509Wrapper.h */,
+				94244BF81A9E638D0084B8DC /* X509Wrapper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		94E803A91A9E0CAC00E99CBF = {
 			isa = PBXGroup;
 			children = (
 				94E803B41A9E0CAC00E99CBF /* CertBrowser */,
 				94E803D11A9E0CAD00E99CBF /* CertBrowserTests */,
 				94E803B31A9E0CAC00E99CBF /* Products */,
+				94244BF41A9E62530084B8DC /* Libraries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,9 +131,10 @@
 				94E803EF1A9E33D700E99CBF /* CertificateViewController.h */,
 				94E803F01A9E33E600E99CBF /* CertificateViewController.m */,
 				94E803C21A9E0CAD00E99CBF /* Main.storyboard */,
-				94E803C51A9E0CAD00E99CBF /* Images.xcassets */,
 				94E803C71A9E0CAD00E99CBF /* LaunchScreen.xib */,
 				94E803BC1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld */,
+				94E803C51A9E0CAD00E99CBF /* Images.xcassets */,
+				94244C021A9E96800084B8DC /* Helpers */,
 				94E803B51A9E0CAC00E99CBF /* Supporting Files */,
 				94E803EA1A9E23BA00E99CBF /* NSString+FontAwesome.h */,
 				94E803EB1A9E23D200E99CBF /* NSString+FontAwesome.m */,
@@ -238,6 +272,8 @@
 			files = (
 				94E803F11A9E33E600E99CBF /* CertificateViewController.m in Sources */,
 				94E803EC1A9E23D200E99CBF /* NSString+FontAwesome.m in Sources */,
+				94244BF91A9E638D0084B8DC /* X509Wrapper.m in Sources */,
+				94244BFE1A9E65CD0084B8DC /* NSData+SHA1.m in Sources */,
 				94E803BB1A9E0CAD00E99CBF /* AppDelegate.m in Sources */,
 				94E803BE1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld in Sources */,
 				94E803C11A9E0CAD00E99CBF /* ViewController.m in Sources */,
@@ -365,8 +401,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Ryan/Developer/OpenSSL-for-iPhone/include",
+				);
 				INFOPLIST_FILE = CertBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Ryan/Developer/OpenSSL-for-iPhone/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -375,8 +419,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Ryan/Developer/OpenSSL-for-iPhone/include",
+				);
 				INFOPLIST_FILE = CertBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Ryan/Developer/OpenSSL-for-iPhone/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -434,6 +486,7 @@
 				94E803DA1A9E0CAD00E99CBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94E803DB1A9E0CAD00E99CBF /* Build configuration list for PBXNativeTarget "CertBrowserTests" */ = {
 			isa = XCConfigurationList;
@@ -442,6 +495,7 @@
 				94E803DD1A9E0CAD00E99CBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

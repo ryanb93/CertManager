@@ -188,7 +188,7 @@
     CFIndex count = SecTrustGetCertificateCount(trustRef);
     
     //For each certificate in the certificate chain.
-    for (CFIndex i = 0; i < count; i++)
+    for (CFIndex i = count - 1; i >= 0; i--)
     {
         //Get a reference to the certificate.
         SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);

@@ -95,19 +95,41 @@
             </objects>
             <point key="canvasLocation" x="506" y="-23"/>
         </scene>
-        <!--Certificate View Controller-->
+        <!--Certificate Chain-->
         <scene sceneID="P3g-kv-upX">
             <objects>
                 <tableViewController id="rTN-ch-csi" customClass="CertificateViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="WeH-Tz-oY9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="109" sectionHeaderHeight="22" sectionFooterHeight="22" id="WeH-Tz-oY9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="certificateCell" id="0pa-iG-xXe">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationLevel="1" indentationWidth="10" reuseIdentifier="certificateCell" rowHeight="109" id="0pa-iG-xXe" customClass="CertTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0pa-iG-xXe" id="9qc-T9-M0b">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAI-4O-kOL">
+                                            <rect key="frame" x="114" y="0.0" width="465" height="51"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Issued by:" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxB-r2-wT0">
+                                            <rect key="frame" x="114" y="34" width="465" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="13" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expires:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3a-YV-Wcu">
+                                            <rect key="frame" x="114" y="74" width="465" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="StandardCert" translatesAutoresizingMaskIntoConstraints="NO" id="obb-2V-fIc">
+                                            <rect key="frame" x="8" y="8" width="93" height="93"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -116,7 +138,8 @@
                             <outlet property="delegate" destination="rTN-ch-csi" id="WUw-F7-iWT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6H3-v4-Wzd">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Certificate Chain" id="6H3-v4-Wzd">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="buz-3U-Q9l">
                             <connections>
                                 <action selector="closeView:" destination="rTN-ch-csi" id="Xza-bj-ePu"/>
@@ -126,7 +149,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aii-Gz-d23" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1648" y="784"/>
+            <point key="canvasLocation" x="1648" y="772"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T7s-Id-I8V">
@@ -145,4 +168,7 @@
             <point key="canvasLocation" x="1648" y="-37"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="StandardCert" width="268" height="222"/>
+    </resources>
 </document>

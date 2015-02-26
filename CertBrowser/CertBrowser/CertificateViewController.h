@@ -12,7 +12,6 @@
 @property (strong, nonatomic) UIButton *backButton;
 @property (strong, nonatomic) NSMutableArray *certificates;
 
-
 -(IBAction)closeView:(id)sender;
 
 @end
