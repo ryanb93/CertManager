@@ -150,7 +150,7 @@
 #pragma mark UIWebViewDelegate
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [NSURLConnection connectionWithRequest:request delegate:self];
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -178,8 +178,6 @@
 #pragma mark NSURLConnectionDataDelegate
 
 -(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-  
-    NSLog(@"New SSL request");
     
     _certificatesForRequest = [[NSMutableArray alloc] init];
     
@@ -193,17 +191,12 @@
         //Get a reference to the certificate.
         SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);
         [_certificatesForRequest addObject:(__bridge id)certRef];
-        
-        NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
-        NSLog(@"Certificate: %@", summary);
     }
     
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)pResponse {
-    NSLog(@"didReceiveResponse");
-    _validCertificates = YES;
     [connection cancel];
 }
 
