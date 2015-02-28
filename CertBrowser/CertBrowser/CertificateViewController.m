@@ -93,6 +93,10 @@
     UILabel *issuerLabel = (UILabel *)[cell viewWithTag:12];
     issuerLabel.text = [NSString stringWithFormat:@"Issued by: %@", [X509Wrapper CertificateGetIssuerName:certificate] ];
     
+    UILabel *expireLabel = (UILabel *)[cell viewWithTag:13];
+    [expireLabel setText:[NSString stringWithFormat:@"Expires: %@", [X509Wrapper CertificateGetExpiryDate:certificate]]];
+	
+    
     return cell;
 }
 

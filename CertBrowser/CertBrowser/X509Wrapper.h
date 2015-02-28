@@ -14,4 +14,5 @@
     +(NSString *) CertificateGetIssuerName:(SecCertificateRef)cert;
     +(NSString *) CertificateGetSHA1:(SecCertificateRef)cert;
 	+(NSString *) CertificateGetType:(SecCertificateRef) cert;
+	+(NSDate *)   CertificateGetExpiryDate:(SecCertificateRef) cert;
 @end
