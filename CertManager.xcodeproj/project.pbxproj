@@ -480,7 +480,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos8.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -515,7 +515,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos8.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -541,6 +541,7 @@
 					"$(SRCROOT)/../../../../Developer/OpenSSL-for-iPhone/include/OpenSSL.framework/Headers",
 				);
 				INFOPLIST_FILE = CertManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -548,6 +549,7 @@
 					"$(PROJECT_DIR)/CertManager/theos/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos8.1;
 			};
 			name = Debug;
 		};
@@ -571,6 +573,7 @@
 					"$(SRCROOT)/../../../../Developer/OpenSSL-for-iPhone/include/OpenSSL.framework/Headers",
 				);
 				INFOPLIST_FILE = CertManager/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -578,6 +581,7 @@
 					"$(PROJECT_DIR)/CertManager/theos/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos8.1;
 			};
 			name = Release;
 		};
