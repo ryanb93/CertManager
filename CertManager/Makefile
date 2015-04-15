@@ -1,5 +1,5 @@
 ARCHS = armv7 arm64
-TARGET = iphone:8.3
+TARGET = iphone:8.1
 
 SOURCE_DIR = .
 
