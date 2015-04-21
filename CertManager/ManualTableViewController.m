@@ -78,7 +78,7 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
                                                    [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:_blockedCerts];
                                                    [self reloadData];
                                                }];
-    
+
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel"
                                                        style:UIAlertActionStyleDefault
                                                      handler:nil];

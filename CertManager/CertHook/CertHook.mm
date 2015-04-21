@@ -7,6 +7,7 @@
 #import <UIKit/UIApplication.h>
 
 #import "NSData+SHA1.h"
+#import "../LogInformation.h"
 
 #pragma mark - External Interfaces
 
@@ -26,8 +27,8 @@
 
 static NSString* const UNTRUSTED_ROOTS_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist";
 static NSString* const UNTRUSTED_CERTS_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedCerts.plist";
-static NSString* const MESSAGING_CENTER     = @"uk.ac.surrey.rb00166.CertManager";
-static NSString* const BLOCKED_NOTIFICATION = @"certificateWasBlocked";
+static NSString* const MESSAGING_CENTER     	  = @"uk.ac.surrey.rb00166.CertManager";
+static NSString* const BLOCKED_NOTIFICATION       = @"certificateWasBlocked";
 
 static NSMutableArray *untrustedRoots;
 
@@ -39,15 +40,12 @@ static NSMutableArray *untrustedRoots;
  *
  *  @param summary The summary name of the certificate blocked.
  */
-static void certificateWasBlocked(NSString *summary) {
+static void certificateWasBlocked(NSString *process, NSString *summary) {
 	
     //Get a reference to the message center and pass to rocketbootstrap.
 	CPDistributedMessagingCenter *center = [%c(CPDistributedMessagingCenter) centerNamed:MESSAGING_CENTER];
 	rocketbootstrap_distributedmessagingcenter_apply(center);
 	
-    //Get the current process name.
-    NSString *process = [[NSProcessInfo processInfo] processName];
-    
     //Create a dictionary to post with the message.
     NSDictionary *sumDict = [NSDictionary dictionaryWithObjectsAndKeys: summary, @"summary", process, @"process", nil];
 
@@ -114,7 +112,7 @@ static void updateRootsNotification(CFNotificationCenterRef center, void *observ
 		BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
         bulletin.sectionID 				 =  @"com.apple.Preferences";
         bulletin.title                   =  @"Certificate Blocked";
-    	bulletin.message                 = [NSString stringWithFormat:@"%@ attempted to make a connection using CA: %@", process, summary];
+    	bulletin.message                 = [NSString stringWithFormat:@"%@ attempted to make a connection using certificate: %@", process, summary];
         bulletin.date                    = [NSDate date];
 		SBBulletinBannerController *ctrl = [%c(SBBulletinBannerController) sharedInstance];
 		[ctrl observer:nil addBulletin:bulletin forFeed:2];
@@ -188,8 +186,11 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 		//If the SHA1 of this certificate is in our blocked list.
 		if([untrustedRoots containsObject:sha1]) {
             NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
-			certificateWasBlocked(summary);
+            NSString *process = [[NSProcessInfo processInfo] processName];
+			certificateWasBlocked(process, summary);
             BLOCKED_PEER = peer;
+            LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:BLOCKED_PEER certficateName:summary time:[NSDate date]];
+            NSLog(@"%@", info);
             //Return the failure.
 			return errSSLClosedAbort;
 		}

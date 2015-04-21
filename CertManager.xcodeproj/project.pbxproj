@@ -20,6 +20,7 @@
 		94173DAA1AE6877C006DA8E8 /* recents@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DA91AE6877C006DA8E8 /* recents@3x.png */; };
 		94173DAC1AE68786006DA8E8 /* recents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DAB1AE68786006DA8E8 /* recents@2x.png */; };
 		94173DAE1AE6878C006DA8E8 /* recents.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DAD1AE6878C006DA8E8 /* recents.png */; };
+		94173DB31AE6B03E006DA8E8 /* LogInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94173DB21AE6B03E006DA8E8 /* LogInformation.m */; };
 		9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DA1A9350490075CD97 /* FSHandler.m */; };
 		9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */; };
 		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
@@ -87,6 +88,8 @@
 		94173DA91AE6877C006DA8E8 /* recents@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recents@3x.png"; sourceTree = "<group>"; };
 		94173DAB1AE68786006DA8E8 /* recents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recents@2x.png"; sourceTree = "<group>"; };
 		94173DAD1AE6878C006DA8E8 /* recents.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recents.png; sourceTree = "<group>"; };
+		94173DB11AE6B03E006DA8E8 /* LogInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInformation.h; sourceTree = "<group>"; };
+		94173DB21AE6B03E006DA8E8 /* LogInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInformation.m; sourceTree = "<group>"; };
 		9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellSwitch.h; sourceTree = "<group>"; };
 		9449B8D91A9350490075CD97 /* FSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSHandler.h; sourceTree = "<group>"; };
 		9449B8DA1A9350490075CD97 /* FSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSHandler.m; sourceTree = "<group>"; };
@@ -149,6 +152,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94173DB61AE6B04C006DA8E8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				94173DB11AE6B03E006DA8E8 /* LogInformation.h */,
+				94173DB21AE6B03E006DA8E8 /* LogInformation.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		94173DB71AE6B058006DA8E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9492AE461A9222C500582A99 /* TrustStoreViewController.h */,
+				9492AE471A9222C500582A99 /* TrustStoreViewController.m */,
+				94173D961AE66941006DA8E8 /* ManualTableViewController.h */,
+				94173D921AE668A8006DA8E8 /* ManualTableViewController.m */,
+				94173DA61AE68704006DA8E8 /* LogTableViewController.h */,
+				94173DA71AE68704006DA8E8 /* LogTableViewController.m */,
+				9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		94173DB81AE6B061006DA8E8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9492AE601A92475C00582A99 /* X509Wrapper.h */,
+				946E2EB01A1AD2A500FE227C /* X509Wrapper.m */,
+				94153E6F1A924C200068BC4B /* CertDataStore.h */,
+				94153E731A924C5B0068BC4B /* CertDataStore.m */,
+				9449B8D91A9350490075CD97 /* FSHandler.h */,
+				9449B8DA1A9350490075CD97 /* FSHandler.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		9449B8E21A937E130075CD97 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,17 +239,9 @@
 				9492AE421A92216F00582A99 /* Makefile */,
 				946E2EA91A1AD2A500FE227C /* AppDelegate.h */,
 				946E2EAA1A1AD2A500FE227C /* AppDelegate.m */,
-				9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */,
-				9492AE461A9222C500582A99 /* TrustStoreViewController.h */,
-				9492AE471A9222C500582A99 /* TrustStoreViewController.m */,
-				94173D961AE66941006DA8E8 /* ManualTableViewController.h */,
-				94173D921AE668A8006DA8E8 /* ManualTableViewController.m */,
-				94173DA61AE68704006DA8E8 /* LogTableViewController.h */,
-				94173DA71AE68704006DA8E8 /* LogTableViewController.m */,
-				94153E6F1A924C200068BC4B /* CertDataStore.h */,
-				94153E731A924C5B0068BC4B /* CertDataStore.m */,
-				9449B8D91A9350490075CD97 /* FSHandler.h */,
-				9449B8DA1A9350490075CD97 /* FSHandler.m */,
+				94173DB81AE6B061006DA8E8 /* Controllers */,
+				94173DB71AE6B058006DA8E8 /* Views */,
+				94173DB61AE6B04C006DA8E8 /* Models */,
 				9449B8E21A937E130075CD97 /* Categories */,
 				9492AE5D1A9238A100582A99 /* Security */,
 				9492AE4C1A92243500582A99 /* Resources */,
@@ -295,8 +326,6 @@
 			children = (
 				946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */,
 				946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */,
-				9492AE601A92475C00582A99 /* X509Wrapper.h */,
-				946E2EB01A1AD2A500FE227C /* X509Wrapper.m */,
 			);
 			name = Security;
 			sourceTree = "<group>";
@@ -455,6 +484,7 @@
 				946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */,
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				94173DA81AE68704006DA8E8 /* LogTableViewController.m in Sources */,
+				94173DB31AE6B03E006DA8E8 /* LogInformation.m in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
 				94173D931AE668A8006DA8E8 /* ManualTableViewController.m in Sources */,
