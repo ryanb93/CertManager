@@ -9,7 +9,6 @@
 
 #import "TableCellSwitch.h"
 #import "CertDataStore.h"
-#import "X509Wrapper.h"
 
 @interface TrustStoreViewController ()
 	@property (strong, atomic) CertDataStore * certStore;

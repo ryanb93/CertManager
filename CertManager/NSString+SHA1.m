@@ -11,7 +11,7 @@
 @implementation NSString (SHA1)
 
 - (BOOL) isSHA1 {
-    NSString *regex = @"^[a-f0-9]{40}$";
+    NSString *regex = @"^[a-fA-F0-9]{40}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [predicate evaluateWithObject:self];
 }

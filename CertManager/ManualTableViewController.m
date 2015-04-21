@@ -8,9 +8,12 @@
 
 #import "ManualTableViewController.h"
 
+#import "FSHandler.h"
+
 @interface ManualTableViewController ()
 
 @property (strong, atomic) NSMutableDictionary *blockedCerts;
+@property (strong, atomic) NSMutableArray *blockedCertSHA1s;
 
 @end
 
@@ -18,6 +21,7 @@
 
 #pragma mark - ManualTableViewController
 
+static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
 -(id) init {
     
     id this = [super init];
@@ -31,6 +35,7 @@
         [self.navigationItem setRightBarButtonItem:rightButton];
     }
     
+    [self reloadData];
     
     return this;
 }
@@ -65,9 +70,19 @@
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Block"
                                                  style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
-                                                  
+                                                   NSString *name = [[alert.textFields objectAtIndex:0] text];
+                                                   NSString *sha1 = [[alert.textFields objectAtIndex:1] text];
                                                    
-
+                                                   NSLog(@"name: %@, sha1: %@", name, sha1);
+                                                   
+                                                   if(![_blockedCerts objectForKey:sha1]) {
+                                                       NSLog(@"Not found, adding now");
+                                                       [_blockedCerts setValue:name forKey:sha1];
+                                                   }
+                                                   
+                                                   [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:_blockedCerts];
+                                                   NSLog(@"Written to file");
+                                                   [self reloadData];
                                                }];
     
     UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel"
@@ -101,8 +116,59 @@
 
 
 - (void)reloadData {
+    
+    _blockedCerts = [FSHandler readDictionaryFromPlist:UNTRUSTED_CERTS_PLIST];
+    
+    _blockedCertSHA1s = [[_blockedCerts keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [(NSString*)obj2 compare:(NSString*)obj1];
+    }] mutableCopy];
+    
     [self.tableView reloadData];
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_blockedCertSHA1s count];
+}
+
+/**
+ *  This is a function which creates the cell object and returns it back to the table view.
+ *
+ *  @param tableView The table view that called this function.
+ *  @param indexPath The index of the cell to be created.
+ *
+ *  @return A completed cell object which will be placed into the table.
+ */
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //Create a cell, if the system has any reusable cells then use that. This reduces memory usage massively.
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"blockedCell"];
+    //If there were no reusable cells.
+    if (nil == cell) {
+        //Create a new cell.
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:@"blockedCell"];
+    }
+    
+
+    NSString *sha1 = [_blockedCertSHA1s objectAtIndex:[indexPath row]];
+    NSString *name = [_blockedCerts valueForKey:sha1];
+    
+    //Set the cell text.
+    [cell.textLabel setText: name];
+    [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [cell.textLabel setNumberOfLines:0];
+    [cell.detailTextLabel setText:sha1];
+    [cell.imageView setImage:[UIImage imageNamed:@"untrusted"]];
+    
+    return cell;
+}
+
 
 
 @end

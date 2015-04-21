@@ -20,12 +20,20 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
  */
 + (void) writeToPlist: (NSString*)fileName withData:(id) data
 {
+    NSLog(@"write to plist %@", data);
     if([data respondsToSelector:@selector(writeToFile:atomically:)]) {
+        NSLog(@"Responds to selector");
+        NSLog(@"Writing %@ to %@", data, fileName);
+        
    		BOOL success = [data writeToFile:[NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName] atomically:YES];
     	if(success) {
+            NSLog(@"SUCCESS");
     		//Send a notification to the system that we have changed values.
     		CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("uk.ac.surrey.rb00166.CertManager/reload"), NULL, NULL, YES);
     	}
+        else {
+            NSLog(@"FAIL WALE");
+        }
     }
 }
 

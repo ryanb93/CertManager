@@ -24,7 +24,6 @@
 
 //The name of the plist to read from.
 static NSString * const UNTRUSTED_ROOTS_PLIST = @"CertManagerUntrustedRoots";
-static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
 
 /**
  *  Init method for the CertDataStore. Loads the root certificates using the Security framework.
@@ -41,7 +40,6 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
     //Set up our private data stores.
     _certificates = [[NSMutableDictionary alloc] init];
     _untrustedRoots = [FSHandler readArrayFromPlist:UNTRUSTED_ROOTS_PLIST];
-    _untrustedCerts = [FSHandler readDictionaryFromPlist:UNTRUSTED_CERTS_PLIST];
     
     //Get the offsets for the certificates in the database index file.
     NSMutableArray *offsets = [[NSMutableArray alloc] init];
