@@ -71,17 +71,11 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
                                                  style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action) {
                                                    NSString *name = [[alert.textFields objectAtIndex:0] text];
-                                                   NSString *sha1 = [[alert.textFields objectAtIndex:1] text];
-                                                   
-                                                   NSLog(@"name: %@, sha1: %@", name, sha1);
-                                                   
+                                                   NSString *sha1 = [[[alert.textFields objectAtIndex:1] text] lowercaseString];
                                                    if(![_blockedCerts objectForKey:sha1]) {
-                                                       NSLog(@"Not found, adding now");
                                                        [_blockedCerts setValue:name forKey:sha1];
                                                    }
-                                                   
                                                    [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:_blockedCerts];
-                                                   NSLog(@"Written to file");
                                                    [self reloadData];
                                                }];
     
@@ -136,6 +130,64 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
     return [_blockedCertSHA1s count];
 }
 
+#pragma mark - UITableViewDelegate
+
+/**
+ *  This function creates the buttons used when the user swipes left on a table cell.
+ *
+ *  @param tableView The table view that called this function.
+ *  @param indexPath The index of the cell that was swiped.
+ *
+ *  @return An array of actions that the cell can perform.
+ */
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+
+    void (^deleteAlert)(UITableViewRowAction*, NSIndexPath*) = ^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        //Create an alert controller and use the alert message function to generate a message.
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Certificate"
+                                                                       message:@"You are about to delete this certificate. This will allow all secure communications "
+                                    "to and from servers containing this certificate in their chain of trust. Are you sure you want to do this?"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        //Add the alert actions to the controller. This adds the buttons automatically.
+        [alert addAction: [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive
+                                                  handler:^(UIAlertAction * action) {
+                                                      NSString *sha1 = [_blockedCertSHA1s objectAtIndex:[indexPath row]];
+                                                      [_blockedCerts removeObjectForKey:sha1];
+                                                      [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:_blockedCerts];
+                                                      [self reloadData];
+                                                  }]];
+        
+        [alert addAction: [UIAlertAction actionWithTitle:@"Cancel"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:nil]];
+        //Show the alert to the user.
+        [self presentViewController:alert animated:YES completion:nil];
+    };
+
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                           title:@"Delete"
+                                                                         handler:deleteAlert];
+
+    return @[deleteAction];
+
+}
+
+/**
+ *  This function enables the swipe on list elements.
+ *
+ *  @param tableView    The table view that called this function.
+ *  @param editingStyle The editing style (unused)
+ *  @param indexPath    The index of the cell (unused)
+ */
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Empty, shows the swipable buttons for all cells.
+}
+
+
 /**
  *  This is a function which creates the cell object and returns it back to the table view.
  *
@@ -166,6 +218,8 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
     [cell.detailTextLabel setText:sha1];
     [cell.imageView setImage:[UIImage imageNamed:@"untrusted"]];
     
+    
+
     return cell;
 }
 

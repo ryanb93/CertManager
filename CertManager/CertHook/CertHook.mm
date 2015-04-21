@@ -24,12 +24,12 @@
 
 #pragma mark - Constants
 
-static NSString* const UNTRUSTED_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist";
+static NSString* const UNTRUSTED_ROOTS_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist";
+static NSString* const UNTRUSTED_CERTS_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedCerts.plist";
 static NSString* const MESSAGING_CENTER     = @"uk.ac.surrey.rb00166.CertManager";
 static NSString* const BLOCKED_NOTIFICATION = @"certificateWasBlocked";
 
-static NSArray *untrustedRoots;
-
+static NSMutableArray *untrustedRoots;
 
 #pragma mark - Callback Methods
 
@@ -60,7 +60,8 @@ static void certificateWasBlocked(NSString *summary) {
  */
 static void updateRoots() {
     //Load the plist into an array.
-    untrustedRoots = [[NSArray alloc] initWithContentsOfFile:UNTRUSTED_PLIST];
+    untrustedRoots = [[NSMutableArray alloc] initWithContentsOfFile:UNTRUSTED_ROOTS_PLIST];
+    [untrustedRoots addObjectsFromArray:[[[NSDictionary alloc] initWithContentsOfFile:UNTRUSTED_CERTS_PLIST] allKeys]];
 }
 
 /**
@@ -182,15 +183,15 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 		NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(certData) length:CFDataGetLength(certData)] sha1Digest];
         
 		//Convert the SHA1 data object to a hex String.
-		NSString *sha1 = [out hexStringValue];
-
+		NSString *sha1 = [[out hexStringValue] lowercaseString];
+        
 		//If the SHA1 of this certificate is in our blocked list.
 		if([untrustedRoots containsObject:sha1]) {
             NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
 			certificateWasBlocked(summary);
             BLOCKED_PEER = peer;
             //Return the failure.
-			return errSSLUnknownRootCert;
+			return errSSLClosedAbort;
 		}
 	}
     
