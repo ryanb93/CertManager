@@ -13,15 +13,15 @@
 @interface CertDataStore : NSObject
 
 - (int)trustStoreVersion;
-- (SecCertificateRef)certificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
-- (NSArray *)titlesForCertificates;
-- (NSInteger)numberOfCertificatesForTitle:(NSString*)title;
-- (NSString*)nameForCertificate:	(SecCertificateRef) cert;
-- (NSString*)issuerForCertificate:	(SecCertificateRef) cert;
-- (BOOL)isTrustedForCertificate:	(SecCertificateRef) cert;
-- (void)untrustCertificate:			(SecCertificateRef) cert;
-- (void)trustCertificate:			(SecCertificateRef) cert;
-- (void)reloadUntrustedCertificates;
+- (SecCertificateRef)rootCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset;
+- (NSArray *)titlesForRootCertificates;
+- (NSInteger)numberOfRootCertificatesForTitle:(NSString*)title;
+- (NSString*)nameForRootCertificate:	(SecCertificateRef) cert;
+- (NSString*)issuerForRootCertificate:	(SecCertificateRef) cert;
+- (BOOL)isTrustedForRootCertificate:	(SecCertificateRef) cert;
+- (void)untrustRootCertificate:			(SecCertificateRef) cert;
+- (void)trustRootCertificate:			(SecCertificateRef) cert;
+- (void)reloadUntrustedRootCertificates;
 
 @property (assign ,atomic) int trustStoreVersion;
 

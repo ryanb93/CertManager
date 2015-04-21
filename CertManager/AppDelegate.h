@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "TrustStoreViewController.h"
+#import "ManualTableViewController.h"
+#import "LogTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -11,6 +11,7 @@
 @interface FSHandler : NSObject
 
 + (void)writeToPlist: (NSString*)fileName withData:(NSMutableArray *)data;
-+ (NSMutableArray *)readFromPlist: (NSString *)fileName;
++ (NSMutableArray *)readArrayFromPlist: (NSString *)fileName;
++ (NSMutableDictionary *)readDictionaryFromPlist: (NSString *)fileName;
 
 @end

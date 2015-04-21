@@ -7,7 +7,5 @@
 //
 #import <UIKit/UIKit.h>
 
-@interface TableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
-
-
+@interface TrustStoreViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 @end

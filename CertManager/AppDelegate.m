@@ -13,17 +13,29 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    
     //Create an instance of our table view controller.
-    TableViewController *tableViewController = [[TableViewController alloc] initWithStyle:UITableViewStylePlain];
+    TrustStoreViewController *tableViewController = [[TrustStoreViewController alloc] init];
+    
+    //Create an instance of our blocked intemediatories
+    ManualTableViewController *blockedController = [[ManualTableViewController alloc] init];
+
+    LogTableViewController *logController = [[LogTableViewController alloc] init];
     
     //Add this controller to a navigation controller.
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
-
+    UINavigationController *blockedNavController = [[UINavigationController alloc] initWithRootViewController:blockedController];
+    UINavigationController *logNavController = [[UINavigationController alloc] initWithRootViewController:logController];
+    
+    //Create tab controller and add views.
+    UITabBarController *tabViewController = [[UITabBarController alloc] init];
+    [tabViewController setViewControllers:[NSArray arrayWithObjects:navController, blockedNavController, logNavController, nil]];
+        
     //Create the window object with the screen bounds.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     //Set the window root view controller to our navigation controller.
-    [self.window setRootViewController:navController];
+    [self.window setRootViewController:tabViewController];
     
     //Make the window visible.
     [self.window makeKeyAndVisible];

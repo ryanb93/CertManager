@@ -11,7 +11,8 @@
 @interface CertDataStore()
 
 @property (strong, atomic) NSMutableDictionary * certificates;
-@property (strong, atomic) NSMutableArray      * untrusted;
+@property (strong, atomic) NSMutableArray      * untrustedRoots;
+@property (strong, atomic) NSMutableDictionary * untrustedCerts;
 
 @end
 
@@ -22,7 +23,8 @@
 @implementation CertDataStore
 
 //The name of the plist to read from.
-static NSString * const UNTRUSTED_PLIST = @"CertManagerUntrustedRoots";
+static NSString * const UNTRUSTED_ROOTS_PLIST = @"CertManagerUntrustedRoots";
+static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
 
 /**
  *  Init method for the CertDataStore. Loads the root certificates using the Security framework.
@@ -38,7 +40,8 @@ static NSString * const UNTRUSTED_PLIST = @"CertManagerUntrustedRoots";
 
     //Set up our private data stores.
     _certificates = [[NSMutableDictionary alloc] init];
-    _untrusted    = [FSHandler readFromPlist:UNTRUSTED_PLIST];
+    _untrustedRoots = [FSHandler readArrayFromPlist:UNTRUSTED_ROOTS_PLIST];
+    _untrustedCerts = [FSHandler readDictionaryFromPlist:UNTRUSTED_CERTS_PLIST];
     
     //Get the offsets for the certificates in the database index file.
     NSMutableArray *offsets = [[NSMutableArray alloc] init];
@@ -102,16 +105,16 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *
  *  @return The reference to the certificate.
  */
-- (SecCertificateRef)certificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
+- (SecCertificateRef)rootCertificateWithTitle:(NSString *)title andOffSet:(NSInteger)offset {
     return (__bridge SecCertificateRef)(_certificates[title][offset]);
 }
 
-- (NSInteger)numberOfCertificatesForTitle:(NSString*)title {
+- (NSInteger)numberOfRootCertificatesForTitle:(NSString*)title {
     return [_certificates[title] count];
 }
 
 
-- (NSArray *)titlesForCertificates {
+- (NSArray *)titlesForRootCertificates {
     return [_certificates allKeys];
 }
 
@@ -122,7 +125,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *
  *  @return The summary name.
  */
-- (NSString *)nameForCertificate:(SecCertificateRef) cert  {
+- (NSString *)nameForRootCertificate:(SecCertificateRef) cert  {
     return (__bridge NSString *)(SecCertificateCopySubjectSummary(cert));
 }
 
@@ -133,7 +136,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *
  *  @return The issuer name.
  */
-- (NSString *)issuerForCertificate:(SecCertificateRef) cert  {
+- (NSString *)issuerForRootCertificate:(SecCertificateRef) cert  {
     return [X509Wrapper CertificateGetIssuerName:cert];
 }
 
@@ -144,9 +147,9 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *
  *  @return If the certificate is trusted by CertManager. By default, true.
  */
-- (BOOL)isTrustedForCertificate:(SecCertificateRef) cert {
+- (BOOL)isTrustedForRootCertificate:(SecCertificateRef) cert {
     NSString* sha1 = [X509Wrapper CertificateGetSHA1:cert];
-    return ![_untrusted containsObject:sha1];
+    return ![_untrustedRoots containsObject:sha1];
 }
 
 /**
@@ -154,9 +157,9 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *
  *  @param cert The certificate to add.
  */
-- (void)untrustCertificate:(SecCertificateRef) cert  {
-    [_untrusted addObject:[X509Wrapper CertificateGetSHA1:cert]];
-    [FSHandler writeToPlist:UNTRUSTED_PLIST withData:_untrusted];
+- (void)untrustRootCertificate:(SecCertificateRef) cert  {
+    [_untrustedRoots addObject:[X509Wrapper CertificateGetSHA1:cert]];
+    [FSHandler writeToPlist:UNTRUSTED_ROOTS_PLIST withData:_untrustedRoots];
 }
 
 /**
@@ -164,13 +167,13 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *
  *  @param cert The certificate to remove.
  */
-- (void)trustCertificate:(SecCertificateRef) cert {
-    [_untrusted removeObject:[X509Wrapper CertificateGetSHA1:cert]];
-    [FSHandler writeToPlist:UNTRUSTED_PLIST withData:_untrusted];
+- (void)trustRootCertificate:(SecCertificateRef) cert {
+    [_untrustedRoots removeObject:[X509Wrapper CertificateGetSHA1:cert]];
+    [FSHandler writeToPlist:UNTRUSTED_ROOTS_PLIST withData:_untrustedRoots];
 }
 
--(void)reloadUntrustedCertificates {
-    _untrusted    = [FSHandler readFromPlist:UNTRUSTED_PLIST];
+-(void)reloadUntrustedRootCertificates {
+    _untrustedRoots = [FSHandler readArrayFromPlist:UNTRUSTED_ROOTS_PLIST];
 }
 
 

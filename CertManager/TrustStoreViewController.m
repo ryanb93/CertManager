@@ -5,24 +5,18 @@
 //  Created by Ryan Burke on 16/11/2014.
 //  Copyright (c) 2014 Ryan Burke. All rights reserved.
 //
-#import <CertUI/CertUIPrompt.h>
-#import <OpenSSL/x509.h>
-#import <Security/SecBase.h>
+#import "TrustStoreViewController.h"
 
-#import "TableViewController.h"
+#import "TableCellSwitch.h"
 #import "CertDataStore.h"
 #import "X509Wrapper.h"
-#import "TableCellSwitch.h"
 
-@interface TableViewController ()
-
-@property (strong, atomic) CertDataStore * certStore;
-@property (strong, atomic) NSArray * titles;
-
-
+@interface TrustStoreViewController ()
+	@property (strong, atomic) CertDataStore * certStore;
+	@property (strong, atomic) NSArray * titles;
 @end
 
-@implementation TableViewController
+@implementation TrustStoreViewController
 
 #pragma mark - TableViewController
 
@@ -36,10 +30,14 @@
     
     //Create our certificate store object.
     _certStore = [[CertDataStore alloc] init];
-    _titles = [[_certStore titlesForCertificates] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    _titles = [[_certStore titlesForRootCertificates] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
     
     //Set the title of the navigation bar to use the trust store version.
-    [self setTitle:[NSString stringWithFormat:@"Trust Store Version: %i", [_certStore trustStoreVersion]]];
+    [[self navigationItem] setTitle:[NSString stringWithFormat:@"Version: %i", [_certStore trustStoreVersion]]];
+    
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Trust Store" image:[UIImage imageNamed:@"world_times"] tag:0];
+
     
     //Stop selection on the table view.
     [self.tableView setAllowsSelection:NO];
@@ -54,7 +52,7 @@
 }
 
 - (void)reloadData {
-    [_certStore reloadUntrustedCertificates];
+    [_certStore reloadUntrustedRootCertificates];
     [self.tableView reloadData];
 }
 
@@ -83,7 +81,7 @@
  */
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *title = _titles[section];
-    return [_certStore numberOfCertificatesForTitle:title];
+    return [_certStore numberOfRootCertificatesForTitle:title];
 }
 
 /**
@@ -146,17 +144,17 @@
     [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
     
     //Set the cell text.
-    SecCertificateRef certificate = [_certStore certificateWithTitle:_titles[[indexPath section]]
+    SecCertificateRef certificate = [_certStore rootCertificateWithTitle:_titles[[indexPath section]]
                                                            andOffSet:[indexPath row]];
-    NSString *certName = [_certStore nameForCertificate:certificate];
-    NSString *issuer   = [_certStore issuerForCertificate:certificate];
+    NSString *certName = [_certStore nameForRootCertificate:certificate];
+    NSString *issuer   = [_certStore issuerForRootCertificate:certificate];
     [cell.textLabel setText: certName];
     [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [cell.textLabel setNumberOfLines:0];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"Issued by: %@", issuer]];
     
     //Style the cell.
-    BOOL trusted = [_certStore isTrustedForCertificate:certificate];
+    BOOL trusted = [_certStore isTrustedForRootCertificate:certificate];
     if(trusted) {
         cell.imageView.image = [UIImage imageNamed:@"trusted"];
         [switchView setOn:NO animated:NO];
@@ -180,13 +178,13 @@
     NSString  *title   = [self tableView:self.tableView titleForHeaderInSection:[indexPath section]];
     NSInteger row      = [indexPath row];
     
-    SecCertificateRef certificate = [_certStore certificateWithTitle:title andOffSet:row];
+    SecCertificateRef certificate = [_certStore rootCertificateWithTitle:title andOffSet:row];
     
     if([switchControl isOn]) {
-        [_certStore untrustCertificate:certificate];
+        [_certStore untrustRootCertificate:certificate];
     }
     else {
-        [_certStore trustCertificate:certificate];
+        [_certStore trustRootCertificate:certificate];
     }
     
     [self.tableView reloadData];

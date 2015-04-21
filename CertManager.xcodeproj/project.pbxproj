@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 94153E731A924C5B0068BC4B /* CertDataStore.m */; };
+		94173D931AE668A8006DA8E8 /* ManualTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94173D921AE668A8006DA8E8 /* ManualTableViewController.m */; };
+		94173D981AE66B1F006DA8E8 /* world_times@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173D971AE66B1F006DA8E8 /* world_times@2x.png */; };
+		94173D9A1AE66B2A006DA8E8 /* world_times@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173D991AE66B2A006DA8E8 /* world_times@3x.png */; };
+		94173D9C1AE66B31006DA8E8 /* world_times.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173D9B1AE66B31006DA8E8 /* world_times.png */; };
+		94173D9E1AE67023006DA8E8 /* file_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173D9D1AE67023006DA8E8 /* file_edit.png */; };
+		94173DA01AE67051006DA8E8 /* file_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173D9F1AE67051006DA8E8 /* file_edit@2x.png */; };
+		94173DA21AE67057006DA8E8 /* file_edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DA11AE67057006DA8E8 /* file_edit@3x.png */; };
+		94173DA41AE67835006DA8E8 /* NSString+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 94173DA31AE67835006DA8E8 /* NSString+SHA1.m */; };
+		94173DA81AE68704006DA8E8 /* LogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94173DA71AE68704006DA8E8 /* LogTableViewController.m */; };
+		94173DAA1AE6877C006DA8E8 /* recents@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DA91AE6877C006DA8E8 /* recents@3x.png */; };
+		94173DAC1AE68786006DA8E8 /* recents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DAB1AE68786006DA8E8 /* recents@2x.png */; };
+		94173DAE1AE6878C006DA8E8 /* recents.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DAD1AE6878C006DA8E8 /* recents.png */; };
 		9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DA1A9350490075CD97 /* FSHandler.m */; };
 		9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */; };
 		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
@@ -21,18 +33,15 @@
 		946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EB01A1AD2A500FE227C /* X509Wrapper.m */; };
 		946E2EBD1A1AD2E000FE227C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBB1A1AD2D800FE227C /* libcrypto.a */; };
 		946E2EBE1A1AD2E200FE227C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBC1A1AD2D800FE227C /* libssl.a */; };
-		9470C8721A9C86BD00906059 /* libsubstrate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9470C8711A9C86BD00906059 /* libsubstrate.dylib */; };
-		9470C8741A9C86D900906059 /* substrate.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 9470C8731A9C86D900906059 /* substrate.h */; };
 		9492AE431A92216F00582A99 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE421A92216F00582A99 /* Makefile */; };
 		9492AE451A92217B00582A99 /* control in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE441A92217B00582A99 /* control */; };
-		9492AE481A9222C500582A99 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TableViewController.m */; };
+		9492AE481A9222C500582A99 /* TrustStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TrustStoreViewController.m */; };
 		9492AE551A92243500582A99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4D1A92243500582A99 /* icon.png */; };
 		9492AE561A92243500582A99 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4E1A92243500582A99 /* Info.plist */; };
 		9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE501A92243500582A99 /* LaunchScreen.xib */; };
 		9492AE591A92243500582A99 /* trusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE511A92243500582A99 /* trusted.png */; };
 		9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE521A92243500582A99 /* trusted@2x.png */; };
 		9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE531A92243500582A99 /* trusted@3x.png */; };
-		9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */; };
 		94D4AAA31A9B8F240049640A /* BulletinBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D4AAA21A9B8F240049640A /* BulletinBoard.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +72,21 @@
 /* Begin PBXFileReference section */
 		94153E6F1A924C200068BC4B /* CertDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertDataStore.h; sourceTree = "<group>"; };
 		94153E731A924C5B0068BC4B /* CertDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertDataStore.m; sourceTree = "<group>"; };
+		94173D921AE668A8006DA8E8 /* ManualTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManualTableViewController.m; sourceTree = "<group>"; };
+		94173D961AE66941006DA8E8 /* ManualTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManualTableViewController.h; sourceTree = "<group>"; };
+		94173D971AE66B1F006DA8E8 /* world_times@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world_times@2x.png"; sourceTree = "<group>"; };
+		94173D991AE66B2A006DA8E8 /* world_times@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world_times@3x.png"; sourceTree = "<group>"; };
+		94173D9B1AE66B31006DA8E8 /* world_times.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = world_times.png; sourceTree = "<group>"; };
+		94173D9D1AE67023006DA8E8 /* file_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file_edit.png; sourceTree = "<group>"; };
+		94173D9F1AE67051006DA8E8 /* file_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file_edit@2x.png"; sourceTree = "<group>"; };
+		94173DA11AE67057006DA8E8 /* file_edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file_edit@3x.png"; sourceTree = "<group>"; };
+		94173DA31AE67835006DA8E8 /* NSString+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHA1.m"; sourceTree = "<group>"; };
+		94173DA51AE67857006DA8E8 /* NSString+SHA1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+SHA1.h"; sourceTree = "<group>"; };
+		94173DA61AE68704006DA8E8 /* LogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTableViewController.h; sourceTree = "<group>"; };
+		94173DA71AE68704006DA8E8 /* LogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogTableViewController.m; sourceTree = "<group>"; };
+		94173DA91AE6877C006DA8E8 /* recents@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recents@3x.png"; sourceTree = "<group>"; };
+		94173DAB1AE68786006DA8E8 /* recents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recents@2x.png"; sourceTree = "<group>"; };
+		94173DAD1AE6878C006DA8E8 /* recents.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recents.png; sourceTree = "<group>"; };
 		9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellSwitch.h; sourceTree = "<group>"; };
 		9449B8D91A9350490075CD97 /* FSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSHandler.h; sourceTree = "<group>"; };
 		9449B8DA1A9350490075CD97 /* FSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSHandler.m; sourceTree = "<group>"; };
@@ -86,21 +110,18 @@
 		946E2EB01A1AD2A500FE227C /* X509Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = X509Wrapper.m; sourceTree = "<group>"; };
 		946E2EBB1A1AD2D800FE227C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		946E2EBC1A1AD2D800FE227C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
-		9470C8711A9C86BD00906059 /* libsubstrate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsubstrate.dylib; path = CertManager/theos/lib/libsubstrate.dylib; sourceTree = "<group>"; };
-		9470C8731A9C86D900906059 /* substrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = substrate.h; path = CertManager/theos/include/substrate.h; sourceTree = "<group>"; };
 		948F7B021A977436002764B5 /* NSData+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA1.h"; sourceTree = "<group>"; };
 		948F7B031A977436002764B5 /* NSData+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SHA1.m"; sourceTree = "<group>"; };
 		9492AE421A92216F00582A99 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		9492AE441A92217B00582A99 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
-		9492AE461A9222C500582A99 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		9492AE471A9222C500582A99 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		9492AE461A9222C500582A99 /* TrustStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustStoreViewController.h; sourceTree = "<group>"; };
+		9492AE471A9222C500582A99 /* TrustStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustStoreViewController.m; sourceTree = "<group>"; };
 		9492AE4D1A92243500582A99 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9492AE4E1A92243500582A99 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9492AE501A92243500582A99 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9492AE511A92243500582A99 /* trusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trusted.png; sourceTree = "<group>"; };
 		9492AE521A92243500582A99 /* trusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@2x.png"; sourceTree = "<group>"; };
 		9492AE531A92243500582A99 /* trusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@3x.png"; sourceTree = "<group>"; };
-		9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = University_of_Surrey_coat_of_arms.png; sourceTree = "<group>"; };
 		9492AE601A92475C00582A99 /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
 		9492AE631A92495A00582A99 /* blacklist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blacklist.plist; sourceTree = "<group>"; };
 		94D4AAA21A9B8F240049640A /* BulletinBoard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BulletinBoard.framework; path = ../../../../Developer/BulletinBoard.framework; sourceTree = "<group>"; };
@@ -112,8 +133,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9470C8741A9C86D900906059 /* substrate.h in Frameworks */,
-				9470C8721A9C86BD00906059 /* libsubstrate.dylib in Frameworks */,
 				94D4AAA31A9B8F240049640A /* BulletinBoard.framework in Frameworks */,
 				946E2EBD1A1AD2E000FE227C /* libcrypto.a in Frameworks */,
 				946E2EBE1A1AD2E200FE227C /* libssl.a in Frameworks */,
@@ -135,6 +154,8 @@
 			children = (
 				9449B8DC1A9368420075CD97 /* NSData+SHA1.h */,
 				9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */,
+				94173DA51AE67857006DA8E8 /* NSString+SHA1.h */,
+				94173DA31AE67835006DA8E8 /* NSString+SHA1.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -179,13 +200,17 @@
 				9492AE421A92216F00582A99 /* Makefile */,
 				946E2EA91A1AD2A500FE227C /* AppDelegate.h */,
 				946E2EAA1A1AD2A500FE227C /* AppDelegate.m */,
-				9492AE461A9222C500582A99 /* TableViewController.h */,
-				9492AE471A9222C500582A99 /* TableViewController.m */,
+				9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */,
+				9492AE461A9222C500582A99 /* TrustStoreViewController.h */,
+				9492AE471A9222C500582A99 /* TrustStoreViewController.m */,
+				94173D961AE66941006DA8E8 /* ManualTableViewController.h */,
+				94173D921AE668A8006DA8E8 /* ManualTableViewController.m */,
+				94173DA61AE68704006DA8E8 /* LogTableViewController.h */,
+				94173DA71AE68704006DA8E8 /* LogTableViewController.m */,
 				94153E6F1A924C200068BC4B /* CertDataStore.h */,
 				94153E731A924C5B0068BC4B /* CertDataStore.m */,
 				9449B8D91A9350490075CD97 /* FSHandler.h */,
 				9449B8DA1A9350490075CD97 /* FSHandler.m */,
-				9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */,
 				9449B8E21A937E130075CD97 /* Categories */,
 				9492AE5D1A9238A100582A99 /* Security */,
 				9492AE4C1A92243500582A99 /* Resources */,
@@ -233,8 +258,6 @@
 		946E2EC51A1AD56F00FE227C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9470C8731A9C86D900906059 /* substrate.h */,
-				9470C8711A9C86BD00906059 /* libsubstrate.dylib */,
 				94D4AAA21A9B8F240049640A /* BulletinBoard.framework */,
 				946E2EBA1A1AD2D800FE227C /* OpenSSL */,
 			);
@@ -244,6 +267,15 @@
 		9492AE4C1A92243500582A99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				94173DAD1AE6878C006DA8E8 /* recents.png */,
+				94173DAB1AE68786006DA8E8 /* recents@2x.png */,
+				94173DA91AE6877C006DA8E8 /* recents@3x.png */,
+				94173D9D1AE67023006DA8E8 /* file_edit.png */,
+				94173D9F1AE67051006DA8E8 /* file_edit@2x.png */,
+				94173DA11AE67057006DA8E8 /* file_edit@3x.png */,
+				94173D9B1AE66B31006DA8E8 /* world_times.png */,
+				94173D991AE66B2A006DA8E8 /* world_times@3x.png */,
+				94173D971AE66B1F006DA8E8 /* world_times@2x.png */,
 				9449B8E31A93A7450075CD97 /* untrusted.png */,
 				9449B8E41A93A7450075CD97 /* untrusted@2x.png */,
 				9449B8E51A93A7450075CD97 /* untrusted@3x.png */,
@@ -254,7 +286,6 @@
 				9492AE511A92243500582A99 /* trusted.png */,
 				9492AE521A92243500582A99 /* trusted@2x.png */,
 				9492AE531A92243500582A99 /* trusted@3x.png */,
-				9492AE541A92243500582A99 /* University_of_Surrey_coat_of_arms.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -384,16 +415,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */,
-				9492AE5C1A92243500582A99 /* University_of_Surrey_coat_of_arms.png in Resources */,
+				94173D9C1AE66B31006DA8E8 /* world_times.png in Resources */,
+				94173DAA1AE6877C006DA8E8 /* recents@3x.png in Resources */,
+				94173DA01AE67051006DA8E8 /* file_edit@2x.png in Resources */,
+				94173DA21AE67057006DA8E8 /* file_edit@3x.png in Resources */,
 				9492AE561A92243500582A99 /* Info.plist in Resources */,
+				94173D9A1AE66B2A006DA8E8 /* world_times@3x.png in Resources */,
 				9492AE451A92217B00582A99 /* control in Resources */,
+				94173D981AE66B1F006DA8E8 /* world_times@2x.png in Resources */,
 				9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */,
 				9449B8E61A93A7450075CD97 /* untrusted.png in Resources */,
 				9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */,
 				9492AE551A92243500582A99 /* icon.png in Resources */,
+				94173DAE1AE6878C006DA8E8 /* recents.png in Resources */,
+				94173DAC1AE68786006DA8E8 /* recents@2x.png in Resources */,
 				9492AE5A1A92243500582A99 /* trusted@2x.png in Resources */,
 				9492AE5B1A92243500582A99 /* trusted@3x.png in Resources */,
 				9492AE591A92243500582A99 /* trusted.png in Resources */,
+				94173D9E1AE67023006DA8E8 /* file_edit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,11 +454,14 @@
 				9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */,
 				946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */,
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
+				94173DA81AE68704006DA8E8 /* LogTableViewController.m in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
-				9492AE481A9222C500582A99 /* TableViewController.m in Sources */,
+				94173D931AE668A8006DA8E8 /* ManualTableViewController.m in Sources */,
+				9492AE481A9222C500582A99 /* TrustStoreViewController.m in Sources */,
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
+				94173DA41AE67835006DA8E8 /* NSString+SHA1.m in Sources */,
 				9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
