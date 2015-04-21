@@ -12,7 +12,6 @@
     
 - (id)initWithApplication:(NSString *)app peer:(NSString *)peer certficateName:(NSString *)cert time:(NSDate *)time;
 
-
 @property (strong, atomic) NSString* application;
 @property (strong, atomic) NSString* peerName;
 @property (strong, atomic) NSString* certificateName;

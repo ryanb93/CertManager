@@ -6,8 +6,9 @@
 #import <rocketbootstrap.h>
 #import <UIKit/UIApplication.h>
 
-#import "NSData+SHA1.h"
+#import "../NSData+SHA1.h"
 #import "../LogInformation.h"
+#import "../FSHandler.h"
 
 #pragma mark - External Interfaces
 
@@ -27,6 +28,7 @@
 
 static NSString* const UNTRUSTED_ROOTS_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedRoots.plist";
 static NSString* const UNTRUSTED_CERTS_PLIST      = @"/private/var/mobile/Library/Preferences/CertManagerUntrustedCerts.plist";
+static NSString* const LOG_FILE      			  = @"uk.ac.surrey.rb00166.CertManager.log";
 static NSString* const MESSAGING_CENTER     	  = @"uk.ac.surrey.rb00166.CertManager";
 static NSString* const BLOCKED_NOTIFICATION       = @"certificateWasBlocked";
 
@@ -189,8 +191,9 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
             NSString *process = [[NSProcessInfo processInfo] processName];
 			certificateWasBlocked(process, summary);
             BLOCKED_PEER = peer;
+            //Log this block and write to disk.
             LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:BLOCKED_PEER certficateName:summary time:[NSDate date]];
-            NSLog(@"%@", info);
+            [FSHandler writeToLogFile:LOG_FILE withLogInformation:info];
             //Return the failure.
 			return errSSLClosedAbort;
 		}

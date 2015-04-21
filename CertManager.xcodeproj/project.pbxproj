@@ -21,6 +21,7 @@
 		94173DAC1AE68786006DA8E8 /* recents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DAB1AE68786006DA8E8 /* recents@2x.png */; };
 		94173DAE1AE6878C006DA8E8 /* recents.png in Resources */ = {isa = PBXBuildFile; fileRef = 94173DAD1AE6878C006DA8E8 /* recents.png */; };
 		94173DB31AE6B03E006DA8E8 /* LogInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94173DB21AE6B03E006DA8E8 /* LogInformation.m */; };
+		94173DBB1AE6C11D006DA8E8 /* DDFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 94173DBA1AE6C11D006DA8E8 /* DDFileReader.m */; };
 		9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DA1A9350490075CD97 /* FSHandler.m */; };
 		9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */; };
 		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
@@ -90,6 +91,8 @@
 		94173DAD1AE6878C006DA8E8 /* recents.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recents.png; sourceTree = "<group>"; };
 		94173DB11AE6B03E006DA8E8 /* LogInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInformation.h; sourceTree = "<group>"; };
 		94173DB21AE6B03E006DA8E8 /* LogInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInformation.m; sourceTree = "<group>"; };
+		94173DB91AE6C11D006DA8E8 /* DDFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileReader.h; sourceTree = "<group>"; };
+		94173DBA1AE6C11D006DA8E8 /* DDFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileReader.m; sourceTree = "<group>"; };
 		9436F0BC1A9B4C940006C332 /* TableCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellSwitch.h; sourceTree = "<group>"; };
 		9449B8D91A9350490075CD97 /* FSHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSHandler.h; sourceTree = "<group>"; };
 		9449B8DA1A9350490075CD97 /* FSHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSHandler.m; sourceTree = "<group>"; };
@@ -113,8 +116,6 @@
 		946E2EB01A1AD2A500FE227C /* X509Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = X509Wrapper.m; sourceTree = "<group>"; };
 		946E2EBB1A1AD2D800FE227C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		946E2EBC1A1AD2D800FE227C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
-		948F7B021A977436002764B5 /* NSData+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA1.h"; sourceTree = "<group>"; };
-		948F7B031A977436002764B5 /* NSData+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SHA1.m"; sourceTree = "<group>"; };
 		9492AE421A92216F00582A99 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		9492AE441A92217B00582A99 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
 		9492AE461A9222C500582A99 /* TrustStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustStoreViewController.h; sourceTree = "<group>"; };
@@ -184,6 +185,8 @@
 				94153E731A924C5B0068BC4B /* CertDataStore.m */,
 				9449B8D91A9350490075CD97 /* FSHandler.h */,
 				9449B8DA1A9350490075CD97 /* FSHandler.m */,
+				94173DB91AE6C11D006DA8E8 /* DDFileReader.h */,
+				94173DBA1AE6C11D006DA8E8 /* DDFileReader.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -203,8 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				9452E2061A94E34900C8A737 /* CertHook.mm */,
-				948F7B021A977436002764B5 /* NSData+SHA1.h */,
-				948F7B031A977436002764B5 /* NSData+SHA1.m */,
 				9452E2071A94E34900C8A737 /* Makefile */,
 			);
 			name = CertHook;
@@ -492,6 +493,7 @@
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
 				94173DA41AE67835006DA8E8 /* NSString+SHA1.m in Sources */,
+				94173DBB1AE6C11D006DA8E8 /* DDFileReader.m in Sources */,
 				9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

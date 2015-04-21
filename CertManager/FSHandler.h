@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LogInformation.h"
+#import "DDFileReader.h"
 
 @interface FSHandler : NSObject
 
 + (void)writeToPlist: (NSString*)fileName withData:(id)data;
++ (void)writeToLogFile: (NSString*)fileName withLogInformation:(LogInformation *)info;
++ (NSMutableArray *)readLogFile: (NSString *)fileName;
 + (NSMutableArray *)readArrayFromPlist: (NSString *)fileName;
 + (NSMutableDictionary *)readDictionaryFromPlist: (NSString *)fileName;
 
