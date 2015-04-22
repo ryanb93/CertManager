@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 Ryan Burke. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "CertificateViewController.h"
+#import "CertificateTableViewController.h"
 #import "X509Wrapper.h"
 #import "NSString+FontAwesome.h"
 
-@interface CertificateViewController ()
+@interface CertificateTableViewController ()
 
 @end
 
-@implementation CertificateViewController
+@implementation CertificateTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

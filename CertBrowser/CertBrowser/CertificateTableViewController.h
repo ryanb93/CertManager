@@ -7,7 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 
-@interface CertificateViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
+@interface CertificateTableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UIButton *backButton;
 @property (strong, nonatomic) NSMutableArray *certificates;

@@ -35,6 +35,12 @@
 		946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EB01A1AD2A500FE227C /* X509Wrapper.m */; };
 		946E2EBD1A1AD2E000FE227C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBB1A1AD2D800FE227C /* libcrypto.a */; };
 		946E2EBE1A1AD2E200FE227C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946E2EBC1A1AD2D800FE227C /* libssl.a */; };
+		948CC5411AE7A1DE00235FDE /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 948CC53E1AE7A1DE00235FDE /* BrowserViewController.m */; };
+		948CC5421AE7A1DE00235FDE /* CertificateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 948CC5401AE7A1DE00235FDE /* CertificateTableViewController.m */; };
+		948CC5471AE7A20700235FDE /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 948CC5461AE7A20700235FDE /* NSString+FontAwesome.m */; };
+		948CC5491AE7A22700235FDE /* RootCert.png in Resources */ = {isa = PBXBuildFile; fileRef = 948CC5481AE7A22700235FDE /* RootCert.png */; };
+		948CC54B1AE7A23200235FDE /* StandardCert.png in Resources */ = {isa = PBXBuildFile; fileRef = 948CC54A1AE7A23200235FDE /* StandardCert.png */; };
+		948CC54D1AE7A24D00235FDE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 948CC54C1AE7A24D00235FDE /* FontAwesome.ttf */; };
 		9492AE431A92216F00582A99 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE421A92216F00582A99 /* Makefile */; };
 		9492AE451A92217B00582A99 /* control in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE441A92217B00582A99 /* control */; };
 		9492AE481A9222C500582A99 /* TrustStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TrustStoreViewController.m */; };
@@ -116,6 +122,15 @@
 		946E2EB01A1AD2A500FE227C /* X509Wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = X509Wrapper.m; sourceTree = "<group>"; };
 		946E2EBB1A1AD2D800FE227C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		946E2EBC1A1AD2D800FE227C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		948CC53D1AE7A1DE00235FDE /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
+		948CC53E1AE7A1DE00235FDE /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
+		948CC53F1AE7A1DE00235FDE /* CertificateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateTableViewController.h; sourceTree = "<group>"; };
+		948CC5401AE7A1DE00235FDE /* CertificateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateTableViewController.m; sourceTree = "<group>"; };
+		948CC5451AE7A20700235FDE /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		948CC5461AE7A20700235FDE /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		948CC5481AE7A22700235FDE /* RootCert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RootCert.png; sourceTree = "<group>"; };
+		948CC54A1AE7A23200235FDE /* StandardCert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StandardCert.png; sourceTree = "<group>"; };
+		948CC54C1AE7A24D00235FDE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		9492AE421A92216F00582A99 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		9492AE441A92217B00582A99 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
 		9492AE461A9222C500582A99 /* TrustStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustStoreViewController.h; sourceTree = "<group>"; };
@@ -165,6 +180,10 @@
 		94173DB71AE6B058006DA8E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				948CC53D1AE7A1DE00235FDE /* BrowserViewController.h */,
+				948CC53E1AE7A1DE00235FDE /* BrowserViewController.m */,
+				948CC53F1AE7A1DE00235FDE /* CertificateTableViewController.h */,
+				948CC5401AE7A1DE00235FDE /* CertificateTableViewController.m */,
 				9492AE461A9222C500582A99 /* TrustStoreViewController.h */,
 				9492AE471A9222C500582A99 /* TrustStoreViewController.m */,
 				94173D961AE66941006DA8E8 /* ManualTableViewController.h */,
@@ -194,6 +213,8 @@
 		9449B8E21A937E130075CD97 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				948CC5451AE7A20700235FDE /* NSString+FontAwesome.h */,
+				948CC5461AE7A20700235FDE /* NSString+FontAwesome.m */,
 				9449B8DC1A9368420075CD97 /* NSData+SHA1.h */,
 				9449B8DD1A93697C0075CD97 /* NSData+SHA1.m */,
 				94173DA51AE67857006DA8E8 /* NSString+SHA1.h */,
@@ -254,6 +275,7 @@
 		946E2E811A1AD24C00FE227C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				948CC54C1AE7A24D00235FDE /* FontAwesome.ttf */,
 				946E2E821A1AD24C00FE227C /* Info.plist */,
 				946E2E831A1AD24C00FE227C /* main.m */,
 			);
@@ -299,6 +321,8 @@
 		9492AE4C1A92243500582A99 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				948CC54A1AE7A23200235FDE /* StandardCert.png */,
+				948CC5481AE7A22700235FDE /* RootCert.png */,
 				94173DAD1AE6878C006DA8E8 /* recents.png */,
 				94173DAB1AE68786006DA8E8 /* recents@2x.png */,
 				94173DA91AE6877C006DA8E8 /* recents@3x.png */,
@@ -445,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */,
+				948CC5491AE7A22700235FDE /* RootCert.png in Resources */,
 				94173D9C1AE66B31006DA8E8 /* world_times.png in Resources */,
 				94173DAA1AE6877C006DA8E8 /* recents@3x.png in Resources */,
 				94173DA01AE67051006DA8E8 /* file_edit@2x.png in Resources */,
@@ -456,6 +481,8 @@
 				9492AE581A92243500582A99 /* LaunchScreen.xib in Resources */,
 				9449B8E61A93A7450075CD97 /* untrusted.png in Resources */,
 				9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */,
+				948CC54B1AE7A23200235FDE /* StandardCert.png in Resources */,
+				948CC54D1AE7A24D00235FDE /* FontAwesome.ttf in Resources */,
 				9492AE551A92243500582A99 /* icon.png in Resources */,
 				94173DAE1AE6878C006DA8E8 /* recents.png in Resources */,
 				94173DAC1AE68786006DA8E8 /* recents@2x.png in Resources */,
@@ -482,9 +509,11 @@
 			files = (
 				946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */,
 				9449B8DB1A9350490075CD97 /* FSHandler.m in Sources */,
+				948CC5471AE7A20700235FDE /* NSString+FontAwesome.m in Sources */,
 				946E2EB51A1AD2A500FE227C /* X509Wrapper.m in Sources */,
 				946E2EB31A1AD2A500FE227C /* SecTrustServer.c in Sources */,
 				94173DA81AE68704006DA8E8 /* LogTableViewController.m in Sources */,
+				948CC5411AE7A1DE00235FDE /* BrowserViewController.m in Sources */,
 				94173DB31AE6B03E006DA8E8 /* LogInformation.m in Sources */,
 				946E2EB21A1AD2A500FE227C /* OTATrustUtilities.c in Sources */,
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
@@ -493,6 +522,7 @@
 				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
 				94173DA41AE67835006DA8E8 /* NSString+SHA1.m in Sources */,
+				948CC5421AE7A1DE00235FDE /* CertificateTableViewController.m in Sources */,
 				94173DBB1AE6C11D006DA8E8 /* DDFileReader.m in Sources */,
 				9449B8DE1A93697C0075CD97 /* NSData+SHA1.m in Sources */,
 			);

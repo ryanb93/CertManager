@@ -7,11 +7,11 @@
 //
 #import <Security/SecTrust.h>
 
-#import "ViewController.h"
-#import "CertificateViewController.h"
+#import "BrowserViewController.h"
+#import "CertificateTableViewController.h"
 #import "NSString+FontAwesome.h"
 
-@interface ViewController ()
+@interface BrowserViewController ()
 
 @property (nonatomic) BOOL validCertificates;
 @property (strong, nonatomic) NSURLRequest* failedRequest;
@@ -19,14 +19,23 @@
 
 @end
 
-@implementation ViewController
+@implementation BrowserViewController
+
+-(id) init {
+    
+    id this = [super init];
+    
+    if(this) {
+        [self setTabBarItem:[[UITabBarItem alloc] initWithTitle:@"Browser" image:[UIImage imageNamed:@"world_times"] tag:1]];
+        [self.navigationItem setTitle:@"Browser"];
+    }
+        
+    return this;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.webView setDelegate:self];
-    [self.webView setScalesPageToFit:YES];
-	
     //Get a reference to the navbar.
     UINavigationBar *navBar = self.navigationController.navigationBar;
     
@@ -49,7 +58,45 @@
     [addressField setClearsOnBeginEditing:YES];
     [addressField setFont:[UIFont systemFontOfSize:17.0f]];
     [addressField setKeyboardType:UIKeyboardTypeURL];
-	
+    
+    
+    [self.navigationController setToolbarHidden:NO];
+    
+    UIWebView *web = [[UIWebView alloc] initWithFrame:screenRect];
+    [self setWebView:web];
+    [self.webView setDelegate:self];
+    [self.webView setScalesPageToFit:YES];
+    [self.view addSubview:web];
+    
+    
+    NSDictionary *fontAwesome = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [UIFont fontWithName:kFontAwesomeFamilyName size:24.0], NSFontAttributeName,
+                                 nil];
+    
+    UIBarButtonItem *flexiableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    _back = [[UIBarButtonItem alloc] initWithTitle:[NSString fontAwesomeIconStringForEnum:FAArrowLeft]
+                                             style:UIBarButtonItemStylePlain
+                                            target:self.webView
+                                            action:@selector(goBack)];
+    
+    _forward = [[UIBarButtonItem alloc] initWithTitle:[NSString fontAwesomeIconStringForEnum:FAArrowRight]
+                                                style:UIBarButtonItemStylePlain
+                                               target:self.webView
+                                               action:@selector(goForward)];
+    
+    [_back setTitleTextAttributes:fontAwesome forState:UIControlStateNormal];
+    [_forward setTitleTextAttributes:fontAwesome forState:UIControlStateNormal];
+    
+    
+    _stop = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self.webView action:@selector(stopLoading)];
+    _refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self.webView action:@selector(reload)];
+    
+
+    
+    NSArray *items = [NSArray arrayWithObjects:_back, flexiableItem, _stop, flexiableItem, _refresh, flexiableItem, _forward, nil];
+    self.toolbarItems = items;
+    
     //Fire this event when we finish editing.
     [addressField addTarget:self
                      action:@selector(loadRequestFromAddressField:)
@@ -80,12 +127,9 @@
 
 - (void)lockButtonPressed:(id)lockButton {
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *myController = [storyboard instantiateViewControllerWithIdentifier:@"CertNavigationController"];
-    
-    [myController.childViewControllers[0] setCertificates:_certificatesForRequest];
-    
-    [self.navigationController presentViewController:myController animated:YES completion:nil];
+    CertificateTableViewController *certTable = [[CertificateTableViewController alloc] initWithCertificates:_certificatesForRequest];
+    UINavigationController *certNav = [[UINavigationController alloc] initWithRootViewController:certTable];
+    [self.navigationController presentViewController:certNav animated:YES completion:nil];
     
 }
 

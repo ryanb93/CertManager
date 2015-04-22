@@ -14,14 +14,14 @@
 		94E803B81A9E0CAC00E99CBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803B71A9E0CAC00E99CBF /* main.m */; };
 		94E803BB1A9E0CAD00E99CBF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803BA1A9E0CAD00E99CBF /* AppDelegate.m */; };
 		94E803BE1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94E803BC1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld */; };
-		94E803C11A9E0CAD00E99CBF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803C01A9E0CAD00E99CBF /* ViewController.m */; };
+		94E803C11A9E0CAD00E99CBF /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803C01A9E0CAD00E99CBF /* BrowserViewController.m */; };
 		94E803C41A9E0CAD00E99CBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E803C21A9E0CAD00E99CBF /* Main.storyboard */; };
 		94E803C61A9E0CAD00E99CBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E803C51A9E0CAD00E99CBF /* Images.xcassets */; };
 		94E803C91A9E0CAD00E99CBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E803C71A9E0CAD00E99CBF /* LaunchScreen.xib */; };
 		94E803D51A9E0CAD00E99CBF /* CertBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803D41A9E0CAD00E99CBF /* CertBrowserTests.m */; };
 		94E803E91A9E237300E99CBF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E803E81A9E237300E99CBF /* FontAwesome.ttf */; };
 		94E803EC1A9E23D200E99CBF /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803EB1A9E23D200E99CBF /* NSString+FontAwesome.m */; };
-		94E803F11A9E33E600E99CBF /* CertificateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803F01A9E33E600E99CBF /* CertificateViewController.m */; };
+		94E803F11A9E33E600E99CBF /* CertificateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E803F01A9E33E600E99CBF /* CertificateTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +47,8 @@
 		94E803B91A9E0CAD00E99CBF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94E803BA1A9E0CAD00E99CBF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		94E803BD1A9E0CAD00E99CBF /* CertBrowser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CertBrowser.xcdatamodel; sourceTree = "<group>"; };
-		94E803BF1A9E0CAD00E99CBF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		94E803C01A9E0CAD00E99CBF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		94E803BF1A9E0CAD00E99CBF /* BrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
+		94E803C01A9E0CAD00E99CBF /* BrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		94E803C31A9E0CAD00E99CBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94E803C51A9E0CAD00E99CBF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		94E803C81A9E0CAD00E99CBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -58,8 +58,8 @@
 		94E803E81A9E237300E99CBF /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		94E803EA1A9E23BA00E99CBF /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		94E803EB1A9E23D200E99CBF /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
-		94E803EF1A9E33D700E99CBF /* CertificateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateViewController.h; sourceTree = "<group>"; };
-		94E803F01A9E33E600E99CBF /* CertificateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateViewController.m; sourceTree = "<group>"; };
+		94E803EF1A9E33D700E99CBF /* CertificateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificateTableViewController.h; sourceTree = "<group>"; };
+		94E803F01A9E33E600E99CBF /* CertificateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificateTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +126,10 @@
 			children = (
 				94E803B91A9E0CAD00E99CBF /* AppDelegate.h */,
 				94E803BA1A9E0CAD00E99CBF /* AppDelegate.m */,
-				94E803BF1A9E0CAD00E99CBF /* ViewController.h */,
-				94E803C01A9E0CAD00E99CBF /* ViewController.m */,
-				94E803EF1A9E33D700E99CBF /* CertificateViewController.h */,
-				94E803F01A9E33E600E99CBF /* CertificateViewController.m */,
+				94E803BF1A9E0CAD00E99CBF /* BrowserViewController.h */,
+				94E803C01A9E0CAD00E99CBF /* BrowserViewController.m */,
+				94E803EF1A9E33D700E99CBF /* CertificateTableViewController.h */,
+				94E803F01A9E33E600E99CBF /* CertificateTableViewController.m */,
 				94E803C21A9E0CAD00E99CBF /* Main.storyboard */,
 				94E803C71A9E0CAD00E99CBF /* LaunchScreen.xib */,
 				94E803BC1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld */,
@@ -270,13 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94E803F11A9E33E600E99CBF /* CertificateViewController.m in Sources */,
+				94E803F11A9E33E600E99CBF /* CertificateTableViewController.m in Sources */,
 				94E803EC1A9E23D200E99CBF /* NSString+FontAwesome.m in Sources */,
 				94244BF91A9E638D0084B8DC /* X509Wrapper.m in Sources */,
 				94244BFE1A9E65CD0084B8DC /* NSData+SHA1.m in Sources */,
 				94E803BB1A9E0CAD00E99CBF /* AppDelegate.m in Sources */,
 				94E803BE1A9E0CAD00E99CBF /* CertBrowser.xcdatamodeld in Sources */,
-				94E803C11A9E0CAD00E99CBF /* ViewController.m in Sources */,
+				94E803C11A9E0CAD00E99CBF /* BrowserViewController.m in Sources */,
 				94E803B81A9E0CAC00E99CBF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

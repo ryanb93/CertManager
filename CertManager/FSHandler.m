@@ -77,6 +77,14 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
     return logs;
 }
 
++ (void)clearLogFile: (NSString*)fileName {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName];
+    if ([fileManager fileExistsAtPath:fullPath]){
+        [fileManager createFileAtPath:fullPath contents:nil attributes:nil];
+    }
+}
+
 /**
  *  Reads an array from a plist.
  *

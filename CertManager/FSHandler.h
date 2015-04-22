@@ -14,6 +14,7 @@
 
 + (void)writeToPlist: (NSString*)fileName withData:(id)data;
 + (void)writeToLogFile: (NSString*)fileName withLogInformation:(LogInformation *)info;
++ (void)clearLogFile: (NSString*)fileName;
 + (NSMutableArray *)readLogFile: (NSString *)fileName;
 + (NSMutableArray *)readArrayFromPlist: (NSString *)fileName;
 + (NSMutableDictionary *)readDictionaryFromPlist: (NSString *)fileName;

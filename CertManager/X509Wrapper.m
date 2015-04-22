@@ -48,6 +48,63 @@
     return sha1;
 }
 
++(NSDate *) CertificateGetExpiryDate:(SecCertificateRef) cert
+{
+    
+    NSData *certificateData                   = (__bridge NSData *) SecCertificateCopyData(cert);
+    const unsigned char *certificateDataBytes = (const unsigned char *)[certificateData bytes];
+    X509 *certificateX509                     = d2i_X509(NULL, &certificateDataBytes, [certificateData length]);
+    
+    NSDate *expiryDate = nil;
+    
+    if (certificateX509 != NULL) {
+        ASN1_TIME *certificateExpiryASN1 = X509_get_notAfter(certificateX509);
+        if (certificateExpiryASN1 != NULL) {
+            ASN1_GENERALIZEDTIME *certificateExpiryASN1Generalized = ASN1_TIME_to_generalizedtime(certificateExpiryASN1, NULL);
+            if (certificateExpiryASN1Generalized != NULL) {
+                unsigned char *certificateExpiryData = ASN1_STRING_data(certificateExpiryASN1Generalized);
+                
+                // ASN1 generalized times look like this: "20131114230046Z"
+                //                                format:  YYYYMMDDHHMMSS
+                //                               indices:  01234567890123
+                //                                                   1111
+                // There are other formats (e.g. specifying partial seconds or
+                // time zones) but this is good enough for our purposes since
+                // we only use the date and not the time.
+                //
+                // (Source: http://www.obj-sys.com/asn1tutorial/node14.html)
+                
+                NSString *expiryTimeStr = [NSString stringWithUTF8String:(char *)certificateExpiryData];
+                NSDateComponents *expiryDateComponents = [[NSDateComponents alloc] init];
+                
+                expiryDateComponents.year   = [[expiryTimeStr substringWithRange:NSMakeRange(0, 4)] intValue];
+                expiryDateComponents.month  = [[expiryTimeStr substringWithRange:NSMakeRange(4, 2)] intValue];
+                expiryDateComponents.day    = [[expiryTimeStr substringWithRange:NSMakeRange(6, 2)] intValue];
+                expiryDateComponents.hour   = [[expiryTimeStr substringWithRange:NSMakeRange(8, 2)] intValue];
+                expiryDateComponents.minute = [[expiryTimeStr substringWithRange:NSMakeRange(10, 2)] intValue];
+                expiryDateComponents.second = [[expiryTimeStr substringWithRange:NSMakeRange(12, 2)] intValue];
+                
+                NSCalendar *calendar = [NSCalendar currentCalendar];
+                expiryDate = [calendar dateFromComponents:expiryDateComponents];
+                
+            }
+        }
+    }
+    
+    return expiryDate;
+}
+
++(NSString *) CertificateGetType:(SecCertificateRef) cert {
+    
+    NSData *certificateData                   = (__bridge NSData *) SecCertificateCopyData(cert);
+    const unsigned char *certificateDataBytes = (const unsigned char *)[certificateData bytes];
+    X509 *certificateX509                     = d2i_X509(NULL, &certificateDataBytes, [certificateData length]);
+    
+    return [NSString stringWithFormat:@"%i", X509_certificate_type(certificateX509, nil)];
+    
+    
+    
+}
 
 
 @end
