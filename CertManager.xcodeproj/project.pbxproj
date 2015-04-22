@@ -61,20 +61,6 @@
 			remoteGlobalIDString = 946E2E7D1A1AD24C00FE227C;
 			remoteInfo = CertManager;
 		};
-		94E803E31A9E0CAE00E99CBF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 94E803DE1A9E0CAD00E99CBF /* CertBrowser.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 94E803B21A9E0CAC00E99CBF;
-			remoteInfo = CertBrowser;
-		};
-		94E803E51A9E0CAE00E99CBF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 94E803DE1A9E0CAD00E99CBF /* CertBrowser.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 94E803CE1A9E0CAD00E99CBF;
-			remoteInfo = CertBrowserTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -144,7 +130,6 @@
 		9492AE601A92475C00582A99 /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
 		9492AE631A92495A00582A99 /* blacklist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blacklist.plist; sourceTree = "<group>"; };
 		94D4AAA21A9B8F240049640A /* BulletinBoard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BulletinBoard.framework; path = ../../../../Developer/BulletinBoard.framework; sourceTree = "<group>"; };
-		94E803DE1A9E0CAD00E99CBF /* CertBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CertBrowser.xcodeproj; path = CertBrowser/CertBrowser.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,7 +221,6 @@
 		946E2E751A1AD24C00FE227C = {
 			isa = PBXGroup;
 			children = (
-				94E803DE1A9E0CAD00E99CBF /* CertBrowser.xcodeproj */,
 				9452E2021A94E2E100C8A737 /* CertHook */,
 				946E2E801A1AD24C00FE227C /* CertManager */,
 				946E2E9A1A1AD24C00FE227C /* CertManagerTests */,
@@ -355,15 +339,6 @@
 			name = Security;
 			sourceTree = "<group>";
 		};
-		94E803DF1A9E0CAD00E99CBF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				94E803E41A9E0CAE00E99CBF /* CertBrowser.app */,
-				94E803E61A9E0CAE00E99CBF /* CertBrowserTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -432,12 +407,6 @@
 			mainGroup = 946E2E751A1AD24C00FE227C;
 			productRefGroup = 946E2E7F1A1AD24C00FE227C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 94E803DF1A9E0CAD00E99CBF /* Products */;
-					ProjectRef = 94E803DE1A9E0CAD00E99CBF /* CertBrowser.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				946E2E7D1A1AD24C00FE227C /* CertManager */,
@@ -445,23 +414,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		94E803E41A9E0CAE00E99CBF /* CertBrowser.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = CertBrowser.app;
-			remoteRef = 94E803E31A9E0CAE00E99CBF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		94E803E61A9E0CAE00E99CBF /* CertBrowserTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CertBrowserTests.xctest;
-			remoteRef = 94E803E51A9E0CAE00E99CBF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		946E2E7C1A1AD24C00FE227C /* Resources */ = {
