@@ -35,7 +35,7 @@
     //Set the title of the navigation bar to use the trust store version.
     [[self navigationItem] setTitle:[NSString stringWithFormat:@"Version: %i", [_certStore trustStoreVersion]]];
     
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Trust Store" image:[UIImage imageNamed:@"world_times"] tag:0];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Trust Store" image:[UIImage imageNamed:@"side_drawers"] tag:0];
 
     
     //Stop selection on the table view.
