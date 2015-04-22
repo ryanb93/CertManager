@@ -21,6 +21,11 @@
 -(id)initWithCertificates:(NSMutableArray *)certs {
     if(self = [super init]) {
         _certificates = certs;
+        UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                    target:self
+                                                                                    action:@selector(closeView:)];
+        [self.navigationItem setTitle:@"Certificate Chain"];
+        [self.navigationItem setLeftBarButtonItem:leftButton];
     }
     return self;
 }
@@ -46,6 +51,9 @@
     return 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120.0f;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     CGFloat height = 30.0;
@@ -70,7 +78,6 @@
         label.transform = CGAffineTransformMakeRotation(M_PI_4);
         [view addSubview:label];
 
-
     }
     
     return view;
@@ -80,6 +87,7 @@
     
     //Create a cell, if the system has any reusable cells then use that. This reduces memory usage massively.
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"certificateCell"];
+    
     //If there were no reusable cells.
     if (nil == cell) {
         //Create a new cell.
@@ -90,20 +98,29 @@
 	//Set the cell text.
     SecCertificateRef certificate = (__bridge SecCertificateRef)(_certificates[[indexPath section]]);
     
-    UIImageView *certImage = (UIImageView *)[cell viewWithTag:10];
+    UIImageView *certImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 100, 100)];
+    [certImage setContentMode:UIViewContentModeScaleAspectFit];
     if([indexPath section] == 0) {
     	certImage.image = [UIImage imageNamed:@"RootCert"];
     }
+    else {
+        certImage.image = [UIImage imageNamed:@"StandardCert"];
+    }
 
-    UILabel *certNameLabel = (UILabel *)[cell viewWithTag:11];
+    UILabel *certNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 10, 300, 40)];
+    [certNameLabel setFont:[UIFont boldSystemFontOfSize:16]];
     certNameLabel.text = (__bridge NSString *)(SecCertificateCopySubjectSummary(certificate));
     
-    UILabel *issuerLabel = (UILabel *)[cell viewWithTag:12];
+    UILabel *issuerLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 50, 300, 40)];
     issuerLabel.text = [NSString stringWithFormat:@"Issued by: %@", [X509Wrapper CertificateGetIssuerName:certificate] ];
     
-    UILabel *expireLabel = (UILabel *)[cell viewWithTag:13];
+    UILabel *expireLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 70, 300, 40)];
     [expireLabel setText:[NSString stringWithFormat:@"Expires: %@", [X509Wrapper CertificateGetExpiryDate:certificate]]];
 	
+    [cell addSubview:certImage];
+    [cell addSubview:certNameLabel];
+    [cell addSubview:issuerLabel];
+    [cell addSubview:expireLabel];
     
     return cell;
 }
