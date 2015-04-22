@@ -126,8 +126,6 @@ static void updateRootsNotification(CFNotificationCenterRef center, void *observ
 
 #pragma mark - SecureTransport hooks
 
-static NSString* BLOCKED_PEER = NULL;
-
 /**
  *  A reference to the original SSLHandshake method.
  *
@@ -137,6 +135,9 @@ static NSString* BLOCKED_PEER = NULL;
  */
 static OSStatus (* original_SSLHandshake)(SSLContextRef context);
 
+
+static NSString* BLOCKED_PEER = NULL;
+
 /**
  *  The override SSLHandshake method.
  *
@@ -145,44 +146,36 @@ static OSStatus (* original_SSLHandshake)(SSLContextRef context);
  *  @return SSL result code.
  */
 static OSStatus hooked_SSLHandshake(SSLContextRef context) {
-
-    //Create an empty trust reference object.
-	SecTrustRef trustRef = NULL;
-    
-    //Get the trust object based on the SSL context.
+        
+	SecTrustRef trustRef = NULL;    
 	SSLCopyPeerTrust(context, &trustRef);
-    
-    
     size_t len;
     SSLGetPeerDomainNameLength(context, &len);
-
     char peerName[len];
     SSLGetPeerDomainName(context, peerName, &len);
 
     NSString *peer = [[NSString alloc] initWithCString:peerName encoding:NSUTF8StringEncoding];
-
     
-    if(BLOCKED_PEER) {
-    	if([peer isEqualToString:BLOCKED_PEER]) {
-        	//We just blocked this peer, fail again.
-        	return errSSLUnknownRootCert;
-    	}
-    }
+     if(BLOCKED_PEER) {
+         if([peer isEqualToString:BLOCKED_PEER]) {
+             //We just blocked this peer, fail again.
+             return errSSLClosedAbort;
+         }
+     }
     
     CFIndex count = SecTrustGetCertificateCount(trustRef);
+
+     SecCertificateRef blockedCert = NULL;
 
 	//For each certificate in the certificate chain.
 	for (CFIndex i = 0; i < count; i++)
 	{
 		//Get a reference to the certificate.
 		SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);
-        
 		//Convert the certificate to a data object.
 		CFDataRef certData = SecCertificateCopyData(certRef);
-        
 		//Convert the CFData to NSData and get the SHA1.
 		NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(certData) length:CFDataGetLength(certData)] sha1Digest];
-        
 		//Convert the SHA1 data object to a hex String.
 		NSString *sha1 = [[out hexStringValue] lowercaseString];
         
@@ -193,26 +186,31 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 			certificateWasBlocked(process, summary);
             BLOCKED_PEER = peer;
             //Log this block and write to disk.
-            LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:BLOCKED_PEER certficateName:summary time:[NSDate date]];
+            LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:peer certficateName:summary time:[NSDate date]];
             [FSHandler writeToLogFile:LOG_FILE withLogInformation:info];
             //Return the failure.
-			return errSSLUnknownRootCert;
+            return errSSLClosedAbort;
 		}
         else if([untrustedCerts containsObject:sha1]) {
-            NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
-            NSString *process = [[NSProcessInfo processInfo] processName];
-            certificateWasBlocked(process, summary);
-            BLOCKED_PEER = peer;
-            //Log this block and write to disk.
-            LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:BLOCKED_PEER certficateName:summary time:[NSDate date]];
-            [FSHandler writeToLogFile:LOG_FILE withLogInformation:info];
-            //Return the failure.
-            return errSSLPeerHandshakeFail;
+             blockedCert = SecTrustGetCertificateAtIndex(trustRef, i);
         }
         
+        if(i == count - 1) {
+         	if(blockedCert != NULL) {
+             NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(blockedCert);
+             NSString *process = [[NSProcessInfo processInfo] processName];
+             certificateWasBlocked(process, summary);
+             BLOCKED_PEER = peer;
+             //Log this block and write to disk.
+             LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:peer certficateName:summary time:[NSDate date]];
+             [FSHandler writeToLogFile:LOG_FILE withLogInformation:info];
+             //Return the failure.
+             return errSSLClosedAbort;
+         }
+         }
+        
 	}
-    
-    BLOCKED_PEER = NULL;
+     BLOCKED_PEER = NULL;
 
 	return original_SSLHandshake(context);
 }

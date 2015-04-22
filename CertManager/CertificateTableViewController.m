@@ -138,7 +138,7 @@
                                                    
                                                    SecCertificateRef certificate = (__bridge SecCertificateRef)([_certificates objectAtIndex:[indexPath section]]);
                                                    
-                                                   NSString *name = [X509Wrapper CertificateGetIssuerName:certificate];
+                                                   NSString *name = (__bridge NSString *)(SecCertificateCopySubjectSummary(certificate));
                                                    NSString *sha1 = [X509Wrapper CertificateGetSHA1:certificate];
                                                    
                                                    NSMutableDictionary *blockedCerts = [FSHandler readDictionaryFromPlist:@"CertManagerUntrustedCerts"];
