@@ -10,16 +10,16 @@
 
 @interface BrowserViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDataDelegate>
 
-@property (nonatomic, retain) UIWebView       * webView;
-@property (nonatomic, retain) UIToolbar       * toolbar;
-@property (nonatomic, retain) UIBarButtonItem * back;
-@property (nonatomic, retain) UIBarButtonItem * forward;
-@property (nonatomic, retain) UIBarButtonItem * refresh;
-@property (nonatomic, retain) UIBarButtonItem * stop;
+@property (strong, atomic) UIWebView       * webView;
+@property (strong, atomic) UIToolbar       * toolbar;
+@property (strong, atomic) UIBarButtonItem * back;
+@property (strong, atomic) UIBarButtonItem * forward;
+@property (strong, atomic) UIBarButtonItem * refresh;
+@property (strong, atomic) UIBarButtonItem * stop;
 
-@property (strong, nonatomic) UILabel     *pageTitle;
-@property (strong, nonatomic) UITextField *addressField;
-@property (strong, nonatomic) UIButton    *lockButton;
+@property (strong, atomic) UILabel     *pageTitle;
+@property (strong, atomic) UITextField *addressField;
+@property (strong, atomic) UIButton    *lockButton;
 
 - (void)updateAddress:(NSURLRequest*)request;
 - (void)informError:(NSError*)error;

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "CertificateTableViewController.h"
 #import "X509Wrapper.h"
+#import "FSHandler.h"
 #import "NSString+FontAwesome.h"
 
 @interface CertificateTableViewController ()
@@ -123,6 +124,39 @@
     [cell addSubview:expireLabel];
     
     return cell;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"Block Certificate"
+                                                                  message:@"Blocking this certificate will cause all connections accross the system to fail when connecting to a server with this certificate in its chain of trust. Are you sure you want to do this?"
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *block = [UIAlertAction actionWithTitle:@"Block"
+                                                 style:UIAlertActionStyleDestructive
+                                               handler:^(UIAlertAction * action) {
+                                                   
+                                                   SecCertificateRef certificate = (__bridge SecCertificateRef)([_certificates objectAtIndex:[indexPath section]]);
+                                                   
+                                                   NSString *name = [X509Wrapper CertificateGetIssuerName:certificate];
+                                                   NSString *sha1 = [X509Wrapper CertificateGetSHA1:certificate];
+                                                   
+                                                   NSMutableDictionary *blockedCerts = [FSHandler readDictionaryFromPlist:@"CertManagerUntrustedCerts"];
+                                                   
+                                                   if(![blockedCerts objectForKey:sha1]) {
+                                                       [blockedCerts setValue:name forKey:sha1];
+                                                   }
+                                                   [FSHandler writeToPlist:@"CertManagerUntrustedCerts" withData:blockedCerts];
+                                               }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    
+    [alert addAction:block];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 @end

@@ -32,7 +32,8 @@ static NSString* const LOG_FILE      			  = @"uk.ac.surrey.rb00166.CertManager.l
 static NSString* const MESSAGING_CENTER     	  = @"uk.ac.surrey.rb00166.CertManager";
 static NSString* const BLOCKED_NOTIFICATION       = @"certificateWasBlocked";
 
-static NSMutableArray *untrustedRoots;
+static NSArray *untrustedRoots;
+static NSArray *untrustedCerts;
 
 #pragma mark - Callback Methods
 
@@ -61,7 +62,7 @@ static void certificateWasBlocked(NSString *process, NSString *summary) {
 static void updateRoots() {
     //Load the plist into an array.
     untrustedRoots = [[NSMutableArray alloc] initWithContentsOfFile:UNTRUSTED_ROOTS_PLIST];
-    [untrustedRoots addObjectsFromArray:[[[NSDictionary alloc] initWithContentsOfFile:UNTRUSTED_CERTS_PLIST] allKeys]];
+    untrustedCerts = [[NSMutableArray alloc] initWithArray:[[[NSDictionary alloc] initWithContentsOfFile:UNTRUSTED_CERTS_PLIST] allKeys]];
 }
 
 /**
@@ -195,8 +196,20 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
             LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:BLOCKED_PEER certficateName:summary time:[NSDate date]];
             [FSHandler writeToLogFile:LOG_FILE withLogInformation:info];
             //Return the failure.
-			return errSSLClosedAbort;
+			return errSSLUnknownRootCert;
 		}
+        else if([untrustedCerts containsObject:sha1]) {
+            NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
+            NSString *process = [[NSProcessInfo processInfo] processName];
+            certificateWasBlocked(process, summary);
+            BLOCKED_PEER = peer;
+            //Log this block and write to disk.
+            LogInformation *info = [[LogInformation alloc] initWithApplication:process peer:BLOCKED_PEER certficateName:summary time:[NSDate date]];
+            [FSHandler writeToLogFile:LOG_FILE withLogInformation:info];
+            //Return the failure.
+            return errSSLPeerHandshakeFail;
+        }
+        
 	}
     
     BLOCKED_PEER = NULL;

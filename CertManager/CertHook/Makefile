@@ -8,6 +8,6 @@ CertHook_FILES = CertHook.xm ../NSData+SHA1.m ../LogInformation.m ../FSHandler.m
 CertHook_FRAMEWORKS = Security, UIKit
 CertHook_PRIVATE_FRAMEWORKS = BulletinBoard
 CertHook_LIBRARIES = substrate rocketbootstrap
-
+SHARED_CFLAGS = -fobjc-arc
 
 include ../theos/makefiles/tweak.mk

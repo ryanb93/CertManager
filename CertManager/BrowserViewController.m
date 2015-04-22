@@ -55,7 +55,6 @@
     [addressField setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [addressField setBorderStyle:UITextBorderStyleRoundedRect];
     [addressField setClearButtonMode:UITextFieldViewModeAlways];
-    [addressField setClearsOnBeginEditing:YES];
     [addressField setFont:[UIFont systemFontOfSize:17.0f]];
     [addressField setKeyboardType:UIKeyboardTypeURL];
     
@@ -120,7 +119,6 @@
     
     self.addressField = addressField;
     
-
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://google.com"]];
 	[self.webView loadRequest:urlRequest];
 }
@@ -135,11 +133,13 @@
 
 - (void)lockIconUseSSL:(BOOL)ssl {
     if(ssl) {
-        [_lockButton setTitle:[NSString fontAwesomeIconStringForEnum:FALock] forState:UIControlStateNormal];
+        NSString *lock = [[NSString alloc] initWithString:[NSString fontAwesomeIconStringForEnum:FALock]];
+        [_lockButton setTitle:lock forState:UIControlStateNormal];
         [_lockButton setTintColor:[UIColor colorWithRed:0.297 green:0.776 blue:0.302 alpha:1.000]];
     }
     else {
-        [_lockButton setTitle:[NSString fontAwesomeIconStringForEnum:FAUnlockAlt] forState:UIControlStateNormal];
+        NSString *unlock = [[NSString alloc] initWithString:[NSString fontAwesomeIconStringForEnum:FAUnlockAlt]];
+        [_lockButton setTitle:unlock forState:UIControlStateNormal];
         [_lockButton setTintColor:[UIColor colorWithRed:1.000 green:0.100 blue:0.169 alpha:1.000]];
     }
 }
@@ -221,9 +221,11 @@
 
 #pragma mark NSURLConnectionDataDelegate
 
+
 -(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     
-    _certificatesForRequest = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *certs = [[NSMutableArray alloc] init];
     
     SecTrustRef trustRef = challenge.protectionSpace.serverTrust;
     
@@ -234,8 +236,10 @@
     {
         //Get a reference to the certificate.
         SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);
-        [_certificatesForRequest addObject:(__bridge id)certRef];
+        [certs addObject:(__bridge id)certRef];
     }
+    
+    _certificatesForRequest = certs;
     
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }

@@ -45,9 +45,6 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
  */
 - (void)viewDidLoad
 {
-    //Call to super.
-    [super viewDidLoad];
-    
     //Stop selection on the table view.
     [self.tableView setAllowsSelection:NO];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
@@ -57,7 +54,13 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
+    [super viewDidLoad];
     
+}
+
+- (void) viewDidAppear:(BOOL) animated {
+    [self reloadData];
+    [super viewDidAppear:animated];
 }
 
 
@@ -68,7 +71,7 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Block"
-                                                 style:UIAlertActionStyleDefault
+                                                 style:UIAlertActionStyleDestructive
                                                handler:^(UIAlertAction * action) {
                                                    NSString *name = [[alert.textFields objectAtIndex:0] text];
                                                    NSString *sha1 = [[[alert.textFields objectAtIndex:1] text] lowercaseString];

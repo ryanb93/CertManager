@@ -42,9 +42,15 @@
     return this;
 }
 
+- (void) viewDidAppear:(BOOL) animated {
+    [self reloadData];
+    [super viewDidAppear:animated];
+}
+
 - (void)reloadData {
     _logs = [FSHandler readLogFile:@"uk.ac.surrey.rb00166.CertManager.log"];
     [self.navigationItem.rightBarButtonItem setEnabled:([_logs count] > 0)];
+    [self.tableView reloadData];
 }
 
 - (void)clearLogs {
