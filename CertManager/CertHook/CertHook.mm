@@ -113,7 +113,7 @@ static void updateRootsNotification(CFNotificationCenterRef center, void *observ
         
 		//Create a bulletin request.
 		BBBulletinRequest *bulletin      = [[BBBulletinRequest alloc] init];
-        bulletin.sectionID 				 =  @"com.apple.Preferences";
+        bulletin.sectionID 				 =  @"uk.ac.surrey.rb00166.CertManager";
         bulletin.title                   =  @"Certificate Blocked";
     	bulletin.message                 = [NSString stringWithFormat:@"%@ attempted to make a connection using certificate: %@", process, summary];
         bulletin.date                    = [NSDate date];
