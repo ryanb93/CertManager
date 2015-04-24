@@ -95,8 +95,6 @@
 		9449B8E31A93A7450075CD97 /* untrusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = untrusted.png; sourceTree = "<group>"; };
 		9449B8E41A93A7450075CD97 /* untrusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@2x.png"; sourceTree = "<group>"; };
 		9449B8E51A93A7450075CD97 /* untrusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@3x.png"; sourceTree = "<group>"; };
-		9452E2061A94E34900C8A737 /* CertHook.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CertHook.mm; sourceTree = "<group>"; };
-		9452E2071A94E34900C8A737 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		946E2E7E1A1AD24C00FE227C /* CertManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E821A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E831A1AD24C00FE227C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -213,20 +211,9 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		9452E2021A94E2E100C8A737 /* CertHook */ = {
-			isa = PBXGroup;
-			children = (
-				9452E2061A94E34900C8A737 /* CertHook.mm */,
-				9452E2071A94E34900C8A737 /* Makefile */,
-			);
-			name = CertHook;
-			path = CertManager/CertHook;
-			sourceTree = "<group>";
-		};
 		946E2E751A1AD24C00FE227C = {
 			isa = PBXGroup;
 			children = (
-				9452E2021A94E2E100C8A737 /* CertHook */,
 				946E2E801A1AD24C00FE227C /* CertManager */,
 				946E2E9A1A1AD24C00FE227C /* CertManagerTests */,
 				946E2E7F1A1AD24C00FE227C /* Products */,
