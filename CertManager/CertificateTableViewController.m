@@ -7,13 +7,13 @@
 //
 #import <Foundation/Foundation.h>
 #import "CertificateTableViewController.h"
-#import "X509Wrapper.h"
-#import "FSHandler.h"
+#import "CertDataStore.h"
 #import "NSString+FontAwesome.h"
 
 @interface CertificateTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *certificates;
+@property (strong, nonatomic) CertDataStore *certStore;
 
 @end
 
@@ -22,6 +22,8 @@
 -(id)initWithCertificates:(NSMutableArray *)certs {
     if(self = [super init]) {
         _certificates = certs;
+        _certStore = [[CertDataStore alloc] init];
+
         UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                     target:self
                                                                                     action:@selector(closeView:)];
@@ -137,16 +139,7 @@
                                                handler:^(UIAlertAction * action) {
                                                    
                                                    SecCertificateRef certificate = (__bridge SecCertificateRef)([_certificates objectAtIndex:[indexPath section]]);
-                                                   
-                                                   NSString *name = (__bridge NSString *)(SecCertificateCopySubjectSummary(certificate));
-                                                   NSString *sha1 = [X509Wrapper CertificateGetSHA1:certificate];
-                                                   
-                                                   NSMutableDictionary *blockedCerts = [FSHandler readDictionaryFromPlist:@"CertManagerUntrustedCerts"];
-                                                   
-                                                   if(![blockedCerts objectForKey:sha1]) {
-                                                       [blockedCerts setValue:name forKey:sha1];
-                                                   }
-                                                   [FSHandler writeToPlist:@"CertManagerUntrustedCerts" withData:blockedCerts];
+                                                   [_certStore untrustNormalCertificate:certificate];
                                                }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"

@@ -13,8 +13,6 @@
 
 @interface BrowserViewController ()
 
-@property (nonatomic) BOOL validCertificates;
-@property (strong, nonatomic) NSURLRequest* failedRequest;
 @property (strong, nonatomic) NSMutableArray* certificatesForRequest;
 
 @end
@@ -144,12 +142,6 @@
     }
 }
 
-- (void)updateTitle:(UIWebView*)aWebView
-{
-    NSString* pageTitle = [aWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.pageTitle.text = pageTitle;
-}
-
 - (void)loadRequestFromAddressField:(id)addressField
 {
     NSString *urlString = [addressField text];
@@ -172,20 +164,13 @@
     self.stop.enabled = self.webView.loading;
 }
 
-- (void)updateAddress:(NSURLRequest*)request
-{
-    NSURL* url = [request mainDocumentURL];
-    NSString* absoluteString = [url absoluteString];
-    self.addressField.text = absoluteString;
-}
-
-- (void)informError:(NSError *)error {
+- (void)showUserError:(NSError *)error {
 
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:[error localizedDescription]
                           message:[error localizedRecoverySuggestion]
                           delegate:nil
-                          cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+                          cancelButtonTitle:@"Cancel"
                           otherButtonTitles:nil];
     
     [alert show];
@@ -207,8 +192,7 @@
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self updateButtons];
-    [self updateTitle:webView];
-    [self updateAddress:[webView request]];
+    [self.addressField setText: [[webView.request mainDocumentURL] absoluteString]];
     [self lockIconUseSSL:[webView.request.URL.scheme isEqualToString:@"https"]];
 }
 
@@ -216,7 +200,7 @@
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self updateButtons];
-    [self informError:error];
+    [self showUserError:error];
 }
 
 #pragma mark NSURLConnectionDataDelegate

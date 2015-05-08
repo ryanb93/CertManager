@@ -17,11 +17,10 @@
 @property (strong, atomic) UIBarButtonItem * refresh;
 @property (strong, atomic) UIBarButtonItem * stop;
 
-@property (strong, atomic) UILabel     *pageTitle;
 @property (strong, atomic) UITextField *addressField;
 @property (strong, atomic) UIButton    *lockButton;
 
-- (void)updateAddress:(NSURLRequest*)request;
-- (void)informError:(NSError*)error;
+- (void)showUserError:(NSError*)error;
+
 @end
 

@@ -24,6 +24,7 @@
 
 //The name of the plist to read from.
 static NSString * const UNTRUSTED_ROOTS_PLIST = @"CertManagerUntrustedRoots";
+static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
 
 /**
  *  Init method for the CertDataStore. Loads the root certificates using the Security framework.
@@ -172,6 +173,18 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
 
 -(void)reloadUntrustedRootCertificates {
     _untrustedRoots = [FSHandler readArrayFromPlist:UNTRUSTED_ROOTS_PLIST];
+}
+
+- (void)untrustNormalCertificate:(SecCertificateRef) cert {
+    
+    NSString *name = (__bridge NSString *)(SecCertificateCopySubjectSummary(cert));
+    NSString *sha1 = [X509Wrapper CertificateGetSHA1:cert];
+    NSMutableDictionary *blockedCerts = [FSHandler readDictionaryFromPlist:UNTRUSTED_CERTS_PLIST];
+    
+    if(![blockedCerts objectForKey:sha1]) {
+        [blockedCerts setValue:name forKey:sha1];
+    }
+    [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:blockedCerts];
 }
 
 

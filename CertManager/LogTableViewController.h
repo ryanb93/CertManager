@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LogTableViewController : UITableViewController
+@interface LogTableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 
 @end

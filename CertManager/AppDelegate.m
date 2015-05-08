@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "TrustStoreViewController.h"
+#import "TrustStoreTableViewController.h"
 #import "ManualTableViewController.h"
 #import "LogTableViewController.h"
 #import "BrowserViewController.h"
@@ -20,7 +20,7 @@
 
     
     //Create an instance of our table view controller.
-    TrustStoreViewController *tableViewController = [[TrustStoreViewController alloc] init];
+    TrustStoreTableViewController *tableViewController = [[TrustStoreTableViewController alloc] init];
     
     //Create an instance of our blocked intemediatories
     ManualTableViewController *blockedController = [[ManualTableViewController alloc] init];

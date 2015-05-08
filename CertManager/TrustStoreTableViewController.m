@@ -5,17 +5,17 @@
 //  Created by Ryan Burke on 16/11/2014.
 //  Copyright (c) 2014 Ryan Burke. All rights reserved.
 //
-#import "TrustStoreViewController.h"
+#import "TrustStoreTableViewController.h"
 
 #import "TableCellSwitch.h"
 #import "CertDataStore.h"
 
-@interface TrustStoreViewController ()
+@interface TrustStoreTableViewController ()
 	@property (strong, atomic) CertDataStore * certStore;
 	@property (strong, atomic) NSArray * titles;
 @end
 
-@implementation TrustStoreViewController
+@implementation TrustStoreTableViewController
 
 #pragma mark - TableViewController
 
