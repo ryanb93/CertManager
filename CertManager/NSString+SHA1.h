@@ -11,6 +11,6 @@
 
 @interface NSString(SHA1)
 
-- (BOOL) isSHA1;
+@property (NS_NONATOMIC_IOSONLY, getter=isSHA1, readonly) BOOL SHA1;
 
 @end

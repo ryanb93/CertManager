@@ -74,7 +74,7 @@
                 //
                 // (Source: http://www.obj-sys.com/asn1tutorial/node14.html)
                 
-                NSString *expiryTimeStr = [NSString stringWithUTF8String:(char *)certificateExpiryData];
+                NSString *expiryTimeStr = @((char *)certificateExpiryData);
                 NSDateComponents *expiryDateComponents = [[NSDateComponents alloc] init];
                 
                 expiryDateComponents.year   = [[expiryTimeStr substringWithRange:NSMakeRange(0, 4)] intValue];

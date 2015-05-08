@@ -10,8 +10,7 @@
 
 @interface NSData(SHA1)
 
-- (NSData *)sha1Digest;
-- (NSString *)hexColonSeperatedStringValueWithCapitals:(BOOL)capitalize;
-- (NSString *)hexStringValue;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSData *sha1Digest;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *hexStringValue;
 
 @end

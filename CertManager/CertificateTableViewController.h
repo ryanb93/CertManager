@@ -11,6 +11,6 @@
 
 @property (strong, nonatomic) UIButton *backButton;
 
--(id)initWithCertificates:(NSMutableArray *)certs;
+-(instancetype)initWithCertificates:(NSMutableArray *)certs;
 -(void)closeView:(id)sender;
 @end

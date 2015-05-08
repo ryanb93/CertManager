@@ -31,7 +31,7 @@
     
     //Create tab controller and add navigation views.
     UITabBarController *tabViewController = [[UITabBarController alloc] init];
-    [tabViewController setViewControllers:[NSArray arrayWithObjects:navController, blockedNavController, logNavController, browserNavController, nil]];
+    [tabViewController setViewControllers:@[navController, blockedNavController, logNavController, browserNavController]];
         
     //Create the window object with the screen bounds.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

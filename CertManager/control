@@ -1,4 +1,4 @@
-Package: ac.uk.surrey.rb00166.CertManager
+Package: uk.ac.surrey.rb00166.CertManager
 Name: CertManager
 Depends: mobilesubstrate (>= 0.9.5001), com.rpetrich.rocketbootstrap (>= 1.0.2), firmware (>= 8.0)
 Version: 0.1.0

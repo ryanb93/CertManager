@@ -22,7 +22,7 @@
 #pragma mark - ManualTableViewController
 
 static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
--(id) init {
+-(instancetype) init {
     
     id this = [super init];
     
@@ -73,9 +73,9 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Block"
                                                  style:UIAlertActionStyleDestructive
                                                handler:^(UIAlertAction * action) {
-                                                   NSString *name = [[alert.textFields objectAtIndex:0] text];
-                                                   NSString *sha1 = [[[alert.textFields objectAtIndex:1] text] lowercaseString];
-                                                   if(![_blockedCerts objectForKey:sha1]) {
+                                                   NSString *name = [(alert.textFields)[0] text];
+                                                   NSString *sha1 = [[(alert.textFields)[1] text] lowercaseString];
+                                                   if(!_blockedCerts[sha1]) {
                                                        [_blockedCerts setValue:name forKey:sha1];
                                                    }
                                                    [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:_blockedCerts];
@@ -108,7 +108,7 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
         resp = [resp nextResponder];
     }
     UIAlertController *alert = (UIAlertController *) resp;
-	[[alert.actions objectAtIndex:0] setEnabled:[tf.text isSHA1]];
+	[(alert.actions)[0] setEnabled:[tf.text isSHA1]];
 }
 
 
@@ -157,7 +157,7 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
         //Add the alert actions to the controller. This adds the buttons automatically.
         [alert addAction: [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive
                                                   handler:^(UIAlertAction * action) {
-                                                      NSString *sha1 = [_blockedCertSHA1s objectAtIndex:[indexPath row]];
+                                                      NSString *sha1 = _blockedCertSHA1s[[indexPath row]];
                                                       [_blockedCerts removeObjectForKey:sha1];
                                                       [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:_blockedCerts];
                                                       [self reloadData];
@@ -211,7 +211,7 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
     }
     
 
-    NSString *sha1 = [_blockedCertSHA1s objectAtIndex:[indexPath row]];
+    NSString *sha1 = _blockedCertSHA1s[[indexPath row]];
     NSString *name = [_blockedCerts valueForKey:sha1];
     
     //Set the cell text.

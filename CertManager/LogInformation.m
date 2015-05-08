@@ -10,7 +10,7 @@
 
 @implementation LogInformation
 
-- (id)initWithApplication:(NSString *)app peer:(NSString *)peer certficateName:(NSString *)cert time:(NSDate *)time {
+- (instancetype)initWithApplication:(NSString *)app peer:(NSString *)peer certficateName:(NSString *)cert time:(NSDate *)time {
     self = [super init];
     if (self) {
         _application = [app copy];

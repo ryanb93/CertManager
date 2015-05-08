@@ -181,7 +181,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
     NSString *sha1 = [X509Wrapper sha1ForCertificate:cert];
     NSMutableDictionary *blockedCerts = [FSHandler readDictionaryFromPlist:UNTRUSTED_CERTS_PLIST];
     
-    if(![blockedCerts objectForKey:sha1]) {
+    if(!blockedCerts[sha1]) {
         [blockedCerts setValue:name forKey:sha1];
     }
     [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:blockedCerts];

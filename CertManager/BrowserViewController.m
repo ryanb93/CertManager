@@ -19,7 +19,7 @@
 
 @implementation BrowserViewController
 
--(id) init {
+-(instancetype) init {
     
     id this = [super init];
     
@@ -66,9 +66,7 @@
     [self.view addSubview:web];
     
     
-    NSDictionary *fontAwesome = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [UIFont fontWithName:kFontAwesomeFamilyName size:24.0], NSFontAttributeName,
-                                 nil];
+    NSDictionary *fontAwesome = @{NSFontAttributeName: [UIFont fontWithName:kFontAwesomeFamilyName size:24.0]};
     
     UIBarButtonItem *flexiableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
@@ -91,7 +89,7 @@
     
 
     
-    NSArray *items = [NSArray arrayWithObjects:_back, flexiableItem, _stop, flexiableItem, _refresh, flexiableItem, _forward, nil];
+    NSArray *items = @[_back, flexiableItem, _stop, flexiableItem, _refresh, flexiableItem, _forward];
     self.toolbarItems = items;
     
     //Fire this event when we finish editing.

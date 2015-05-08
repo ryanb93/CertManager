@@ -43,7 +43,6 @@
 		948CC54F1AE7BD2A00235FDE /* side_drawers@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 948CC54E1AE7BD2A00235FDE /* side_drawers@3x.png */; };
 		948CC5511AE7BD5300235FDE /* side_drawers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 948CC5501AE7BD5300235FDE /* side_drawers@2x.png */; };
 		948CC5531AE7BD5700235FDE /* side_drawers.png in Resources */ = {isa = PBXBuildFile; fileRef = 948CC5521AE7BD5700235FDE /* side_drawers.png */; };
-		9492AE431A92216F00582A99 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE421A92216F00582A99 /* Makefile */; };
 		9492AE451A92217B00582A99 /* control in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE441A92217B00582A99 /* control */; };
 		9492AE481A9222C500582A99 /* TrustStoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9492AE471A9222C500582A99 /* TrustStoreTableViewController.m */; };
 		9492AE551A92243500582A99 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9492AE4D1A92243500582A99 /* icon.png */; };
@@ -466,7 +465,6 @@
 				946E2E841A1AD24C00FE227C /* main.m in Sources */,
 				94173D931AE668A8006DA8E8 /* ManualTableViewController.m in Sources */,
 				9492AE481A9222C500582A99 /* TrustStoreTableViewController.m in Sources */,
-				9492AE431A92216F00582A99 /* Makefile in Sources */,
 				94153E741A924C5B0068BC4B /* CertDataStore.m in Sources */,
 				94173DA41AE67835006DA8E8 /* NSString+SHA1.m in Sources */,
 				948CC5421AE7A1DE00235FDE /* CertificateTableViewController.m in Sources */,
@@ -531,7 +529,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos8.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -566,7 +564,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos8.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -600,7 +598,7 @@
 					"$(PROJECT_DIR)/CertManager/theos/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos8.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -632,7 +630,7 @@
 					"$(PROJECT_DIR)/CertManager/theos/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos8.1;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

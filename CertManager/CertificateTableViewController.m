@@ -19,7 +19,7 @@
 
 @implementation CertificateTableViewController
 
--(id)initWithCertificates:(NSMutableArray *)certs {
+-(instancetype)initWithCertificates:(NSMutableArray *)certs {
     if(self = [super init]) {
         _certificates = certs;
         _certStore = [[CertDataStore alloc] init];
@@ -138,7 +138,7 @@
                                                  style:UIAlertActionStyleDestructive
                                                handler:^(UIAlertAction * action) {
                                                    
-                                                   SecCertificateRef certificate = (__bridge SecCertificateRef)([_certificates objectAtIndex:[indexPath section]]);
+                                                   SecCertificateRef certificate = (__bridge SecCertificateRef)(_certificates[[indexPath section]]);
                                                    [_certStore untrustNormalCertificate:certificate];
                                                }];
     

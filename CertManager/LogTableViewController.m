@@ -17,7 +17,7 @@
 
 @implementation LogTableViewController
 
--(id) init {
+-(instancetype) init {
     
     id this = [super init];
     
@@ -104,7 +104,7 @@
     }
     
     //Set the cell text.
-    LogInformation *log = (LogInformation *)[_logs objectAtIndex:[indexPath row]];
+    LogInformation *log = (LogInformation *)_logs[[indexPath row]];
     [cell.textLabel setText: [NSString stringWithFormat:@"%@ - %@",[log certificateName], [log peerName]]];
     [cell.detailTextLabel setText:[log application]];
     
