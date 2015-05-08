@@ -5,6 +5,7 @@
 //  Created by Ryan Burke on 13/11/2014.
 //  Copyright (c) 2014 Ryan Burke. All rights reserved.
 //
+//  Adapted from source: https://stackoverflow.com/questions/8850524/seccertificateref-how-to-get-the-certificate-information
 
 #import "X509Wrapper.h"
 
@@ -40,14 +41,6 @@
     return issuer;
 }
 
-+(NSString *) sha1ForCertificate:(SecCertificateRef)cert {
-    CFDataRef data = SecCertificateCopyData(cert);
-    NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(data) length:CFDataGetLength(data)] sha1Digest];
-    CFRelease(data);
-    NSString *sha1 = [out hexStringValue];
-    return sha1;
-}
-
 +(NSDate *) expiryDateForCertificate:(SecCertificateRef) cert
 {
     
@@ -63,17 +56,6 @@
             ASN1_GENERALIZEDTIME *certificateExpiryASN1Generalized = ASN1_TIME_to_generalizedtime(certificateExpiryASN1, NULL);
             if (certificateExpiryASN1Generalized != NULL) {
                 unsigned char *certificateExpiryData = ASN1_STRING_data(certificateExpiryASN1Generalized);
-                
-                // ASN1 generalized times look like this: "20131114230046Z"
-                //                                format:  YYYYMMDDHHMMSS
-                //                               indices:  01234567890123
-                //                                                   1111
-                // There are other formats (e.g. specifying partial seconds or
-                // time zones) but this is good enough for our purposes since
-                // we only use the date and not the time.
-                //
-                // (Source: http://www.obj-sys.com/asn1tutorial/node14.html)
-                
                 NSString *expiryTimeStr = @((char *)certificateExpiryData);
                 NSDateComponents *expiryDateComponents = [[NSDateComponents alloc] init];
                 
@@ -92,6 +74,14 @@
     }
     
     return expiryDate;
+}
+
++(NSString *) sha1ForCertificate:(SecCertificateRef)cert {
+    CFDataRef data = SecCertificateCopyData(cert);
+    NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(data) length:CFDataGetLength(data)] sha1Digest];
+    CFRelease(data);
+    NSString *sha1 = [out hexStringValue];
+    return sha1;
 }
 
 @end
