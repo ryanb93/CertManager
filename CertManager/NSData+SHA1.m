@@ -31,19 +31,4 @@
     return value;
 }
 
-- (NSString *)hexColonSeperatedStringValueWithCapitals:(BOOL)capitalize {
-    NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:([self length] * 3)];
-    
-    const unsigned char *dataBuffer = [self bytes];
-    NSString * format = capitalize ? @"%02X" : @"%02x";
-    for (int i = 0; i < [self length]; ++i)
-    {
-        if (i)
-            [stringBuffer appendString:@":"];
-        [stringBuffer appendFormat:format, (unsigned long)dataBuffer[i]];
-    }
-    
-    return [stringBuffer copy];
-}
-
 @end

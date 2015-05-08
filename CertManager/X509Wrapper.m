@@ -10,7 +10,7 @@
 
 @implementation X509Wrapper
 
-+(NSString *) CertificateGetIssuerName:(SecCertificateRef) cert
++(NSString *) issuerForCertificate:(SecCertificateRef) cert
 {
     NSData *certificateData                   = (__bridge NSData *) SecCertificateCopyData(cert);
     const unsigned char *certificateDataBytes = (const unsigned char *)[certificateData bytes];
@@ -40,7 +40,7 @@
     return issuer;
 }
 
-+(NSString *) CertificateGetSHA1:(SecCertificateRef)cert {
++(NSString *) sha1ForCertificate:(SecCertificateRef)cert {
     CFDataRef data = SecCertificateCopyData(cert);
     NSData * out = [[NSData dataWithBytes:CFDataGetBytePtr(data) length:CFDataGetLength(data)] sha1Digest];
     CFRelease(data);
@@ -48,7 +48,7 @@
     return sha1;
 }
 
-+(NSDate *) CertificateGetExpiryDate:(SecCertificateRef) cert
++(NSDate *) expiryDateForCertificate:(SecCertificateRef) cert
 {
     
     NSData *certificateData                   = (__bridge NSData *) SecCertificateCopyData(cert);
@@ -93,19 +93,6 @@
     
     return expiryDate;
 }
-
-+(NSString *) CertificateGetType:(SecCertificateRef) cert {
-    
-    NSData *certificateData                   = (__bridge NSData *) SecCertificateCopyData(cert);
-    const unsigned char *certificateDataBytes = (const unsigned char *)[certificateData bytes];
-    X509 *certificateX509                     = d2i_X509(NULL, &certificateDataBytes, [certificateData length]);
-    
-    return [NSString stringWithFormat:@"%i", X509_certificate_type(certificateX509, nil)];
-    
-    
-    
-}
-
 
 @end
 

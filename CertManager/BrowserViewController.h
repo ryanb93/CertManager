@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  BrowserViewController.h
 //  CertBrowser
 //
 //  Created by Ryan Burke on 25/02/2015.

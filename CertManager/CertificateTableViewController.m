@@ -115,10 +115,10 @@
     certNameLabel.text = (__bridge NSString *)(SecCertificateCopySubjectSummary(certificate));
     
     UILabel *issuerLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 50, 300, 40)];
-    issuerLabel.text = [NSString stringWithFormat:@"Issued by: %@", [X509Wrapper CertificateGetIssuerName:certificate] ];
+    issuerLabel.text = [NSString stringWithFormat:@"Issued by: %@", [X509Wrapper issuerForCertificate:certificate] ];
     
     UILabel *expireLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 70, 300, 40)];
-    [expireLabel setText:[NSString stringWithFormat:@"Expires: %@", [X509Wrapper CertificateGetExpiryDate:certificate]]];
+    [expireLabel setText:[NSString stringWithFormat:@"Expires: %@", [X509Wrapper expiryDateForCertificate:certificate]]];
 	
     [cell addSubview:certImage];
     [cell addSubview:certNameLabel];

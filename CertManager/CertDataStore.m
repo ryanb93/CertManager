@@ -10,9 +10,9 @@
 
 @interface CertDataStore()
 
-@property (strong, atomic) NSMutableDictionary * certificates;
-@property (strong, atomic) NSMutableArray      * untrustedRoots;
-@property (strong, atomic) NSMutableDictionary * untrustedCerts;
+@property (strong, atomic) NSMutableDictionary *certificates;
+@property (strong, atomic) NSMutableArray      *untrustedRoots;
+@property (strong, atomic) NSMutableDictionary *untrustedCerts;
 
 @end
 
@@ -136,7 +136,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *  @return The issuer name.
  */
 - (NSString *)issuerForRootCertificate:(SecCertificateRef) cert  {
-    return [X509Wrapper CertificateGetIssuerName:cert];
+    return [X509Wrapper issuerForCertificate:cert];
 }
 
 /**
@@ -147,7 +147,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *  @return If the certificate is trusted by CertManager. By default, true.
  */
 - (BOOL)isTrustedForRootCertificate:(SecCertificateRef) cert {
-    NSString* sha1 = [X509Wrapper CertificateGetSHA1:cert];
+    NSString* sha1 = [X509Wrapper sha1ForCertificate:cert];
     return ![_untrustedRoots containsObject:sha1];
 }
 
@@ -157,7 +157,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *  @param cert The certificate to add.
  */
 - (void)untrustRootCertificate:(SecCertificateRef) cert  {
-    [_untrustedRoots addObject:[X509Wrapper CertificateGetSHA1:cert]];
+    [_untrustedRoots addObject:[X509Wrapper sha1ForCertificate:cert]];
     [FSHandler writeToPlist:UNTRUSTED_ROOTS_PLIST withData:_untrustedRoots];
 }
 
@@ -167,7 +167,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
  *  @param cert The certificate to remove.
  */
 - (void)trustRootCertificate:(SecCertificateRef) cert {
-    [_untrustedRoots removeObject:[X509Wrapper CertificateGetSHA1:cert]];
+    [_untrustedRoots removeObject:[X509Wrapper sha1ForCertificate:cert]];
     [FSHandler writeToPlist:UNTRUSTED_ROOTS_PLIST withData:_untrustedRoots];
 }
 
@@ -178,7 +178,7 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
 - (void)untrustNormalCertificate:(SecCertificateRef) cert {
     
     NSString *name = (__bridge NSString *)(SecCertificateCopySubjectSummary(cert));
-    NSString *sha1 = [X509Wrapper CertificateGetSHA1:cert];
+    NSString *sha1 = [X509Wrapper sha1ForCertificate:cert];
     NSMutableDictionary *blockedCerts = [FSHandler readDictionaryFromPlist:UNTRUSTED_CERTS_PLIST];
     
     if(![blockedCerts objectForKey:sha1]) {

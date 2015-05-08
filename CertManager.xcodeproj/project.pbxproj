@@ -131,7 +131,6 @@
 		9492AE521A92243500582A99 /* trusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@2x.png"; sourceTree = "<group>"; };
 		9492AE531A92243500582A99 /* trusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trusted@3x.png"; sourceTree = "<group>"; };
 		9492AE601A92475C00582A99 /* X509Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X509Wrapper.h; sourceTree = "<group>"; };
-		9492AE631A92495A00582A99 /* blacklist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blacklist.plist; sourceTree = "<group>"; };
 		94D4AAA21A9B8F240049640A /* BulletinBoard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BulletinBoard.framework; path = ../../../../Developer/BulletinBoard.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,7 +313,6 @@
 				9449B8E31A93A7450075CD97 /* untrusted.png */,
 				9449B8E41A93A7450075CD97 /* untrusted@2x.png */,
 				9449B8E51A93A7450075CD97 /* untrusted@3x.png */,
-				9492AE631A92495A00582A99 /* blacklist.plist */,
 				9492AE4D1A92243500582A99 /* icon.png */,
 				9492AE4E1A92243500582A99 /* Info.plist */,
 				9492AE501A92243500582A99 /* LaunchScreen.xib */,

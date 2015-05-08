@@ -11,8 +11,7 @@
 #import "NSData+SHA1.h"
 
 @interface X509Wrapper : NSObject
-    +(NSString *) CertificateGetIssuerName:(SecCertificateRef)cert;
-    +(NSString *) CertificateGetSHA1:(SecCertificateRef)cert;
-	+(NSString *) CertificateGetType:(SecCertificateRef) cert;
-	+(NSDate *)   CertificateGetExpiryDate:(SecCertificateRef) cert;
+    +(NSString *) issuerForCertificate:(SecCertificateRef)cert;
+    +(NSString *) sha1ForCertificate:(SecCertificateRef)cert;
+	+(NSDate *)   expiryDateForCertificate:(SecCertificateRef) cert;
 @end
