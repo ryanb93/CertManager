@@ -26,6 +26,9 @@
 static NSString * const UNTRUSTED_ROOTS_PLIST = @"CertManagerUntrustedRoots";
 static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
 
+CFDataRef SecFrameworkCopyResourceContents(CFStringRef resourceName,
+                                           CFStringRef resourceType, CFStringRef subDirName);
+
 /**
  *  Init method for the CertDataStore. Loads the root certificates using the Security framework.
  *
@@ -35,7 +38,6 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
 {
      
     //Init the OTA Directory.
-    self.trustStoreVersion = InitOTADirectory();
     SecOTAPKIRef ref       = SecOTAPKICopyCurrentOTAPKIRef();
 
     //Set up our private data stores.
@@ -79,6 +81,31 @@ static NSString * const UNTRUSTED_CERTS_PLIST = @"CertManagerUntrustedCerts";
     return self;
     
 }
+
+- (int) trustStoreVersion {
+    
+    CFIndex asset_number = 0;
+    
+    CFDataRef assetVersionData = SecFrameworkCopyResourceContents(CFSTR("AssetVersion"), CFSTR("plist"), NULL);
+    if (NULL != assetVersionData)
+    {
+        CFPropertyListFormat propFormat;
+        CFDictionaryRef versionPlist =  CFPropertyListCreateWithData(kCFAllocatorDefault, assetVersionData, 0, &propFormat, NULL);
+        if (NULL != versionPlist && CFDictionaryGetTypeID() == CFGetTypeID(versionPlist))
+        {
+            CFNumberRef versionNumber = (CFNumberRef)CFDictionaryGetValue(versionPlist, (const void *)CFSTR("VersionNumber"));
+            if (NULL != versionNumber)
+            {
+                CFNumberGetValue(versionNumber, kCFNumberCFIndexType, &asset_number);
+            }
+        }
+        CFRelease(versionPlist);
+        CFRelease(assetVersionData);
+    }
+    
+    return (int) asset_number;
+}
+
 
 /**
  *  A function which compares the summary of the certificate.
