@@ -27,6 +27,7 @@
 		9449B8E61A93A7450075CD97 /* untrusted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E31A93A7450075CD97 /* untrusted.png */; };
 		9449B8E71A93A7450075CD97 /* untrusted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E41A93A7450075CD97 /* untrusted@2x.png */; };
 		9449B8E81A93A7450075CD97 /* untrusted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9449B8E51A93A7450075CD97 /* untrusted@3x.png */; };
+		9465BE4F1B024EA600403916 /* APSL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9465BE4E1B024EA600403916 /* APSL.txt */; };
 		946E2E841A1AD24C00FE227C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E831A1AD24C00FE227C /* main.m */; };
 		946E2E9E1A1AD24C00FE227C /* CertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2E9D1A1AD24C00FE227C /* CertManagerTests.m */; };
 		946E2EB11A1AD2A500FE227C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E2EAA1A1AD2A500FE227C /* AppDelegate.m */; };
@@ -94,6 +95,7 @@
 		9449B8E31A93A7450075CD97 /* untrusted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = untrusted.png; sourceTree = "<group>"; };
 		9449B8E41A93A7450075CD97 /* untrusted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@2x.png"; sourceTree = "<group>"; };
 		9449B8E51A93A7450075CD97 /* untrusted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "untrusted@3x.png"; sourceTree = "<group>"; };
+		9465BE4E1B024EA600403916 /* APSL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APSL.txt; sourceTree = "<group>"; };
 		946E2E7E1A1AD24C00FE227C /* CertManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CertManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946E2E821A1AD24C00FE227C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946E2E831A1AD24C00FE227C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			children = (
 				946E2EAB1A1AD2A500FE227C /* OTATrustUtilities.c */,
 				946E2EAC1A1AD2A500FE227C /* SecTrustServer.c */,
+				9465BE4E1B024EA600403916 /* APSL.txt */,
 			);
 			name = Security;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				948CC5491AE7A22700235FDE /* RootCert.png in Resources */,
 				94173D9C1AE66B31006DA8E8 /* world_times.png in Resources */,
 				94173DAA1AE6877C006DA8E8 /* recents@3x.png in Resources */,
+				9465BE4F1B024EA600403916 /* APSL.txt in Resources */,
 				94173DA01AE67051006DA8E8 /* file_edit@2x.png in Resources */,
 				94173DA21AE67057006DA8E8 /* file_edit@3x.png in Resources */,
 				9492AE561A92243500582A99 /* Info.plist in Resources */,
