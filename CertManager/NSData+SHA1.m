@@ -12,12 +12,12 @@
 
 @implementation NSData (SHA1)
 
-- (NSData *)sha1Digest
-{
-    unsigned char result[CC_SHA1_DIGEST_LENGTH];
-    CC_SHA1([self bytes], (CC_LONG)[self length], result);
-    return [NSData dataWithBytes:result length:CC_SHA1_DIGEST_LENGTH];
-}
+ - (NSData *)sha1Digest
+ {
+     unsigned char result[CC_SHA1_DIGEST_LENGTH];
+     CC_SHA1([self bytes], (CC_LONG)[self length], result);
+     return [NSData dataWithBytes:result length:CC_SHA1_DIGEST_LENGTH];
+ }
 
 - (NSString *)hexStringValue
 {
