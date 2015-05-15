@@ -105,9 +105,9 @@
     
     //Set the cell text.
     LogInformation *log = (LogInformation *)_logs[[indexPath row]];
-    [cell.textLabel setText: [NSString stringWithFormat:@"%@ - %@",[log certificateName], [log peerName]]];
-    [cell.detailTextLabel setText:[log application]];
-    
+    [cell.textLabel setText: [NSString stringWithFormat:@"%@",[log certificateName]]];
+    [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ - %@",[log application], [log time]]];
+
     return cell;
 }
 

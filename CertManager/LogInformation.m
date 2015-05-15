@@ -10,11 +10,10 @@
 
 @implementation LogInformation
 
-- (instancetype)initWithApplication:(NSString *)app peer:(NSString *)peer certficateName:(NSString *)cert time:(NSDate *)time {
+- (instancetype)initWithApplication:(NSString *)app certficateName:(NSString *)cert time:(NSString *)time {
     self = [super init];
     if (self) {
         _application = [app copy];
-        _peerName = [peer copy];
         _certificateName = [cert copy];
         _time = [time copy];
     }
@@ -22,7 +21,7 @@
 }
 
 -(NSString *) description {
-    return [NSString stringWithFormat:@"%@,%@,%@,%@", _application, _peerName, _certificateName, _time];
+    return [NSString stringWithFormat:@"%@,%@,%@", _application, _certificateName, _time];
 }
 
 @end

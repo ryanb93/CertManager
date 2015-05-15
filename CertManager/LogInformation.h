@@ -10,11 +10,10 @@
 
 @interface LogInformation : NSObject
     
-- (instancetype)initWithApplication:(NSString *)app peer:(NSString *)peer certficateName:(NSString *)cert time:(NSDate *)time NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithApplication:(NSString *)app certficateName:(NSString *)cert time:(NSString *)time NS_DESIGNATED_INITIALIZER;
 
 @property (strong, atomic) NSString* application;
-@property (strong, atomic) NSString* peerName;
 @property (strong, atomic) NSString* certificateName;
-@property (strong, atomic) NSDate* time;
+@property (strong, atomic) NSString* time;
 
 @end

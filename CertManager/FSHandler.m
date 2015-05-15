@@ -29,10 +29,11 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
     }
 }
 
-+ (void)writeToLogFile: (NSString*)fileName withLogInformation:(LogInformation *)info {
++ (void)appendLogFile: (NSString*)fileName withLogInformation:(LogInformation *)info {
 
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@.log", PREFERENCES, fileName];
     NSString *infoString = [NSString stringWithFormat:@"%@\r\n", [info description]];
+    NSLog(@"appending log file: %@", infoString);
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fullPath];
     if (fileHandle){
         [fileHandle seekToEndOfFile];
@@ -57,7 +58,7 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
 + (NSMutableArray *) readLogFile: (NSString *)fileName {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@", PREFERENCES, fileName];
     if (![fileManager fileExistsAtPath:fullPath]){
         [fileManager createFileAtPath:fullPath contents:nil attributes:nil];
     }
@@ -66,20 +67,17 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
     NSMutableArray *logs = [[NSMutableArray alloc] init];
     while ((line = [reader readLine])) {
         NSArray *split = [line componentsSeparatedByString:@","];
-        NSString *app = split[0];
-        NSString *peer = split[1];
-        NSString *certName = split[2];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        NSDate *time = [dateFormatter dateFromString:split[3]];
-        LogInformation *log = [[LogInformation alloc] initWithApplication:app peer:peer certficateName:certName time:time];
-        [logs addObject:log];
+        if(split.count == 3) {
+        	LogInformation *log = [[LogInformation alloc] initWithApplication:split[0] certficateName:split[1] time:split[2]];
+        	[logs addObject:log];
+        }
     }
     return logs;
 }
 
 + (void)clearLogFile: (NSString*)fileName {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@.plist", PREFERENCES, fileName];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@", PREFERENCES, fileName];
     if ([fileManager fileExistsAtPath:fullPath]){
         [fileManager createFileAtPath:fullPath contents:nil attributes:nil];
     }
