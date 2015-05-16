@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BrowserViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDataDelegate>
+@interface BrowserViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDelegate>
 
 @property (strong, atomic) UIWebView       * webView;
 @property (strong, atomic) UIToolbar       * toolbar;

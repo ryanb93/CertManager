@@ -13,7 +13,7 @@
 
 @interface BrowserViewController ()
 
-@property (strong, nonatomic) NSMutableArray* certificatesForRequest;
+@property (nonatomic) SecTrustRef trustForRequest;
 
 @end
 
@@ -120,8 +120,7 @@
 }
 
 - (void)lockButtonPressed:(id)lockButton {
-    
-    CertificateTableViewController *certTable = [[CertificateTableViewController alloc] initWithCertificates:_certificatesForRequest];
+    CertificateTableViewController *certTable = [[CertificateTableViewController alloc] initWithTrust:self.trustForRequest];
     UINavigationController *certNav = [[UINavigationController alloc] initWithRootViewController:certTable];
     [self.navigationController presentViewController:certNav animated:YES completion:nil];
     
@@ -132,11 +131,13 @@
         NSString *lock = [[NSString alloc] initWithString:[NSString fontAwesomeIconStringForEnum:FALock]];
         [_lockButton setTitle:lock forState:UIControlStateNormal];
         [_lockButton setTintColor:[UIColor colorWithRed:0.297 green:0.776 blue:0.302 alpha:1.000]];
+        [_lockButton setEnabled:YES];
     }
     else {
         NSString *unlock = [[NSString alloc] initWithString:[NSString fontAwesomeIconStringForEnum:FAUnlockAlt]];
         [_lockButton setTitle:unlock forState:UIControlStateNormal];
         [_lockButton setTintColor:[UIColor colorWithRed:1.000 green:0.100 blue:0.169 alpha:1.000]];
+        [_lockButton setEnabled:NO];
     }
 }
 
@@ -201,28 +202,11 @@
     [self showUserError:error];
 }
 
-#pragma mark NSURLConnectionDataDelegate
+#pragma mark NSURLConnectionDelegate
 
 
 -(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    
-    
-    NSMutableArray *certs = [[NSMutableArray alloc] init];
-    
-    SecTrustRef trustRef = challenge.protectionSpace.serverTrust;
-    
-    CFIndex count = SecTrustGetCertificateCount(trustRef);
-    
-    //For each certificate in the certificate chain.
-    for (CFIndex i = count - 1; i >= 0; i--)
-    {
-        //Get a reference to the certificate.
-        SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);
-        [certs addObject:(__bridge id)certRef];
-    }
-    
-    _certificatesForRequest = certs;
-    
+    self.trustForRequest = challenge.protectionSpace.serverTrust;
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 

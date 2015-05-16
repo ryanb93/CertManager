@@ -5,6 +5,7 @@
 //  Created by Ryan Burke on 25/02/2015.
 //  Copyright (c) 2015 Ryan Burke. All rights reserved.
 //
+#import <Security/SecTrust.h>
 #import <Foundation/Foundation.h>
 #import "CertificateTableViewController.h"
 #import "CertDataStore.h"
@@ -19,8 +20,20 @@
 
 @implementation CertificateTableViewController
 
--(instancetype)initWithCertificates:(NSMutableArray *)certs {
+-(instancetype)initWithTrust:(SecTrustRef)trustRef {
     if(self = [super init]) {
+        
+        NSMutableArray *certs = [[NSMutableArray alloc] init];
+        CFIndex count = SecTrustGetCertificateCount(trustRef);
+        
+        //For each certificate in the certificate chain.
+        for (CFIndex i = count - 1; i >= 0; i--)
+        {
+            //Get a reference to the certificate.
+            SecCertificateRef certRef = SecTrustGetCertificateAtIndex(trustRef, i);
+            [certs addObject:(__bridge id)certRef];
+        }
+        
         _certificates = certs;
         _certStore = [[CertDataStore alloc] init];
 
