@@ -33,7 +33,6 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
 
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@.log", PREFERENCES, fileName];
     NSString *infoString = [NSString stringWithFormat:@"%@\r\n", [info description]];
-    NSLog(@"appending log file: %@", infoString);
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fullPath];
     if (fileHandle){
         [fileHandle seekToEndOfFile];
@@ -41,7 +40,7 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
         [fileHandle closeFile];
     }
     else{
-        [[info description] writeToFile:infoString
+        [[info description] writeToFile:fullPath
                              atomically:NO
                                encoding:NSStringEncodingConversionAllowLossy
                                   error:nil];
