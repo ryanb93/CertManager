@@ -214,5 +214,4 @@ NSInteger sortCerts(id certificate1, id certificate2, void *context)
     [FSHandler writeToPlist:UNTRUSTED_CERTS_PLIST withData:blockedCerts];
 }
 
-
 @end

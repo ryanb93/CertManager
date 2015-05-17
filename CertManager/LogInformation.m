@@ -20,6 +20,14 @@
     return self;
 }
 
+- (instancetype)initWithDescription:(NSString *)description {
+    NSArray *split = [description componentsSeparatedByString:@","];
+    if(split.count == 3) {
+        self = [self initWithApplication:split[0] certficateName:split[1] time:split[2]];
+    }
+    return self;
+}
+
 -(NSString *) description {
     return [NSString stringWithFormat:@"%@,%@,%@", _application, _certificateName, _time];
 }

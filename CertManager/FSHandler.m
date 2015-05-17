@@ -65,11 +65,7 @@ static NSString * const PREFERENCES = @"/private/var/mobile/Library/Preferences"
     NSString * line = nil;
     NSMutableArray *logs = [[NSMutableArray alloc] init];
     while ((line = [reader readLine])) {
-        NSArray *split = [line componentsSeparatedByString:@","];
-        if(split.count == 3) {
-        	LogInformation *log = [[LogInformation alloc] initWithApplication:split[0] certficateName:split[1] time:split[2]];
-        	[logs addObject:log];
-        }
+        [logs addObject:[[LogInformation alloc] initWithDescription:line]];
     }
     return logs;
 }

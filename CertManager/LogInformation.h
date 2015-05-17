@@ -12,6 +12,8 @@
     
 - (instancetype)initWithApplication:(NSString *)app certficateName:(NSString *)cert time:(NSString *)time NS_DESIGNATED_INITIALIZER;
 
+- (instancetype)initWithDescription:(NSString *)description;
+
 @property (strong, atomic) NSString* application;
 @property (strong, atomic) NSString* certificateName;
 @property (strong, atomic) NSString* time;
