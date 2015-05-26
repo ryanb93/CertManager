@@ -104,10 +104,6 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
 	SSLCopyPeerTrust(context, &trustRef);
     size_t len;
     SSLGetPeerDomainNameLength(context, &len);
-    char peerName[len];
-    SSLGetPeerDomainName(context, peerName, &len);
-
-    NSString *peer = [[NSString alloc] initWithCString:peerName encoding:NSUTF8StringEncoding];
 
     CFIndex count = SecTrustGetCertificateCount(trustRef);
 
@@ -136,7 +132,6 @@ static OSStatus hooked_SSLHandshake(SSLContextRef context) {
             }
 
             if(value != -1) {
-                NSString *summary = (__bridge NSString *) SecCertificateCopySubjectSummary(certRef);
                 BLOCKED_PEER = YES;
                 certificateWasBlocked(certRef);
                 return value;
