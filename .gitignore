@@ -19,6 +19,13 @@ DerivedData
 
 .theos
 
+.DS_Store
+Desktop.ini
+._*
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However
