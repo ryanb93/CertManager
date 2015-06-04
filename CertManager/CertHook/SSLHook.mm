@@ -7,7 +7,7 @@
 #import "../NSData+SHA1.h"
 #import "../LogInformation.h"
 #import "../FSHandler.h"
-#import "../theos/include/substrate.h"
+#import "substrate.h"
 
 #pragma mark - External Interfaces
 

@@ -1,7 +1,7 @@
 #import <BulletinBoard/BulletinBoard.h>
 #import <notify.h>
 #import <rocketbootstrap.h>
-#import "../theos/include/substrate.h"
+#import "substrate.h"
 
 
 #pragma mark - External Interfaces

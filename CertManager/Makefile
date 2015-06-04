@@ -11,11 +11,11 @@ CertManager_LDFLAGS = -lcrypto -lssl -lrocketbootstrap
 CertManager_LIBRARIES = rocketbootstrap
 SHARED_CFLAGS = -fobjc-arc
 
-include theos/makefiles/common.mk
-include theos/makefiles/application.mk
+include $(THEOS)/makefiles/common.mk
+include $(THEOS)/makefiles/application.mk
 
 SUBPROJECTS += CertHook
-include theos/makefiles/aggregate.mk
+include $(THEOS)/makefiles/aggregate.mk
 
 after-install::
 	install.exec "killall -9 backboardd"
