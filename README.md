@@ -1,5 +1,8 @@
-CertManager
-===========
+CertManager (Deprecated)
+========================
+
+This project is no longer maintained. It should not be installed on newer jailbroken devices as it will cause boot loops.
+----
 
 CertManager is an application and tweak for jailbroken iOS devices that allows users to define the certificates they trust on their devices.
 
